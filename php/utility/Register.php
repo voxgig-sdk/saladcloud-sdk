@@ -1,0 +1,70 @@
+<?php
+declare(strict_types=1);
+
+// Saladcloud SDK utility registration
+
+require_once __DIR__ . '/../core/UtilityType.php';
+require_once __DIR__ . '/Clean.php';
+require_once __DIR__ . '/Done.php';
+require_once __DIR__ . '/MakeError.php';
+require_once __DIR__ . '/FeatureAdd.php';
+require_once __DIR__ . '/FeatureHook.php';
+require_once __DIR__ . '/FeatureInit.php';
+require_once __DIR__ . '/Fetcher.php';
+require_once __DIR__ . '/MakeFetchDef.php';
+require_once __DIR__ . '/MakeContext.php';
+require_once __DIR__ . '/MakeOptions.php';
+require_once __DIR__ . '/MakeRequest.php';
+require_once __DIR__ . '/MakeResponse.php';
+require_once __DIR__ . '/MakeResult.php';
+require_once __DIR__ . '/MakePoint.php';
+require_once __DIR__ . '/MakeSpec.php';
+require_once __DIR__ . '/MakeUrl.php';
+require_once __DIR__ . '/Param.php';
+require_once __DIR__ . '/PrepareAuth.php';
+require_once __DIR__ . '/PrepareBody.php';
+require_once __DIR__ . '/Graphql.php';
+require_once __DIR__ . '/PrepareHeaders.php';
+require_once __DIR__ . '/PrepareMethod.php';
+require_once __DIR__ . '/PrepareParams.php';
+require_once __DIR__ . '/PreparePath.php';
+require_once __DIR__ . '/PrepareQuery.php';
+require_once __DIR__ . '/ResultBasic.php';
+require_once __DIR__ . '/ResultBody.php';
+require_once __DIR__ . '/ResultHeaders.php';
+require_once __DIR__ . '/TransformRequest.php';
+require_once __DIR__ . '/TransformResponse.php';
+
+SaladcloudUtility::setRegistrar(function (SaladcloudUtility $u): void {
+    $u->clean = [SaladcloudClean::class, 'call'];
+    $u->done = [SaladcloudDone::class, 'call'];
+    $u->make_error = [SaladcloudMakeError::class, 'call'];
+    $u->feature_add = [SaladcloudFeatureAdd::class, 'call'];
+    $u->feature_hook = [SaladcloudFeatureHook::class, 'call'];
+    $u->feature_init = [SaladcloudFeatureInit::class, 'call'];
+    $u->fetcher = [SaladcloudFetcher::class, 'call'];
+    $u->make_fetch_def = [SaladcloudMakeFetchDef::class, 'call'];
+    $u->make_context = [SaladcloudMakeContext::class, 'call'];
+    $u->make_options = [SaladcloudMakeOptions::class, 'call'];
+    $u->make_request = [SaladcloudMakeRequest::class, 'call'];
+    $u->make_response = [SaladcloudMakeResponse::class, 'call'];
+    $u->make_result = [SaladcloudMakeResult::class, 'call'];
+    $u->make_point = [SaladcloudMakePoint::class, 'call'];
+    $u->make_spec = [SaladcloudMakeSpec::class, 'call'];
+    $u->make_url = [SaladcloudMakeUrl::class, 'call'];
+    $u->param = [SaladcloudParam::class, 'call'];
+    $u->prepare_auth = [SaladcloudPrepareAuth::class, 'call'];
+    $u->prepare_body = [SaladcloudPrepareBody::class, 'call'];
+    $u->prepare_headers = [SaladcloudPrepareHeaders::class, 'call'];
+    $u->prepare_method = [SaladcloudPrepareMethod::class, 'call'];
+    $u->prepare_params = [SaladcloudPrepareParams::class, 'call'];
+    $u->prepare_path = [SaladcloudPreparePath::class, 'call'];
+    $u->prepare_query = [SaladcloudPrepareQuery::class, 'call'];
+    $u->graphql_body = [SaladcloudGraphql::class, 'body'];
+    $u->graphql_errors = [SaladcloudGraphql::class, 'errors'];
+    $u->result_basic = [SaladcloudResultBasic::class, 'call'];
+    $u->result_body = [SaladcloudResultBody::class, 'call'];
+    $u->result_headers = [SaladcloudResultHeaders::class, 'call'];
+    $u->transform_request = [SaladcloudTransformRequest::class, 'call'];
+    $u->transform_response = [SaladcloudTransformResponse::class, 'call'];
+});

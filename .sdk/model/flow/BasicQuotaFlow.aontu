@@ -1,0 +1,32 @@
+# BasicQuotaFlow
+
+main: kit: flow: BasicQuotaFlow:
+{
+  entity: "quota",
+  kind: "basic",
+  name: "BasicQuotaFlow",
+  step: [
+    {
+      i: {
+        ref: "quota_ref01",
+        srcdatavar: "quota_ref01_data",
+        suffix: "_dt0"
+      }
+
+      m: {
+        id: "quota01"
+      }
+
+      o: "load",
+      v: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-quota_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicQuotaFlow"
+}

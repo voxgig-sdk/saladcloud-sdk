@@ -1,0 +1,28 @@
+# BasicSystemLogFlow
+
+main: kit: flow: BasicSystemLogFlow:
+{
+  entity: "system_log",
+  kind: "basic",
+  name: "BasicSystemLogFlow",
+  step: [
+    {
+      m: {
+        container_group_name: "container_group_name01",
+        organization_name: "organization_name01",
+        project_id: "project01"
+      }
+
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "system_log_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicSystemLogFlow"
+}

@@ -1,0 +1,72 @@
+{
+  "existing": {
+    "inference_endpoint_job_collection": {
+      "INFERENCE_ENDPOINT_JOB_COLLECTION00": {
+        "create_time": "s78",
+        "events": [],
+        "id": "INFERENCE_ENDPOINT_JOB_COLLECTION00",
+        "inference_endpoint_name": "s7b",
+        "input": "s7c",
+        "metadata": {},
+        "organization_name": "s7e",
+        "output": "s7f",
+        "status": "s80",
+        "update_time": "s81",
+        "webhook": "s82",
+        "webhook_url": "s83"
+      },
+      "INFERENCE_ENDPOINT_JOB_COLLECTION01": {
+        "create_time": "sf0",
+        "events": [],
+        "id": "INFERENCE_ENDPOINT_JOB_COLLECTION01",
+        "inference_endpoint_name": "sf3",
+        "input": "sf4",
+        "metadata": {},
+        "organization_name": "sf6",
+        "output": "sf7",
+        "status": "sf8",
+        "update_time": "sf9",
+        "webhook": "sfa",
+        "webhook_url": "sfb"
+      },
+      "INFERENCE_ENDPOINT_JOB_COLLECTION02": {
+        "create_time": "s168",
+        "events": [],
+        "id": "INFERENCE_ENDPOINT_JOB_COLLECTION02",
+        "inference_endpoint_name": "s16b",
+        "input": "s16c",
+        "metadata": {},
+        "organization_name": "s16e",
+        "output": "s16f",
+        "status": "s170",
+        "update_time": "s171",
+        "webhook": "s172",
+        "webhook_url": "s173"
+      }
+    }
+  },
+  "new": {
+    "inference_endpoint_job_collection": {
+      "inference_endpoint_job_collection_ref01": {
+        "create_time": "s1e0",
+        "events": [],
+        "inference_endpoint_name": "s1e3",
+        "input": "s1e4",
+        "metadata": {},
+        "organization_name": "s1e6",
+        "output": "s1e7",
+        "status": "s1e8",
+        "update_time": "s1e9",
+        "webhook": "s1ea",
+        "webhook_url": "s1eb"
+      }
+    }
+  },
+  "requests": {
+    "GET /organizations/{organization_name}/inference-endpoints/{inference_endpoint_name}/jobs": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

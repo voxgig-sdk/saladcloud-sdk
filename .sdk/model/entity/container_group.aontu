@@ -1,0 +1,384 @@
+# Entity: container_group
+
+main: kit: entity: container_group: {
+
+  alias: field: {}
+
+  name: "container_group"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          co: {
+            id: "POST /organizations/{organization_name}/projects/{project_name}/containers/{container_group_name}/instances/{container_group_instance_id}/reallocate"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "container_id"
+                or: "container_group_name"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "instance_id"
+                or: "container_group_instance_id"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "organization_name"
+                or: "organization_name"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "project_id"
+                or: "project_name"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/organizations/{organization_name}/projects/{project_name}/containers/{container_group_name}/instances/{container_group_instance_id}/reallocate"
+          q: {
+            "$action": "reallocate"
+            exist: [
+              "container_id"
+              "instance_id"
+              "organization_name"
+              "project_id"
+            ]
+          }
+          r: {
+            param: {
+              container_group_instance_id: "instance_id"
+              container_group_name: "container_id"
+              project_name: "project_id"
+            }
+          }
+          s: [
+            {
+              lit: "organizations"
+            }
+            {
+              var: "organization_name"
+            }
+            {
+              lit: "projects"
+            }
+            {
+              var: "project_id"
+            }
+            {
+              lit: "containers"
+            }
+            {
+              var: "container_id"
+            }
+            {
+              lit: "instances"
+            }
+            {
+              var: "instance_id"
+            }
+            {
+              lit: "reallocate"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "POST /organizations/{organization_name}/projects/{project_name}/containers/{container_group_name}/instances/{container_group_instance_id}/recreate"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "container_id"
+                or: "container_group_name"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "instance_id"
+                or: "container_group_instance_id"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "organization_name"
+                or: "organization_name"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "project_id"
+                or: "project_name"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/organizations/{organization_name}/projects/{project_name}/containers/{container_group_name}/instances/{container_group_instance_id}/recreate"
+          q: {
+            "$action": "recreate"
+            exist: [
+              "container_id"
+              "instance_id"
+              "organization_name"
+              "project_id"
+            ]
+          }
+          r: {
+            param: {
+              container_group_instance_id: "instance_id"
+              container_group_name: "container_id"
+              project_name: "project_id"
+            }
+          }
+          s: [
+            {
+              lit: "organizations"
+            }
+            {
+              var: "organization_name"
+            }
+            {
+              lit: "projects"
+            }
+            {
+              var: "project_id"
+            }
+            {
+              lit: "containers"
+            }
+            {
+              var: "container_id"
+            }
+            {
+              lit: "instances"
+            }
+            {
+              var: "instance_id"
+            }
+            {
+              lit: "recreate"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "POST /organizations/{organization_name}/projects/{project_name}/containers/{container_group_name}/instances/{container_group_instance_id}/restart"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "container_id"
+                or: "container_group_name"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "instance_id"
+                or: "container_group_instance_id"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "organization_name"
+                or: "organization_name"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "project_id"
+                or: "project_name"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/organizations/{organization_name}/projects/{project_name}/containers/{container_group_name}/instances/{container_group_instance_id}/restart"
+          q: {
+            "$action": "restart"
+            exist: [
+              "container_id"
+              "instance_id"
+              "organization_name"
+              "project_id"
+            ]
+          }
+          r: {
+            param: {
+              container_group_instance_id: "instance_id"
+              container_group_name: "container_id"
+              project_name: "project_id"
+            }
+          }
+          s: [
+            {
+              lit: "organizations"
+            }
+            {
+              var: "organization_name"
+            }
+            {
+              lit: "projects"
+            }
+            {
+              var: "project_id"
+            }
+            {
+              lit: "containers"
+            }
+            {
+              var: "container_id"
+            }
+            {
+              lit: "instances"
+            }
+            {
+              var: "instance_id"
+            }
+            {
+              lit: "restart"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /organizations/{organization_name}/projects/{project_name}/containers/{container_group_name}/instances/{container_group_instance_id}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "container_group_instance_id"
+                or: "container_group_instance_id"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "container_id"
+                or: "container_group_name"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "organization_name"
+                or: "organization_name"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "project_id"
+                or: "project_name"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/organizations/{organization_name}/projects/{project_name}/containers/{container_group_name}/instances/{container_group_instance_id}"
+          q: {
+            exist: [
+              "container_group_instance_id"
+              "container_id"
+              "organization_name"
+              "project_id"
+            ]
+          }
+          r: {
+            param: {
+              container_group_name: "container_id"
+              project_name: "project_id"
+            }
+          }
+          s: [
+            {
+              lit: "organizations"
+            }
+            {
+              var: "organization_name"
+            }
+            {
+              lit: "projects"
+            }
+            {
+              var: "project_id"
+            }
+            {
+              lit: "containers"
+            }
+            {
+              var: "container_id"
+            }
+            {
+              lit: "instances"
+            }
+            {
+              var: "container_group_instance_id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+  fields: {
+  }
+
+
+  relations: ancestors: [
+    [path("$.main.kit.entity.container")]
+  ]
+
+}

@@ -1,0 +1,57 @@
+{
+  "existing": {
+    "container_group": {
+      "CONTAINER_GROUP00": {
+        "container_id": "CONTAINER01",
+        "instance_id": "INSTANCE01",
+        "organization_name": "ORGANIZATION_NAME01",
+        "project_id": "PROJECT01",
+        "container_group_instance_id": "CONTAINER_GROUP_INSTANCE01",
+        "id": "CONTAINER_GROUP00"
+      },
+      "CONTAINER_GROUP01": {
+        "container_id": "CONTAINER01",
+        "instance_id": "INSTANCE01",
+        "organization_name": "ORGANIZATION_NAME01",
+        "project_id": "PROJECT01",
+        "container_group_instance_id": "CONTAINER_GROUP_INSTANCE01",
+        "id": "CONTAINER_GROUP01"
+      },
+      "CONTAINER_GROUP02": {
+        "container_id": "CONTAINER01",
+        "instance_id": "INSTANCE01",
+        "organization_name": "ORGANIZATION_NAME01",
+        "project_id": "PROJECT01",
+        "container_group_instance_id": "CONTAINER_GROUP_INSTANCE01",
+        "id": "CONTAINER_GROUP02"
+      }
+    }
+  },
+  "new": {
+    "container_group": {
+      "container_group_ref01": {}
+    }
+  },
+  "requests": {
+    "POST /organizations/{organization_name}/projects/{project_name}/containers/{container_group_name}/instances/{container_group_instance_id}/reallocate": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /organizations/{organization_name}/projects/{project_name}/containers/{container_group_name}/instances/{container_group_instance_id}/recreate": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /organizations/{organization_name}/projects/{project_name}/containers/{container_group_name}/instances/{container_group_instance_id}/restart": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /organizations/{organization_name}/projects/{project_name}/containers/{container_group_name}/instances/{container_group_instance_id}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

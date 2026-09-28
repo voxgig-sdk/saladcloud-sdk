@@ -1,0 +1,292 @@
+# Entity: inference_endpoint
+
+main: kit: entity: inference_endpoint: {
+
+  alias: field: {}
+
+  fields: {
+    description: {
+      h: "Description"
+      n: "description"
+      r: true
+      sh: "The detailed description of the resource."
+      t: "`$STRING`"
+    }
+    display_name: {
+      h: "Display Name"
+      n: "display_name"
+      r: true
+      sh: "The display-friendly name of the resource."
+      t: "`$STRING`"
+    }
+    icon_url: {
+      fo: "url"
+      h: "Icon Url"
+      n: "icon_url"
+      r: true
+      sh: "The URL of the icon image"
+      t: "`$STRING`"
+    }
+    id: {
+      fo: "uuid"
+      h: "Id"
+      n: "id"
+      r: true
+      sh: "The inference endpoint identifier."
+      t: "`$STRING`"
+    }
+    input_schema: {
+      h: "Input Schema"
+      n: "input_schema"
+      r: true
+      sh: "The input schema"
+      t: "`$STRING`"
+    }
+    name: {
+      h: "Name"
+      n: "name"
+      r: true
+      sh: "The inference endpoint name."
+      t: "`$STRING`"
+    }
+    organization_name: {
+      h: "Organization Name"
+      n: "organization_name"
+      r: true
+      sh: "The organization name."
+      t: "`$STRING`"
+    }
+    output_schema: {
+      h: "Output Schema"
+      n: "output_schema"
+      r: true
+      sh: "The output schema"
+      t: "`$STRING`"
+    }
+    price_description: {
+      h: "Price Description"
+      n: "price_description"
+      r: true
+      sh: "A description of the price"
+      t: "`$STRING`"
+    }
+    readme: {
+      h: "Readme"
+      n: "readme"
+      r: true
+      sh: "A markdown file containing a detailed description of the inference endpoint"
+      t: "`$STRING`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "inference_endpoint"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /organizations/{organization_name}/inference-endpoints"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "organization_name"
+                or: "organization_name"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            query: [
+              {
+                k: "query"
+                n: "page"
+                or: "page"
+                r: false
+                t: "`$INTEGER`"
+              }
+              {
+                k: "query"
+                n: "page_size"
+                or: "page_size"
+                r: false
+                t: "`$INTEGER`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/organizations/{organization_name}/inference-endpoints"
+          q: {
+            exist: [
+              "organization_name"
+              "page"
+              "page_size"
+            ]
+          }
+          s: [
+            {
+              lit: "organizations"
+            }
+            {
+              var: "organization_name"
+            }
+            {
+              lit: "inference-endpoints"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.items`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /organizations/{organization_name}/inference-endpoints/{inference_endpoint_name}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "inference_endpoint_name"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "organization_name"
+                or: "organization_name"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/organizations/{organization_name}/inference-endpoints/{inference_endpoint_name}"
+          q: {
+            exist: [
+              "id"
+              "organization_name"
+            ]
+          }
+          r: {
+            param: {
+              inference_endpoint_name: "id"
+            }
+          }
+          s: [
+            {
+              lit: "organizations"
+            }
+            {
+              var: "organization_name"
+            }
+            {
+              lit: "inference-endpoints"
+            }
+            {
+              var: "id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    remove: {
+      name: "remove"
+      points: [
+        {
+          co: {
+            id: "DELETE /organizations/{organization_name}/inference-endpoints/{inference_endpoint_name}/jobs/{inference_endpoint_job_id}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "inference_endpoint_id"
+                or: "inference_endpoint_name"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "inference_endpoint_job_id"
+                or: "inference_endpoint_job_id"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "organization_name"
+                or: "organization_name"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "DELETE"
+          o: "/organizations/{organization_name}/inference-endpoints/{inference_endpoint_name}/jobs/{inference_endpoint_job_id}"
+          q: {
+            exist: [
+              "inference_endpoint_id"
+              "inference_endpoint_job_id"
+              "organization_name"
+            ]
+          }
+          r: {
+            param: {
+              inference_endpoint_name: "inference_endpoint_id"
+            }
+          }
+          s: [
+            {
+              lit: "organizations"
+            }
+            {
+              var: "organization_name"
+            }
+            {
+              lit: "inference-endpoints"
+            }
+            {
+              var: "inference_endpoint_id"
+            }
+            {
+              lit: "jobs"
+            }
+            {
+              var: "inference_endpoint_job_id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

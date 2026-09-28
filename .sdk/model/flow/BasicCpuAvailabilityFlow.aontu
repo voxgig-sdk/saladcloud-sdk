@@ -1,0 +1,22 @@
+# BasicCpuAvailabilityFlow
+
+main: kit: flow: BasicCpuAvailabilityFlow:
+{
+  entity: "cpu_availability",
+  kind: "basic",
+  name: "BasicCpuAvailabilityFlow",
+  step: [
+    {
+      i: {
+        ref: "cpu_availability_ref01"
+      }
+
+      m: {
+        organization_name: "organization_name01"
+      }
+
+      o: "create"
+    }
+  ],
+  "key$": "BasicCpuAvailabilityFlow"
+}

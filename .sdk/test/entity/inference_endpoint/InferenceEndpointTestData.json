@@ -1,0 +1,80 @@
+{
+  "existing": {
+    "inference_endpoint": {
+      "INFERENCE_ENDPOINT00": {
+        "description": "s64",
+        "display_name": "s65",
+        "icon_url": "s66",
+        "id": "INFERENCE_ENDPOINT00",
+        "input_schema": "s68",
+        "name": "s69",
+        "organization_name": "s6a",
+        "output_schema": "s6b",
+        "price_description": "s6c",
+        "readme": "s6d",
+        "inference_endpoint_id": "INFERENCE_ENDPOINT01",
+        "inference_endpoint_job_id": "INFERENCE_ENDPOINT_JOB01"
+      },
+      "INFERENCE_ENDPOINT01": {
+        "description": "sc8",
+        "display_name": "sc9",
+        "icon_url": "sca",
+        "id": "INFERENCE_ENDPOINT01",
+        "input_schema": "scc",
+        "name": "scd",
+        "organization_name": "sce",
+        "output_schema": "scf",
+        "price_description": "sd0",
+        "readme": "sd1",
+        "inference_endpoint_id": "INFERENCE_ENDPOINT01",
+        "inference_endpoint_job_id": "INFERENCE_ENDPOINT_JOB01"
+      },
+      "INFERENCE_ENDPOINT02": {
+        "description": "s12c",
+        "display_name": "s12d",
+        "icon_url": "s12e",
+        "id": "INFERENCE_ENDPOINT02",
+        "input_schema": "s130",
+        "name": "s131",
+        "organization_name": "s132",
+        "output_schema": "s133",
+        "price_description": "s134",
+        "readme": "s135",
+        "inference_endpoint_id": "INFERENCE_ENDPOINT01",
+        "inference_endpoint_job_id": "INFERENCE_ENDPOINT_JOB01"
+      }
+    }
+  },
+  "new": {
+    "inference_endpoint": {
+      "inference_endpoint_ref01": {
+        "description": "s190",
+        "display_name": "s191",
+        "icon_url": "s192",
+        "input_schema": "s194",
+        "name": "s195",
+        "organization_name": "s196",
+        "output_schema": "s197",
+        "price_description": "s198",
+        "readme": "s199"
+      }
+    }
+  },
+  "requests": {
+    "GET /organizations/{organization_name}/inference-endpoints": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /organizations/{organization_name}/inference-endpoints/{inference_endpoint_name}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "DELETE /organizations/{organization_name}/inference-endpoints/{inference_endpoint_name}/jobs/{inference_endpoint_job_id}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

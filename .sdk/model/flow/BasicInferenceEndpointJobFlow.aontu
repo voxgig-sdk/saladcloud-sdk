@@ -1,0 +1,48 @@
+# BasicInferenceEndpointJobFlow
+
+main: kit: flow: BasicInferenceEndpointJobFlow:
+{
+  entity: "inference_endpoint_job",
+  kind: "basic",
+  name: "BasicInferenceEndpointJobFlow",
+  step: [
+    {
+      i: {
+        ref: "inference_endpoint_job_ref01"
+      }
+
+      m: {
+        inference_endpoint_id: "inference_endpoint01",
+        inference_endpoint_name: "inference_endpoint_name01",
+        organization_name: "organization_name01"
+      }
+
+      o: "create"
+    }
+
+    {
+      i: {
+        ref: "inference_endpoint_job_ref01",
+        srcdatavar: "inference_endpoint_job_ref01_data",
+        suffix: "_dt0"
+      }
+
+      m: {
+        id: "inference_endpoint_job01",
+        inference_endpoint_id: "inference_endpoint01",
+        organization_name: "organization_name01"
+      }
+
+      o: "load",
+      v: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-inference_endpoint_job_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicInferenceEndpointJobFlow"
+}

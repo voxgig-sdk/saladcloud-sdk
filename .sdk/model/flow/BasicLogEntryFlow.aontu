@@ -1,0 +1,22 @@
+# BasicLogEntryFlow
+
+main: kit: flow: BasicLogEntryFlow:
+{
+  entity: "log_entry",
+  kind: "basic",
+  name: "BasicLogEntryFlow",
+  step: [
+    {
+      i: {
+        ref: "log_entry_ref01"
+      }
+
+      m: {
+        organization_name: "organization_name01"
+      }
+
+      o: "create"
+    }
+  ],
+  "key$": "BasicLogEntryFlow"
+}

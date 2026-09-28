@@ -1,0 +1,160 @@
+{
+  "existing": {
+    "container": {
+      "CONTAINER00": {
+        "autostart_policy": true,
+        "container": {},
+        "country_codes": [],
+        "create_time": "sfd",
+        "current_state": {},
+        "display_name": "sff",
+        "id": "CONTAINER00",
+        "liveness_probe": "s101",
+        "name": "s102",
+        "networking": {},
+        "organization_name": "s104",
+        "pending_change": false,
+        "priority": "s106",
+        "project_name": "s107",
+        "queue_autoscaler": {},
+        "queue_connection": {},
+        "readiness_probe": "s10a",
+        "readme": "s10b",
+        "replicas": 268,
+        "restart_policy": "s10d",
+        "scalingactions": [],
+        "scheduledscalingenabled": false,
+        "startup_probe": "s110",
+        "update_time": "s111",
+        "version": 274,
+        "container_group_name": "CONTAINER_GROUP_NAME01",
+        "project_id": "PROJECT01"
+      },
+      "CONTAINER01": {
+        "autostart_policy": true,
+        "container": {},
+        "country_codes": [],
+        "create_time": "s1f7",
+        "current_state": {},
+        "display_name": "s1f9",
+        "id": "CONTAINER01",
+        "liveness_probe": "s1fb",
+        "name": "s1fc",
+        "networking": {},
+        "organization_name": "s1fe",
+        "pending_change": false,
+        "priority": "s200",
+        "project_name": "s201",
+        "queue_autoscaler": {},
+        "queue_connection": {},
+        "readiness_probe": "s204",
+        "readme": "s205",
+        "replicas": 518,
+        "restart_policy": "s207",
+        "scalingactions": [],
+        "scheduledscalingenabled": false,
+        "startup_probe": "s20a",
+        "update_time": "s20b",
+        "version": 524,
+        "container_group_name": "CONTAINER_GROUP_NAME01",
+        "project_id": "PROJECT01"
+      },
+      "CONTAINER02": {
+        "autostart_policy": true,
+        "container": {},
+        "country_codes": [],
+        "create_time": "s2f1",
+        "current_state": {},
+        "display_name": "s2f3",
+        "id": "CONTAINER02",
+        "liveness_probe": "s2f5",
+        "name": "s2f6",
+        "networking": {},
+        "organization_name": "s2f8",
+        "pending_change": false,
+        "priority": "s2fa",
+        "project_name": "s2fb",
+        "queue_autoscaler": {},
+        "queue_connection": {},
+        "readiness_probe": "s2fe",
+        "readme": "s2ff",
+        "replicas": 768,
+        "restart_policy": "s301",
+        "scalingactions": [],
+        "scheduledscalingenabled": false,
+        "startup_probe": "s304",
+        "update_time": "s305",
+        "version": 774,
+        "container_group_name": "CONTAINER_GROUP_NAME01",
+        "project_id": "PROJECT01"
+      }
+    }
+  },
+  "new": {
+    "container": {
+      "container_ref01": {
+        "autostart_policy": true,
+        "container": {},
+        "country_codes": [],
+        "create_time": "s3eb",
+        "current_state": {},
+        "display_name": "s3ed",
+        "liveness_probe": "s3ef",
+        "name": "s3f0",
+        "networking": {},
+        "organization_name": "s3f2",
+        "pending_change": false,
+        "priority": "s3f4",
+        "project_name": "s3f5",
+        "queue_autoscaler": {},
+        "queue_connection": {},
+        "readiness_probe": "s3f8",
+        "readme": "s3f9",
+        "replicas": 1018,
+        "restart_policy": "s3fb",
+        "scalingactions": [],
+        "scheduledscalingenabled": false,
+        "startup_probe": "s3fe",
+        "update_time": "s3ff",
+        "version": 1024
+      }
+    }
+  },
+  "requests": {
+    "POST /organizations/{organization_name}/projects/{project_name}/containers/{container_group_name}/start": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /organizations/{organization_name}/projects/{project_name}/containers/{container_group_name}/stop": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /organizations/{organization_name}/projects/{project_name}/containers": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /organizations/{organization_name}/projects/{project_name}/containers": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /organizations/{organization_name}/projects/{project_name}/containers/{container_group_name}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "DELETE /organizations/{organization_name}/projects/{project_name}/containers/{container_group_name}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "PATCH /organizations/{organization_name}/projects/{project_name}/containers/{container_group_name}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

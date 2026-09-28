@@ -1,0 +1,71 @@
+{
+  "existing": {
+    "gpu_availability": {
+      "GPU_AVAILABILITY00": {
+        "available_gpu_batch": 100,
+        "available_gpu_high": 101,
+        "available_gpu_low": 102,
+        "available_gpu_medium": 103,
+        "country_codes": [],
+        "cpu": 105,
+        "gpu_classes": [],
+        "memory": 107,
+        "on_call_gpu": 108,
+        "storage_amount": 109,
+        "organization_name": "ORGANIZATION_NAME01",
+        "id": "GPU_AVAILABILITY00"
+      },
+      "GPU_AVAILABILITY01": {
+        "available_gpu_batch": 200,
+        "available_gpu_high": 201,
+        "available_gpu_low": 202,
+        "available_gpu_medium": 203,
+        "country_codes": [],
+        "cpu": 205,
+        "gpu_classes": [],
+        "memory": 207,
+        "on_call_gpu": 208,
+        "storage_amount": 209,
+        "organization_name": "ORGANIZATION_NAME01",
+        "id": "GPU_AVAILABILITY01"
+      },
+      "GPU_AVAILABILITY02": {
+        "available_gpu_batch": 300,
+        "available_gpu_high": 301,
+        "available_gpu_low": 302,
+        "available_gpu_medium": 303,
+        "country_codes": [],
+        "cpu": 305,
+        "gpu_classes": [],
+        "memory": 307,
+        "on_call_gpu": 308,
+        "storage_amount": 309,
+        "organization_name": "ORGANIZATION_NAME01",
+        "id": "GPU_AVAILABILITY02"
+      }
+    }
+  },
+  "new": {
+    "gpu_availability": {
+      "gpu_availability_ref01": {
+        "available_gpu_batch": 400,
+        "available_gpu_high": 401,
+        "available_gpu_low": 402,
+        "available_gpu_medium": 403,
+        "country_codes": [],
+        "cpu": 405,
+        "gpu_classes": [],
+        "memory": 407,
+        "on_call_gpu": 408,
+        "storage_amount": 409
+      }
+    }
+  },
+  "requests": {
+    "POST /organizations/{organization_name}/availability/sce-gpu-availability": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

@@ -1,0 +1,182 @@
+# Entity: system_log
+
+main: kit: entity: system_log: {
+
+  alias: field: {}
+
+  fields: {
+    event_name: {
+      h: "Event Name"
+      n: "event_name"
+      r: true
+      sh: "The name of the event"
+      t: "`$STRING`"
+    }
+    event_time: {
+      fo: "date-time"
+      h: "Event Time"
+      n: "event_time"
+      r: true
+      sh: "The UTC date & time when the log item was created"
+      t: "`$STRING`"
+    }
+    instance_id: {
+      fo: "uuid"
+      h: "Instance Id"
+      n: "instance_id"
+      r: false
+      sh: "The container group instance identifier."
+      t: "`$STRING`"
+    }
+    machine_id: {
+      fo: "uuid"
+      h: "Machine Id"
+      n: "machine_id"
+      r: false
+      sh: "The container group machine identifier."
+      t: "`$STRING`"
+    }
+    resource_cpu: {
+      h: "Resource Cpu"
+      n: "resource_cpu"
+      r: true
+      sh: "The number of CPUs"
+      t: [
+        "`$ONE`"
+        [
+          "`$INTEGER`"
+          "`$NULL`"
+        ]
+      ]
+    }
+    resource_gpu_class: {
+      h: "Resource Gpu Class"
+      n: "resource_gpu_class"
+      r: true
+      sh: "The GPU class name"
+      t: "`$STRING`"
+    }
+    resource_memory: {
+      h: "Resource Memory"
+      n: "resource_memory"
+      r: true
+      sh: "The memory amount in MB"
+      t: [
+        "`$ONE`"
+        [
+          "`$INTEGER`"
+          "`$NULL`"
+        ]
+      ]
+    }
+    resource_storage_amount: {
+      fo: "int64"
+      h: "Resource Storage Amount"
+      n: "resource_storage_amount"
+      r: true
+      sh: "The storage amount in bytes"
+      t: [
+        "`$ONE`"
+        [
+          "`$INTEGER`"
+          "`$NULL`"
+        ]
+      ]
+    }
+    version: {
+      h: "Version"
+      n: "version"
+      r: true
+      sh: "The version instance ID"
+      t: "`$STRING`"
+    }
+  }
+
+  name: "system_log"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /organizations/{organization_name}/projects/{project_name}/containers/{container_group_name}/system-logs"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "container_group_name"
+                or: "container_group_name"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "organization_name"
+                or: "organization_name"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "project_id"
+                or: "project_name"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/organizations/{organization_name}/projects/{project_name}/containers/{container_group_name}/system-logs"
+          q: {
+            exist: [
+              "container_group_name"
+              "organization_name"
+              "project_id"
+            ]
+          }
+          r: {
+            param: {
+              project_name: "project_id"
+            }
+          }
+          s: [
+            {
+              lit: "organizations"
+            }
+            {
+              var: "organization_name"
+            }
+            {
+              lit: "projects"
+            }
+            {
+              var: "project_id"
+            }
+            {
+              lit: "containers"
+            }
+            {
+              var: "container_group_name"
+            }
+            {
+              lit: "system-logs"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.items`"
+          }
+        }
+      ]
+    }
+  }
+
+
+  relations: ancestors: [
+    [path("$.main.kit.entity.container")]
+  ]
+
+}

@@ -1,0 +1,16 @@
+# Flows
+
+@"./BasicContainerFlow.aontu"
+@"./BasicContainerGroupFlow.aontu"
+@"./BasicContainerGroupInstanceFlow.aontu"
+@"./BasicCpuAvailabilityFlow.aontu"
+@"./BasicGpuAvailabilityFlow.aontu"
+@"./BasicGpuClassFlow.aontu"
+@"./BasicInferenceEndpointFlow.aontu"
+@"./BasicInferenceEndpointJobCollectionFlow.aontu"
+@"./BasicInferenceEndpointJobFlow.aontu"
+@"./BasicLogEntryFlow.aontu"
+@"./BasicQueueFlow.aontu"
+@"./BasicQuotaFlow.aontu"
+@"./BasicSystemLogFlow.aontu"
+@"./BasicWebhookSecretKeyFlow.aontu"

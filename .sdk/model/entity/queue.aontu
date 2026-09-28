@@ -1,0 +1,812 @@
+# Entity: queue
+
+main: kit: entity: queue: {
+
+  alias: field: {}
+
+  fields: {
+    container_groups: {
+      h: "Container Groups"
+      n: "container_groups"
+      r: true
+      sh: "The container groups that are part of this queue."
+      t: "`$ARRAY`"
+    }
+    create_time: {
+      fo: "date-time"
+      h: "Create Time"
+      n: "create_time"
+      r: true
+      sh: "The job creation time"
+      t: "`$STRING`"
+    }
+    current_queue_length: {
+      fo: "int32"
+      h: "Current Queue Length"
+      n: "current_queue_length"
+      r: false
+      sh: "The current length of the queue"
+      t: "`$INTEGER`"
+    }
+    description: {
+      h: "Description"
+      n: "description"
+      r: false
+      sh: "The description."
+      t: "`$STRING`"
+    }
+    display_name: {
+      h: "Display Name"
+      n: "display_name"
+      op: {
+        create: {
+          req: false
+          type: "`$STRING`"
+        }
+      }
+      r: true
+      sh: "The display name."
+      t: "`$STRING`"
+    }
+    events: {
+      h: "Events"
+      n: "events"
+      r: true
+      sh: "The job events"
+      t: "`$ARRAY`"
+    }
+    id: {
+      fo: "uuid"
+      h: "Id"
+      n: "id"
+      r: true
+      sh: "The job identifier"
+      t: "`$STRING`"
+    }
+    input: {
+      h: "Input"
+      n: "input"
+      r: true
+      sh: "The job input."
+      t: "`$ANY`"
+    }
+    metadata: {
+      h: "Metadata"
+      n: "metadata"
+      r: false
+      sh: "Additional metadata for the job"
+      t: "`$OBJECT`"
+    }
+    name: {
+      h: "Name"
+      n: "name"
+      r: true
+      sh: "The queue name."
+      t: "`$STRING`"
+    }
+    output: {
+      h: "Output"
+      n: "output"
+      r: false
+      sh: "The job output."
+      t: "`$ANY`"
+    }
+    status: {
+      h: "Status"
+      n: "status"
+      r: true
+      sh: "The job status"
+      t: "`$STRING`"
+    }
+    update_time: {
+      fo: "date-time"
+      h: "Update Time"
+      n: "update_time"
+      r: true
+      sh: "The job update time"
+      t: "`$STRING`"
+    }
+    webhook: {
+      fo: "url"
+      h: "Webhook"
+      n: "webhook"
+      r: false
+      sh: "The webhook URL to notify when the job completes"
+      t: "`$STRING`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "queue"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          co: {
+            id: "POST /organizations/{organization_name}/projects/{project_name}/queues/{queue_name}/jobs"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "organization_name"
+                or: "organization_name"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "project_id"
+                or: "project_name"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "queue_name"
+                or: "queue_name"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/organizations/{organization_name}/projects/{project_name}/queues/{queue_name}/jobs"
+          q: {
+            "$action": "job"
+            exist: [
+              "organization_name"
+              "project_id"
+              "queue_name"
+            ]
+          }
+          r: {
+            param: {
+              project_name: "project_id"
+            }
+          }
+          s: [
+            {
+              lit: "organizations"
+            }
+            {
+              var: "organization_name"
+            }
+            {
+              lit: "projects"
+            }
+            {
+              var: "project_id"
+            }
+            {
+              lit: "queues"
+            }
+            {
+              var: "queue_name"
+            }
+            {
+              lit: "jobs"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "POST /organizations/{organization_name}/projects/{project_name}/queues"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "organization_name"
+                or: "organization_name"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "project_name"
+                or: "project_name"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/organizations/{organization_name}/projects/{project_name}/queues"
+          q: {
+            exist: [
+              "organization_name"
+              "project_name"
+            ]
+          }
+          s: [
+            {
+              lit: "organizations"
+            }
+            {
+              var: "organization_name"
+            }
+            {
+              lit: "projects"
+            }
+            {
+              var: "project_name"
+            }
+            {
+              lit: "queues"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /organizations/{organization_name}/projects/{project_name}/queues/{queue_name}/jobs"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "organization_name"
+                or: "organization_name"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "project_id"
+                or: "project_name"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "queue_name"
+                or: "queue_name"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            query: [
+              {
+                k: "query"
+                n: "page"
+                or: "page"
+                r: false
+                t: "`$INTEGER`"
+              }
+              {
+                k: "query"
+                n: "page_size"
+                or: "page_size"
+                r: false
+                t: "`$INTEGER`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/organizations/{organization_name}/projects/{project_name}/queues/{queue_name}/jobs"
+          q: {
+            "$action": "job"
+            exist: [
+              "organization_name"
+              "page"
+              "page_size"
+              "project_id"
+              "queue_name"
+            ]
+          }
+          r: {
+            param: {
+              project_name: "project_id"
+            }
+          }
+          s: [
+            {
+              lit: "organizations"
+            }
+            {
+              var: "organization_name"
+            }
+            {
+              lit: "projects"
+            }
+            {
+              var: "project_id"
+            }
+            {
+              lit: "queues"
+            }
+            {
+              var: "queue_name"
+            }
+            {
+              lit: "jobs"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.items`"
+          }
+        }
+        {
+          co: {
+            id: "GET /organizations/{organization_name}/projects/{project_name}/queues"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "organization_name"
+                or: "organization_name"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "project_name"
+                or: "project_name"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/organizations/{organization_name}/projects/{project_name}/queues"
+          q: {
+            exist: [
+              "organization_name"
+              "project_name"
+            ]
+          }
+          s: [
+            {
+              lit: "organizations"
+            }
+            {
+              var: "organization_name"
+            }
+            {
+              lit: "projects"
+            }
+            {
+              var: "project_name"
+            }
+            {
+              lit: "queues"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.items`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /organizations/{organization_name}/projects/{project_name}/queues/{queue_name}/jobs/{queue_job_id}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "organization_name"
+                or: "organization_name"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "project_id"
+                or: "project_name"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "queue_id"
+                or: "queue_name"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "queue_job_id"
+                or: "queue_job_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/organizations/{organization_name}/projects/{project_name}/queues/{queue_name}/jobs/{queue_job_id}"
+          q: {
+            exist: [
+              "organization_name"
+              "project_id"
+              "queue_id"
+              "queue_job_id"
+            ]
+          }
+          r: {
+            param: {
+              project_name: "project_id"
+              queue_name: "queue_id"
+            }
+          }
+          s: [
+            {
+              lit: "organizations"
+            }
+            {
+              var: "organization_name"
+            }
+            {
+              lit: "projects"
+            }
+            {
+              var: "project_id"
+            }
+            {
+              lit: "queues"
+            }
+            {
+              var: "queue_id"
+            }
+            {
+              lit: "jobs"
+            }
+            {
+              var: "queue_job_id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "GET /organizations/{organization_name}/projects/{project_name}/queues/{queue_name}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "queue_name"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "organization_name"
+                or: "organization_name"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "project_id"
+                or: "project_name"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/organizations/{organization_name}/projects/{project_name}/queues/{queue_name}"
+          q: {
+            exist: [
+              "id"
+              "organization_name"
+              "project_id"
+            ]
+          }
+          r: {
+            param: {
+              project_name: "project_id"
+              queue_name: "id"
+            }
+          }
+          s: [
+            {
+              lit: "organizations"
+            }
+            {
+              var: "organization_name"
+            }
+            {
+              lit: "projects"
+            }
+            {
+              var: "project_id"
+            }
+            {
+              lit: "queues"
+            }
+            {
+              var: "id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    remove: {
+      name: "remove"
+      points: [
+        {
+          co: {
+            id: "DELETE /organizations/{organization_name}/projects/{project_name}/queues/{queue_name}/jobs/{queue_job_id}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "organization_name"
+                or: "organization_name"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "project_id"
+                or: "project_name"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "queue_id"
+                or: "queue_name"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "queue_job_id"
+                or: "queue_job_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "DELETE"
+          o: "/organizations/{organization_name}/projects/{project_name}/queues/{queue_name}/jobs/{queue_job_id}"
+          q: {
+            exist: [
+              "organization_name"
+              "project_id"
+              "queue_id"
+              "queue_job_id"
+            ]
+          }
+          r: {
+            param: {
+              project_name: "project_id"
+              queue_name: "queue_id"
+            }
+          }
+          s: [
+            {
+              lit: "organizations"
+            }
+            {
+              var: "organization_name"
+            }
+            {
+              lit: "projects"
+            }
+            {
+              var: "project_id"
+            }
+            {
+              lit: "queues"
+            }
+            {
+              var: "queue_id"
+            }
+            {
+              lit: "jobs"
+            }
+            {
+              var: "queue_job_id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+        {
+          co: {
+            id: "DELETE /organizations/{organization_name}/projects/{project_name}/queues/{queue_name}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "queue_name"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "organization_name"
+                or: "organization_name"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "project_id"
+                or: "project_name"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "DELETE"
+          o: "/organizations/{organization_name}/projects/{project_name}/queues/{queue_name}"
+          q: {
+            exist: [
+              "id"
+              "organization_name"
+              "project_id"
+            ]
+          }
+          r: {
+            param: {
+              project_name: "project_id"
+              queue_name: "id"
+            }
+          }
+          s: [
+            {
+              lit: "organizations"
+            }
+            {
+              var: "organization_name"
+            }
+            {
+              lit: "projects"
+            }
+            {
+              var: "project_id"
+            }
+            {
+              lit: "queues"
+            }
+            {
+              var: "id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    update: {
+      name: "update"
+      points: [
+        {
+          co: {
+            id: "PATCH /organizations/{organization_name}/projects/{project_name}/queues/{queue_name}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "queue_name"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "organization_name"
+                or: "organization_name"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "project_id"
+                or: "project_name"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "PATCH"
+          o: "/organizations/{organization_name}/projects/{project_name}/queues/{queue_name}"
+          q: {
+            exist: [
+              "id"
+              "organization_name"
+              "project_id"
+            ]
+          }
+          r: {
+            param: {
+              project_name: "project_id"
+              queue_name: "id"
+            }
+          }
+          s: [
+            {
+              lit: "organizations"
+            }
+            {
+              var: "organization_name"
+            }
+            {
+              lit: "projects"
+            }
+            {
+              var: "project_id"
+            }
+            {
+              lit: "queues"
+            }
+            {
+              var: "id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

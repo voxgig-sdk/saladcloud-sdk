@@ -1,0 +1,51 @@
+{
+  "existing": {
+    "quota": {
+      "QUOTA00": {
+        "container_replicas_quota": 50,
+        "container_replicas_used": 51,
+        "max_container_group_reallocations_per_minute": 52,
+        "max_container_group_recreates_per_minute": 53,
+        "max_container_group_restarts_per_minute": 54,
+        "organization_name": "ORGANIZATION_NAME01",
+        "id": "QUOTA00"
+      },
+      "QUOTA01": {
+        "container_replicas_quota": 100,
+        "container_replicas_used": 101,
+        "max_container_group_reallocations_per_minute": 102,
+        "max_container_group_recreates_per_minute": 103,
+        "max_container_group_restarts_per_minute": 104,
+        "organization_name": "ORGANIZATION_NAME01",
+        "id": "QUOTA01"
+      },
+      "QUOTA02": {
+        "container_replicas_quota": 150,
+        "container_replicas_used": 151,
+        "max_container_group_reallocations_per_minute": 152,
+        "max_container_group_recreates_per_minute": 153,
+        "max_container_group_restarts_per_minute": 154,
+        "organization_name": "ORGANIZATION_NAME01",
+        "id": "QUOTA02"
+      }
+    }
+  },
+  "new": {
+    "quota": {
+      "quota_ref01": {
+        "container_replicas_quota": 200,
+        "container_replicas_used": 201,
+        "max_container_group_reallocations_per_minute": 202,
+        "max_container_group_recreates_per_minute": 203,
+        "max_container_group_restarts_per_minute": 204
+      }
+    }
+  },
+  "requests": {
+    "GET /organizations/{organization_name}/quotas": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

@@ -1,0 +1,158 @@
+# Entity: gpu_class
+
+main: kit: entity: gpu_class: {
+
+  alias: field: {}
+
+  fields: {
+    gpu_class_type: {
+      h: "Gpu Class Type"
+      n: "gpu_class_type"
+      r: false
+      sh: "The type of GPU class"
+      t: "`$STRING`"
+    }
+    gpu_count: {
+      fo: "int32"
+      h: "Gpu Count"
+      n: "gpu_count"
+      r: false
+      sh: "The number of GPUs in the cluster"
+      t: "`$INTEGER`"
+    }
+    id: {
+      fo: "uuid"
+      h: "Id"
+      n: "id"
+      r: true
+      sh: "The unique identifier"
+      t: "`$STRING`"
+    }
+    is_high_demand: {
+      h: "Is High Demand"
+      n: "is_high_demand"
+      r: false
+      sh: "Whether the GPU class is in high demand"
+      t: "`$BOOLEAN`"
+    }
+    max_ram: {
+      fo: "int32"
+      h: "Max Ram"
+      n: "max_ram"
+      r: false
+      sh: "The maximum RAM amount in MB"
+      t: "`$INTEGER`"
+    }
+    max_storage: {
+      fo: "int64"
+      h: "Max Storage"
+      n: "max_storage"
+      r: false
+      sh: "The maximum storage amount in bytes"
+      t: "`$INTEGER`"
+    }
+    max_vcpu: {
+      fo: "int32"
+      h: "Max Vcpu"
+      n: "max_vcpu"
+      r: false
+      sh: "The maximum vCPU count"
+      t: "`$INTEGER`"
+    }
+    min_ram: {
+      fo: "int32"
+      h: "Min Ram"
+      n: "min_ram"
+      r: false
+      sh: "The minimum RAM amount in MB"
+      t: "`$INTEGER`"
+    }
+    min_storage: {
+      fo: "int64"
+      h: "Min Storage"
+      n: "min_storage"
+      r: false
+      sh: "The minimum storage amount in bytes"
+      t: "`$INTEGER`"
+    }
+    min_vcpu: {
+      fo: "int32"
+      h: "Min Vcpu"
+      n: "min_vcpu"
+      r: false
+      sh: "The minimum vCPU count"
+      t: "`$INTEGER`"
+    }
+    name: {
+      h: "Name"
+      n: "name"
+      r: true
+      sh: "The GPU class name"
+      t: "`$STRING`"
+    }
+    prices: {
+      h: "Prices"
+      n: "prices"
+      r: true
+      sh: "The list of prices for each container group priority"
+      t: "`$ARRAY`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "gpu_class"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /organizations/{organization_name}/gpu-classes"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "organization_name"
+                or: "organization_name"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/organizations/{organization_name}/gpu-classes"
+          q: {
+            exist: [
+              "organization_name"
+            ]
+          }
+          s: [
+            {
+              lit: "organizations"
+            }
+            {
+              var: "organization_name"
+            }
+            {
+              lit: "gpu-classes"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.items`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

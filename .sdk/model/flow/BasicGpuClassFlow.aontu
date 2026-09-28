@@ -1,0 +1,26 @@
+# BasicGpuClassFlow
+
+main: kit: flow: BasicGpuClassFlow:
+{
+  entity: "gpu_class",
+  kind: "basic",
+  name: "BasicGpuClassFlow",
+  step: [
+    {
+      m: {
+        organization_name: "organization_name01"
+      }
+
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "gpu_class_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicGpuClassFlow"
+}

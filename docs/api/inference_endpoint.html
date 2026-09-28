@@ -1,0 +1,1154 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>InferenceEndpoint | SaladCloud API</title><link rel="stylesheet" href="../assets/style.css"></head>
+<body><a class="skip" href="#content">Skip to content</a>
+<header class="site-header"><a class="site-title" href="../index.html">SaladCloud API<span>SDK documentation</span></a><div class="site-links"><a class="repo-link" href="https://github.com/voxgig-sdk/saladcloud-sdk">voxgig-sdk/saladcloud-sdk</a></div></header>
+<div class="site-notice" role="note"></div>
+<div class="shell"><nav class="site-nav" aria-label="Documentation"><div class="search"><label for="search">Search documentation</label><input id="search" type="search" data-base="../" placeholder="Find a guide or reference"><div id="results" aria-live="polite"></div></div><details><summary>Overview</summary><a href="../index.html">SaladCloud API</a></details>
+<details open><summary>API</summary><a href="../api/index.html">API overview</a>
+<a href="../api/container.html">Container</a>
+<a href="../api/container_group.html">ContainerGroup</a>
+<a href="../api/container_group_instance.html">ContainerGroupInstance</a>
+<a href="../api/cpu_availability.html">CpuAvailability</a>
+<a href="../api/gpu_availability.html">GpuAvailability</a>
+<a href="../api/gpu_class.html">GpuClass</a>
+<a aria-current="page" href="../api/inference_endpoint.html">InferenceEndpoint</a><div class="nav-sections"><a class="nav-section" href="#get-organizationsorganization_nameinference-endpoints">GET /organizations/{organization_name}/inference-endpoints</a>
+<a class="nav-section" href="#get-organizationsorganization_nameinference-endpointsinference_endpoint_name">GET /organizations/{organization_name}/inference-endpoints/{inference_endpoint_name}</a>
+<a class="nav-section" href="#delete-organizationsorganization_nameinference-endpointsinference_endpoint_namejobsinference_endpoint_job_id">DELETE /organizations/{organization_name}/inference-endpoints/{inference_endpoint_name}/jobs/{inference_endpoint_job_id}</a></div>
+<a href="../api/inference_endpoint_job.html">InferenceEndpointJob</a>
+<a href="../api/inference_endpoint_job_collection.html">InferenceEndpointJobCollection</a>
+<a href="../api/log_entry.html">LogEntry</a>
+<a href="../api/queue.html">Queue</a>
+<a href="../api/quota.html">Quota</a>
+<a href="../api/system_log.html">SystemLog</a>
+<a href="../api/webhook_secret_key.html">WebhookSecretKey</a></details>
+<details><summary>Guides</summary><a href="../guides/authentication.html">Authentication</a>
+<a href="../guides/first-call.html">Make your first API call</a>
+<a href="../guides/errors.html">Handle errors</a>
+<a href="../guides/concepts.html">Entities, SDKs, and tools</a></details>
+<details><summary>SDKs</summary><a href="../sdks/go.html">Golang</a>
+<a href="../sdks/lua.html">Lua</a>
+<a href="../sdks/php.html">PHP</a>
+<a href="../sdks/py.html">Python</a>
+<a href="../sdks/rb.html">Ruby</a>
+<a href="../sdks/ts.html">TypeScript</a></details>
+<details><summary>Tools</summary><a href="../tools/go-cli.html">Go CLI</a>
+<a href="../tools/go-mcp.html">Go MCP server</a></details>
+<details><summary>Features</summary><a href="../features/debug.html">Debug capture</a>
+<a href="../features/idempotency.html">Idempotency</a>
+<a href="../features/metrics.html">Metrics</a>
+<a href="../features/paging.html">Paging</a>
+<a href="../features/ratelimit.html">Rate limiting</a>
+<a href="../features/retry.html">Retry</a>
+<a href="../features/test.html">Test transport</a>
+<a href="../features/timeout.html">Timeout</a></details></nav><main id="content"><div class="page-context"><span class="section-dot" aria-hidden="true"></span>API</div><h1 id="inferenceendpoint">InferenceEndpoint</h1>
+<h2 id="operations">Operations</h2>
+<p>Every route this entity exposes. Each route links to its own reference on this page.</p>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Route</th>
+<th>SDK operation</th>
+<th>Returns</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>GET</code></td>
+<td><a href="#get-organizationsorganization_nameinference-endpoints"><code>/organizations/{organization_name}/inference-endpoints</code></a></td>
+<td><code>list</code></td>
+<td>OK</td>
+</tr>
+<tr>
+<td><code>GET</code></td>
+<td><a href="#get-organizationsorganization_nameinference-endpointsinference_endpoint_name"><code>/organizations/{organization_name}/inference-endpoints/{inference_endpoint_name}</code></a></td>
+<td><code>load</code></td>
+<td>OK</td>
+</tr>
+<tr>
+<td><code>DELETE</code></td>
+<td><a href="#delete-organizationsorganization_nameinference-endpointsinference_endpoint_namejobsinference_endpoint_job_id"><code>/organizations/{organization_name}/inference-endpoints/{inference_endpoint_name}/jobs/{inference_endpoint_job_id}</code></a></td>
+<td><code>remove</code></td>
+<td>Accepted</td>
+</tr>
+</tbody>
+</table>
+<h2 id="examples">Examples</h2>
+<p>One example per SDK, generated from the API model. The argument names are the parameters and fields of this entity, and the values are placeholders. The examples are not compiled or executed.</p>
+<h3 id="golang">Golang</h3>
+<p>Construct <code>client</code> as shown in the <a href="../sdks/go.html#set-up-the-client">Golang setup</a>, then call the operations:</p>
+<pre><code class="language-go">inference_endpoints, err := client.InferenceEndpoint(nil).List(map[string]any{&quot;organization_name&quot;: &quot;example&quot;}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(inference_endpoints)
+inference_endpoint, err := client.InferenceEndpoint(nil).Load(map[string]any{&quot;id&quot;: &quot;example_id&quot;, &quot;organization_name&quot;: &quot;example&quot;}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(inference_endpoint)
+removed, err := client.InferenceEndpoint(nil).Remove(map[string]any{&quot;inference_endpoint_id&quot;: &quot;example&quot;, &quot;inference_endpoint_job_id&quot;: &quot;example&quot;, &quot;organization_name&quot;: &quot;example&quot;}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(removed)
+</code></pre>
+<h3 id="lua">Lua</h3>
+<p>Construct <code>client</code> as shown in the <a href="../sdks/lua.html#set-up-the-client">Lua setup</a>, then call the operations:</p>
+<pre><code class="language-lua">local inference_endpoints, err = client:InferenceEndpoint():list({ organization_name = &quot;example&quot; })
+local inference_endpoint, err = client:InferenceEndpoint():load({ id = &quot;example_id&quot;, organization_name = &quot;example&quot; })
+local removed, err = client:InferenceEndpoint():remove({ inference_endpoint_id = &quot;example&quot;, inference_endpoint_job_id = &quot;example&quot;, organization_name = &quot;example&quot; })
+</code></pre>
+<h3 id="php">PHP</h3>
+<p>Construct <code>client</code> as shown in the <a href="../sdks/php.html#set-up-the-client">PHP setup</a>, then call the operations:</p>
+<pre><code class="language-php">$inference_endpoints = $client-&gt;InferenceEndpoint()-&gt;list([&quot;organization_name&quot; =&gt; &quot;example&quot;]);
+$inference_endpoint = $client-&gt;InferenceEndpoint()-&gt;load([&quot;id&quot; =&gt; &quot;example_id&quot;, &quot;organization_name&quot; =&gt; &quot;example&quot;]);
+$client-&gt;InferenceEndpoint()-&gt;remove([&quot;inference_endpoint_id&quot; =&gt; &quot;example&quot;, &quot;inference_endpoint_job_id&quot; =&gt; &quot;example&quot;, &quot;organization_name&quot; =&gt; &quot;example&quot;]);
+</code></pre>
+<h3 id="python">Python</h3>
+<p>Construct <code>client</code> as shown in the <a href="../sdks/py.html#set-up-the-client">Python setup</a>, then call the operations:</p>
+<pre><code class="language-py">inference_endpoints = client.InferenceEndpoint().list({&quot;organization_name&quot;: &quot;example&quot;})
+inference_endpoint = client.InferenceEndpoint().load({&quot;id&quot;: &quot;example_id&quot;, &quot;organization_name&quot;: &quot;example&quot;})
+client.InferenceEndpoint().remove({&quot;inference_endpoint_id&quot;: &quot;example&quot;, &quot;inference_endpoint_job_id&quot;: &quot;example&quot;, &quot;organization_name&quot;: &quot;example&quot;})
+</code></pre>
+<h3 id="ruby">Ruby</h3>
+<p>Construct <code>client</code> as shown in the <a href="../sdks/rb.html#set-up-the-client">Ruby setup</a>, then call the operations:</p>
+<pre><code class="language-rb">inference_endpoints = client.InferenceEndpoint.list({ &quot;organization_name&quot; =&gt; &quot;example&quot; })
+inference_endpoint = client.InferenceEndpoint.load({ &quot;id&quot; =&gt; &quot;example_id&quot;, &quot;organization_name&quot; =&gt; &quot;example&quot; })
+client.InferenceEndpoint.remove({ &quot;inference_endpoint_id&quot; =&gt; &quot;example&quot;, &quot;inference_endpoint_job_id&quot; =&gt; &quot;example&quot;, &quot;organization_name&quot; =&gt; &quot;example&quot; })
+</code></pre>
+<h3 id="typescript">TypeScript</h3>
+<p>Construct <code>client</code> as shown in the <a href="../sdks/ts.html#set-up-the-client">TypeScript setup</a>, then call the operations:</p>
+<pre><code class="language-ts">const inference_endpoints = await client.InferenceEndpoint().list({ organization_name: &quot;example&quot; })
+const inference_endpoint = await client.InferenceEndpoint().load({ id: &quot;example_id&quot;, organization_name: &quot;example&quot; })
+await client.InferenceEndpoint().remove({ inference_endpoint_id: &quot;example&quot;, inference_endpoint_job_id: &quot;example&quot;, organization_name: &quot;example&quot; })
+</code></pre>
+<h2 id="fields">Fields</h2>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>description</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The detailed description of the resource.</td>
+</tr>
+<tr>
+<td><code>display_name</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The display-friendly name of the resource.</td>
+</tr>
+<tr>
+<td><code>icon_url</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The URL of the icon image</td>
+</tr>
+<tr>
+<td><code>id</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The inference endpoint identifier.</td>
+</tr>
+<tr>
+<td><code>input_schema</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The input schema</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The inference endpoint name.</td>
+</tr>
+<tr>
+<td><code>organization_name</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The organization name.</td>
+</tr>
+<tr>
+<td><code>output_schema</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The output schema</td>
+</tr>
+<tr>
+<td><code>price_description</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A description of the price</td>
+</tr>
+<tr>
+<td><code>readme</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A markdown file containing a detailed description of the inference endpoint</td>
+</tr>
+</tbody>
+</table>
+<h2 id="list">list</h2>
+<h3 id="get-organizationsorganization_nameinference-endpoints" class="operation" data-method="get"><code>GET</code> /organizations/{organization_name}/inference-endpoints</h3>
+<p>Operation ID: <code>list_inference_endpoints</code>.</p>
+<p>Authentication: API key in the header (<code>ApiKeyAuth</code>).</p>
+<h4 id="parameters">Parameters</h4>
+<p>| Parameter | In | Type | Required | Description |
+| --- | --- | --- | --- |
+| <code>organization_name</code> | <code>path</code> | <code>string</code> | Yes | Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization. |
+| <code>page</code> | <code>query</code> | <code>integer (int32)</code> | No | The page number. |
+| <code>page_size</code> | <code>query</code> | <code>integer (int32)</code> | No | The maximum number of items per page. |</p>
+<h4 id="responses">Responses</h4>
+<h5 id="200-ok" class="status" data-status="2xx">200: OK</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>items</code></td>
+<td><code>array of object</code></td>
+<td>Yes</td>
+<td>The list of inference endpoints.</td>
+</tr>
+<tr>
+<td><code>items[].description</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The detailed description of the resource.</td>
+</tr>
+<tr>
+<td><code>items[].display_name</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The display-friendly name of the resource.</td>
+</tr>
+<tr>
+<td><code>items[].icon_url</code></td>
+<td><code>string (url)</code></td>
+<td>Yes</td>
+<td>The URL of the icon image</td>
+</tr>
+<tr>
+<td><code>items[].id</code></td>
+<td><code>string (uuid)</code></td>
+<td>Yes</td>
+<td>The inference endpoint identifier.</td>
+</tr>
+<tr>
+<td><code>items[].input_schema</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The input schema</td>
+</tr>
+<tr>
+<td><code>items[].name</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The inference endpoint name.</td>
+</tr>
+<tr>
+<td><code>items[].organization_name</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The organization name.</td>
+</tr>
+<tr>
+<td><code>items[].output_schema</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The output schema</td>
+</tr>
+<tr>
+<td><code>items[].price_description</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A description of the price</td>
+</tr>
+<tr>
+<td><code>items[].readme</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A markdown file containing a detailed description of the inference endpoint</td>
+</tr>
+<tr>
+<td><code>page</code></td>
+<td><code>integer (int32)</code></td>
+<td>Yes</td>
+<td>The page number.</td>
+</tr>
+<tr>
+<td><code>page_size</code></td>
+<td><code>integer (int32)</code></td>
+<td>Yes</td>
+<td>The maximum number of items per page.</td>
+</tr>
+<tr>
+<td><code>total_size</code></td>
+<td><code>integer (int32)</code></td>
+<td>Yes</td>
+<td>The total number of items in the collection.</td>
+</tr>
+</tbody>
+</table>
+<h5 id="400-bad-request" class="status" data-status="4xx">400: Bad Request</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>detail</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The human-readable explanation specific to this occurrence of the error.</td>
+</tr>
+<tr>
+<td><code>instance</code></td>
+<td><code>string (url)</code></td>
+<td>No</td>
+<td>The URI reference that identifies the specific occurrence of the error.</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td><code>integer (int32)</code></td>
+<td>No</td>
+<td>The HTTP status code generated by the origin server for this occurrence of the error.</td>
+</tr>
+<tr>
+<td><code>title</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The short, human-readable summary of the error type.</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td><code>string (url)</code></td>
+<td>No</td>
+<td>The URI reference that identifies the error type.</td>
+</tr>
+</tbody>
+</table>
+<h5 id="401-unauthorized" class="status" data-status="4xx">401: Unauthorized</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>detail</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The human-readable explanation specific to this occurrence of the error.</td>
+</tr>
+<tr>
+<td><code>instance</code></td>
+<td><code>string (url)</code></td>
+<td>No</td>
+<td>The URI reference that identifies the specific occurrence of the error.</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td><code>integer (int32)</code></td>
+<td>No</td>
+<td>The HTTP status code generated by the origin server for this occurrence of the error.</td>
+</tr>
+<tr>
+<td><code>title</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The short, human-readable summary of the error type.</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td><code>string (url)</code></td>
+<td>No</td>
+<td>The URI reference that identifies the error type.</td>
+</tr>
+</tbody>
+</table>
+<h5 id="403-forbidden" class="status" data-status="4xx">403: Forbidden</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>detail</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The human-readable explanation specific to this occurrence of the error.</td>
+</tr>
+<tr>
+<td><code>instance</code></td>
+<td><code>string (url)</code></td>
+<td>No</td>
+<td>The URI reference that identifies the specific occurrence of the error.</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td><code>integer (int32)</code></td>
+<td>No</td>
+<td>The HTTP status code generated by the origin server for this occurrence of the error.</td>
+</tr>
+<tr>
+<td><code>title</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The short, human-readable summary of the error type.</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td><code>string (url)</code></td>
+<td>No</td>
+<td>The URI reference that identifies the error type.</td>
+</tr>
+</tbody>
+</table>
+<h5 id="404-not-found" class="status" data-status="4xx">404: Not Found</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>detail</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The human-readable explanation specific to this occurrence of the error.</td>
+</tr>
+<tr>
+<td><code>instance</code></td>
+<td><code>string (url)</code></td>
+<td>No</td>
+<td>The URI reference that identifies the specific occurrence of the error.</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td><code>integer (int32)</code></td>
+<td>No</td>
+<td>The HTTP status code generated by the origin server for this occurrence of the error.</td>
+</tr>
+<tr>
+<td><code>title</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The short, human-readable summary of the error type.</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td><code>string (url)</code></td>
+<td>No</td>
+<td>The URI reference that identifies the error type.</td>
+</tr>
+</tbody>
+</table>
+<h5 id="429-too-many-requests" class="status" data-status="4xx">429: Too Many Requests</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>detail</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The human-readable explanation specific to this occurrence of the error.</td>
+</tr>
+<tr>
+<td><code>instance</code></td>
+<td><code>string (url)</code></td>
+<td>No</td>
+<td>The URI reference that identifies the specific occurrence of the error.</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td><code>integer (int32)</code></td>
+<td>No</td>
+<td>The HTTP status code generated by the origin server for this occurrence of the error.</td>
+</tr>
+<tr>
+<td><code>title</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The short, human-readable summary of the error type.</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td><code>string (url)</code></td>
+<td>No</td>
+<td>The URI reference that identifies the error type.</td>
+</tr>
+</tbody>
+</table>
+<h5 id="default-unknown-error">default: Unknown Error</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>detail</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The human-readable explanation specific to this occurrence of the error.</td>
+</tr>
+<tr>
+<td><code>instance</code></td>
+<td><code>string (url)</code></td>
+<td>No</td>
+<td>The URI reference that identifies the specific occurrence of the error.</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td><code>integer (int32)</code></td>
+<td>No</td>
+<td>The HTTP status code generated by the origin server for this occurrence of the error.</td>
+</tr>
+<tr>
+<td><code>title</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The short, human-readable summary of the error type.</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td><code>string (url)</code></td>
+<td>No</td>
+<td>The URI reference that identifies the error type.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="load">load</h2>
+<h3 id="get-organizationsorganization_nameinference-endpointsinference_endpoint_name" class="operation" data-method="get"><code>GET</code> /organizations/{organization_name}/inference-endpoints/{inference_endpoint_name}</h3>
+<p>Operation ID: <code>get_inference_endpoint</code>.</p>
+<p>Authentication: API key in the header (<code>ApiKeyAuth</code>).</p>
+<h4 id="parameters-1">Parameters</h4>
+<p>| Parameter | In | Type | Required | Description |
+| --- | --- | --- | --- |
+| <code>organization_name</code> | <code>path</code> | <code>string</code> | Yes | Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization. |
+| <code>inference_endpoint_name</code> | <code>path</code> | <code>string</code> | Yes | The inference endpoint name. |</p>
+<h4 id="responses-1">Responses</h4>
+<h5 id="200-ok-1" class="status" data-status="2xx">200: OK</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>description</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The detailed description of the resource.</td>
+</tr>
+<tr>
+<td><code>display_name</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The display-friendly name of the resource.</td>
+</tr>
+<tr>
+<td><code>icon_url</code></td>
+<td><code>string (url)</code></td>
+<td>Yes</td>
+<td>The URL of the icon image</td>
+</tr>
+<tr>
+<td><code>id</code></td>
+<td><code>string (uuid)</code></td>
+<td>Yes</td>
+<td>The inference endpoint identifier.</td>
+</tr>
+<tr>
+<td><code>input_schema</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The input schema</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The inference endpoint name.</td>
+</tr>
+<tr>
+<td><code>organization_name</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The organization name.</td>
+</tr>
+<tr>
+<td><code>output_schema</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The output schema</td>
+</tr>
+<tr>
+<td><code>price_description</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A description of the price</td>
+</tr>
+<tr>
+<td><code>readme</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>A markdown file containing a detailed description of the inference endpoint</td>
+</tr>
+</tbody>
+</table>
+<h5 id="401-unauthorized-1" class="status" data-status="4xx">401: Unauthorized</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>detail</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The human-readable explanation specific to this occurrence of the error.</td>
+</tr>
+<tr>
+<td><code>instance</code></td>
+<td><code>string (url)</code></td>
+<td>No</td>
+<td>The URI reference that identifies the specific occurrence of the error.</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td><code>integer (int32)</code></td>
+<td>No</td>
+<td>The HTTP status code generated by the origin server for this occurrence of the error.</td>
+</tr>
+<tr>
+<td><code>title</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The short, human-readable summary of the error type.</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td><code>string (url)</code></td>
+<td>No</td>
+<td>The URI reference that identifies the error type.</td>
+</tr>
+</tbody>
+</table>
+<h5 id="403-forbidden-1" class="status" data-status="4xx">403: Forbidden</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>detail</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The human-readable explanation specific to this occurrence of the error.</td>
+</tr>
+<tr>
+<td><code>instance</code></td>
+<td><code>string (url)</code></td>
+<td>No</td>
+<td>The URI reference that identifies the specific occurrence of the error.</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td><code>integer (int32)</code></td>
+<td>No</td>
+<td>The HTTP status code generated by the origin server for this occurrence of the error.</td>
+</tr>
+<tr>
+<td><code>title</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The short, human-readable summary of the error type.</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td><code>string (url)</code></td>
+<td>No</td>
+<td>The URI reference that identifies the error type.</td>
+</tr>
+</tbody>
+</table>
+<h5 id="404-not-found-1" class="status" data-status="4xx">404: Not Found</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>detail</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The human-readable explanation specific to this occurrence of the error.</td>
+</tr>
+<tr>
+<td><code>instance</code></td>
+<td><code>string (url)</code></td>
+<td>No</td>
+<td>The URI reference that identifies the specific occurrence of the error.</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td><code>integer (int32)</code></td>
+<td>No</td>
+<td>The HTTP status code generated by the origin server for this occurrence of the error.</td>
+</tr>
+<tr>
+<td><code>title</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The short, human-readable summary of the error type.</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td><code>string (url)</code></td>
+<td>No</td>
+<td>The URI reference that identifies the error type.</td>
+</tr>
+</tbody>
+</table>
+<h5 id="429-too-many-requests-1" class="status" data-status="4xx">429: Too Many Requests</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>detail</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The human-readable explanation specific to this occurrence of the error.</td>
+</tr>
+<tr>
+<td><code>instance</code></td>
+<td><code>string (url)</code></td>
+<td>No</td>
+<td>The URI reference that identifies the specific occurrence of the error.</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td><code>integer (int32)</code></td>
+<td>No</td>
+<td>The HTTP status code generated by the origin server for this occurrence of the error.</td>
+</tr>
+<tr>
+<td><code>title</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The short, human-readable summary of the error type.</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td><code>string (url)</code></td>
+<td>No</td>
+<td>The URI reference that identifies the error type.</td>
+</tr>
+</tbody>
+</table>
+<h5 id="default-unknown-error-1">default: Unknown Error</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>detail</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The human-readable explanation specific to this occurrence of the error.</td>
+</tr>
+<tr>
+<td><code>instance</code></td>
+<td><code>string (url)</code></td>
+<td>No</td>
+<td>The URI reference that identifies the specific occurrence of the error.</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td><code>integer (int32)</code></td>
+<td>No</td>
+<td>The HTTP status code generated by the origin server for this occurrence of the error.</td>
+</tr>
+<tr>
+<td><code>title</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The short, human-readable summary of the error type.</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td><code>string (url)</code></td>
+<td>No</td>
+<td>The URI reference that identifies the error type.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="remove">remove</h2>
+<h3 id="delete-organizationsorganization_nameinference-endpointsinference_endpoint_namejobsinference_endpoint_job_id" class="operation" data-method="delete"><code>DELETE</code> /organizations/{organization_name}/inference-endpoints/{inference_endpoint_name}/jobs/{inference_endpoint_job_id}</h3>
+<p>Operation ID: <code>delete_inference_endpoint_job</code>.</p>
+<p>Authentication: API key in the header (<code>ApiKeyAuth</code>).</p>
+<h4 id="parameters-2">Parameters</h4>
+<p>| Parameter | In | Type | Required | Description |
+| --- | --- | --- | --- |
+| <code>organization_name</code> | <code>path</code> | <code>string</code> | Yes | Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization. |
+| <code>inference_endpoint_name</code> | <code>path</code> | <code>string</code> | Yes | The inference endpoint name. |
+| <code>inference_endpoint_job_id</code> | <code>path</code> | <code>string (uuid)</code> | Yes | The inference endpoint job identifier. |</p>
+<h4 id="responses-2">Responses</h4>
+<h5 id="202-accepted" class="status" data-status="2xx">202: Accepted</h5>
+<h5 id="400-bad-request-1" class="status" data-status="4xx">400: Bad Request</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>detail</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The human-readable explanation specific to this occurrence of the error.</td>
+</tr>
+<tr>
+<td><code>instance</code></td>
+<td><code>string (url)</code></td>
+<td>No</td>
+<td>The URI reference that identifies the specific occurrence of the error.</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td><code>integer (int32)</code></td>
+<td>No</td>
+<td>The HTTP status code generated by the origin server for this occurrence of the error.</td>
+</tr>
+<tr>
+<td><code>title</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The short, human-readable summary of the error type.</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td><code>string (url)</code></td>
+<td>No</td>
+<td>The URI reference that identifies the error type.</td>
+</tr>
+</tbody>
+</table>
+<h5 id="401-unauthorized-2" class="status" data-status="4xx">401: Unauthorized</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>detail</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The human-readable explanation specific to this occurrence of the error.</td>
+</tr>
+<tr>
+<td><code>instance</code></td>
+<td><code>string (url)</code></td>
+<td>No</td>
+<td>The URI reference that identifies the specific occurrence of the error.</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td><code>integer (int32)</code></td>
+<td>No</td>
+<td>The HTTP status code generated by the origin server for this occurrence of the error.</td>
+</tr>
+<tr>
+<td><code>title</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The short, human-readable summary of the error type.</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td><code>string (url)</code></td>
+<td>No</td>
+<td>The URI reference that identifies the error type.</td>
+</tr>
+</tbody>
+</table>
+<h5 id="403-forbidden-2" class="status" data-status="4xx">403: Forbidden</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>detail</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The human-readable explanation specific to this occurrence of the error.</td>
+</tr>
+<tr>
+<td><code>instance</code></td>
+<td><code>string (url)</code></td>
+<td>No</td>
+<td>The URI reference that identifies the specific occurrence of the error.</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td><code>integer (int32)</code></td>
+<td>No</td>
+<td>The HTTP status code generated by the origin server for this occurrence of the error.</td>
+</tr>
+<tr>
+<td><code>title</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The short, human-readable summary of the error type.</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td><code>string (url)</code></td>
+<td>No</td>
+<td>The URI reference that identifies the error type.</td>
+</tr>
+</tbody>
+</table>
+<h5 id="404-not-found-2" class="status" data-status="4xx">404: Not Found</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>detail</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The human-readable explanation specific to this occurrence of the error.</td>
+</tr>
+<tr>
+<td><code>instance</code></td>
+<td><code>string (url)</code></td>
+<td>No</td>
+<td>The URI reference that identifies the specific occurrence of the error.</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td><code>integer (int32)</code></td>
+<td>No</td>
+<td>The HTTP status code generated by the origin server for this occurrence of the error.</td>
+</tr>
+<tr>
+<td><code>title</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The short, human-readable summary of the error type.</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td><code>string (url)</code></td>
+<td>No</td>
+<td>The URI reference that identifies the error type.</td>
+</tr>
+</tbody>
+</table>
+<h5 id="429-too-many-requests-2" class="status" data-status="4xx">429: Too Many Requests</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>detail</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The human-readable explanation specific to this occurrence of the error.</td>
+</tr>
+<tr>
+<td><code>instance</code></td>
+<td><code>string (url)</code></td>
+<td>No</td>
+<td>The URI reference that identifies the specific occurrence of the error.</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td><code>integer (int32)</code></td>
+<td>No</td>
+<td>The HTTP status code generated by the origin server for this occurrence of the error.</td>
+</tr>
+<tr>
+<td><code>title</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The short, human-readable summary of the error type.</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td><code>string (url)</code></td>
+<td>No</td>
+<td>The URI reference that identifies the error type.</td>
+</tr>
+</tbody>
+</table>
+<h5 id="default-unknown-error-2">default: Unknown Error</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>detail</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The human-readable explanation specific to this occurrence of the error.</td>
+</tr>
+<tr>
+<td><code>instance</code></td>
+<td><code>string (url)</code></td>
+<td>No</td>
+<td>The URI reference that identifies the specific occurrence of the error.</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td><code>integer (int32)</code></td>
+<td>No</td>
+<td>The HTTP status code generated by the origin server for this occurrence of the error.</td>
+</tr>
+<tr>
+<td><code>title</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The short, human-readable summary of the error type.</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td><code>string (url)</code></td>
+<td>No</td>
+<td>The URI reference that identifies the error type.</td>
+</tr>
+</tbody>
+</table>
+</main></div>
+<script src="../assets/search.js" defer></script></body></html>

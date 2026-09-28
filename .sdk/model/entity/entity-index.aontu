@@ -1,0 +1,16 @@
+# Entity Models
+
+@"./container.aontu"
+@"./container_group.aontu"
+@"./container_group_instance.aontu"
+@"./cpu_availability.aontu"
+@"./gpu_availability.aontu"
+@"./gpu_class.aontu"
+@"./inference_endpoint.aontu"
+@"./inference_endpoint_job.aontu"
+@"./inference_endpoint_job_collection.aontu"
+@"./log_entry.aontu"
+@"./queue.aontu"
+@"./quota.aontu"
+@"./system_log.aontu"
+@"./webhook_secret_key.aontu"

@@ -1,0 +1,209 @@
+
+
+import Path from 'node:path'
+import * as Fs from 'node:fs'
+
+import { test, describe, afterEach } from 'node:test'
+import assert from 'node:assert'
+import { createLiveTransport } from '../../live-runner'
+import { runLiveEntity } from '../../live-entity'
+
+
+import { SaladcloudSDK, BaseFeature, stdutil } from '../../..'
+
+import {
+  envOverride,
+  liveClientOptions,
+  liveDelay,
+  loadEnvLocal,
+  makeCtrl,
+  makeMatch,
+  makeReqdata,
+  makeStepData,
+  makeValid,
+  maybeSkipControl,
+} from '../../utility'
+
+
+loadEnvLocal(__dirname + '/../../../.env.local')
+
+
+describe('QueueEntity', async () => {
+
+  // Per-test live pacing. Delay is read from sdk-test-control.json's
+  // `test.live.delayMs`; only sleeps when SALADCLOUD_TEST_LIVE=TRUE.
+  afterEach(liveDelay('SALADCLOUD_TEST_LIVE'))
+
+  test('instance', async () => {
+    const testsdk = SaladcloudSDK.test()
+    const ent = testsdk.Queue()
+    assert(null != ent)
+  })
+
+
+  test('basic', async (t) => {
+
+    const live = 'TRUE' === process.env.SALADCLOUD_TEST_LIVE
+    for (const op of ['create', 'list', 'update', 'load', 'remove']) {
+      if (!live && maybeSkipControl(t, 'entityOp', 'queue.' + op, live)) return
+    }
+
+    
+    const setup = basicSetup()
+    if (setup.live) {
+      return runLiveEntity(setup, {"active":true,"alias":{"field":{}},"fields":{"container_groups":{"a":true,"h":"Container Groups","n":"container_groups","r":true,"sh":"The container groups that are part of this queue.","t":"`$ARRAY`","key$":"container_groups","index$":0},"create_time":{"a":true,"fo":"date-time","h":"Create Time","n":"create_time","r":true,"sh":"The job creation time","t":"`$STRING`","key$":"create_time","index$":1},"current_queue_length":{"a":true,"fo":"int32","h":"Current Queue Length","n":"current_queue_length","r":false,"sh":"The current length of the queue","t":"`$INTEGER`","key$":"current_queue_length","index$":2},"description":{"a":true,"h":"Description","n":"description","r":false,"sh":"The description.","t":"`$STRING`","key$":"description","index$":3},"display_name":{"a":true,"h":"Display Name","n":"display_name","op":{"create":{"req":false,"type":"`$STRING`"}},"r":true,"sh":"The display name.","t":"`$STRING`","key$":"display_name","index$":4},"events":{"a":true,"h":"Events","n":"events","r":true,"sh":"The job events","t":"`$ARRAY`","key$":"events","index$":5},"id":{"a":true,"fo":"uuid","h":"Id","n":"id","r":true,"sh":"The job identifier","t":"`$STRING`","key$":"id","index$":6},"input":{"a":true,"h":"Input","n":"input","r":true,"sh":"The job input.","t":"`$ANY`","key$":"input","index$":7},"metadata":{"a":true,"h":"Metadata","n":"metadata","r":false,"sh":"Additional metadata for the job","t":"`$OBJECT`","key$":"metadata","index$":8},"name":{"a":true,"h":"Name","n":"name","r":true,"sh":"The queue name.","t":"`$STRING`","key$":"name","index$":9},"output":{"a":true,"h":"Output","n":"output","r":false,"sh":"The job output.","t":"`$ANY`","key$":"output","index$":10},"status":{"a":true,"h":"Status","n":"status","r":true,"sh":"The job status","t":"`$STRING`","key$":"status","index$":11},"update_time":{"a":true,"fo":"date-time","h":"Update Time","n":"update_time","r":true,"sh":"The job update time","t":"`$STRING`","key$":"update_time","index$":12},"webhook":{"a":true,"fo":"url","h":"Webhook","n":"webhook","r":false,"sh":"The webhook URL to notify when the job completes","t":"`$STRING`","key$":"webhook","index$":13}},"id":{"field":"id","name":"id"},"name":"queue","op":{"create":{"input":"data","name":"create","points":[{"a":true,"co":{"id":"POST /organizations/{organization_name}/projects/{project_name}/queues/{queue_name}/jobs","source":"openapi3","version":2},"g":{"params":[{"a":true,"k":"param","n":"organization_name","or":"organization_name","r":true,"t":"`$STRING`","index$":0},{"a":true,"k":"param","n":"project_id","or":"project_name","r":true,"t":"`$STRING`","index$":1},{"a":true,"k":"param","n":"queue_name","or":"queue_name","r":true,"t":"`$STRING`","index$":2}]},"k":"http","m":"POST","o":"/organizations/{organization_name}/projects/{project_name}/queues/{queue_name}/jobs","q":{"$action":"job","exist":["organization_name","project_id","queue_name"]},"r":{"param":{"project_name":"project_id"}},"s":[{"lit":"organizations"},{"var":"organization_name"},{"lit":"projects"},{"var":"project_id"},{"lit":"queues"},{"var":"queue_name"},{"lit":"jobs"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":0},{"a":true,"co":{"id":"POST /organizations/{organization_name}/projects/{project_name}/queues","source":"openapi3","version":2},"g":{"params":[{"a":true,"k":"param","n":"organization_name","or":"organization_name","r":true,"t":"`$STRING`","index$":0},{"a":true,"k":"param","n":"project_name","or":"project_name","r":true,"t":"`$STRING`","index$":1}]},"k":"http","m":"POST","o":"/organizations/{organization_name}/projects/{project_name}/queues","q":{"exist":["organization_name","project_name"]},"r":{},"s":[{"lit":"organizations"},{"var":"organization_name"},{"lit":"projects"},{"var":"project_name"},{"lit":"queues"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":1}],"key$":"create"},"list":{"input":"data","name":"list","points":[{"a":true,"co":{"id":"GET /organizations/{organization_name}/projects/{project_name}/queues/{queue_name}/jobs","source":"openapi3","version":2},"g":{"params":[{"a":true,"k":"param","n":"organization_name","or":"organization_name","r":true,"t":"`$STRING`","index$":0},{"a":true,"k":"param","n":"project_id","or":"project_name","r":true,"t":"`$STRING`","index$":1},{"a":true,"k":"param","n":"queue_name","or":"queue_name","r":true,"t":"`$STRING`","index$":2}],"query":[{"a":true,"k":"query","n":"page","or":"page","r":false,"t":"`$INTEGER`","index$":0},{"a":true,"k":"query","n":"page_size","or":"page_size","r":false,"t":"`$INTEGER`","index$":1}]},"k":"http","m":"GET","o":"/organizations/{organization_name}/projects/{project_name}/queues/{queue_name}/jobs","q":{"$action":"job","exist":["organization_name","page","page_size","project_id","queue_name"]},"r":{"param":{"project_name":"project_id"}},"s":[{"lit":"organizations"},{"var":"organization_name"},{"lit":"projects"},{"var":"project_id"},{"lit":"queues"},{"var":"queue_name"},{"lit":"jobs"}],"t":{"req":"`reqdata`","res":"`body.items`"},"index$":0},{"a":true,"co":{"id":"GET /organizations/{organization_name}/projects/{project_name}/queues","source":"openapi3","version":2},"g":{"params":[{"a":true,"k":"param","n":"organization_name","or":"organization_name","r":true,"t":"`$STRING`","index$":0},{"a":true,"k":"param","n":"project_name","or":"project_name","r":true,"t":"`$STRING`","index$":1}]},"k":"http","m":"GET","o":"/organizations/{organization_name}/projects/{project_name}/queues","q":{"exist":["organization_name","project_name"]},"r":{},"s":[{"lit":"organizations"},{"var":"organization_name"},{"lit":"projects"},{"var":"project_name"},{"lit":"queues"}],"t":{"req":"`reqdata`","res":"`body.items`"},"index$":1}],"key$":"list"},"load":{"input":"data","name":"load","points":[{"a":true,"co":{"id":"GET /organizations/{organization_name}/projects/{project_name}/queues/{queue_name}/jobs/{queue_job_id}","source":"openapi3","version":2},"g":{"params":[{"a":true,"k":"param","n":"organization_name","or":"organization_name","r":true,"t":"`$STRING`","index$":0},{"a":true,"k":"param","n":"project_id","or":"project_name","r":true,"t":"`$STRING`","index$":1},{"a":true,"k":"param","n":"queue_id","or":"queue_name","r":true,"t":"`$STRING`","index$":2},{"a":true,"k":"param","n":"queue_job_id","or":"queue_job_id","r":true,"t":"`$STRING`","index$":3}]},"k":"http","m":"GET","o":"/organizations/{organization_name}/projects/{project_name}/queues/{queue_name}/jobs/{queue_job_id}","q":{"exist":["organization_name","project_id","queue_id","queue_job_id"]},"r":{"param":{"project_name":"project_id","queue_name":"queue_id"}},"s":[{"lit":"organizations"},{"var":"organization_name"},{"lit":"projects"},{"var":"project_id"},{"lit":"queues"},{"var":"queue_id"},{"lit":"jobs"},{"var":"queue_job_id"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":0},{"a":true,"co":{"id":"GET /organizations/{organization_name}/projects/{project_name}/queues/{queue_name}","source":"openapi3","version":2},"g":{"params":[{"a":true,"k":"param","n":"id","or":"queue_name","r":true,"t":"`$STRING`","index$":0},{"a":true,"k":"param","n":"organization_name","or":"organization_name","r":true,"t":"`$STRING`","index$":1},{"a":true,"k":"param","n":"project_id","or":"project_name","r":true,"t":"`$STRING`","index$":2}]},"k":"http","m":"GET","o":"/organizations/{organization_name}/projects/{project_name}/queues/{queue_name}","q":{"exist":["id","organization_name","project_id"]},"r":{"param":{"project_name":"project_id","queue_name":"id"}},"s":[{"lit":"organizations"},{"var":"organization_name"},{"lit":"projects"},{"var":"project_id"},{"lit":"queues"},{"var":"id"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":1}],"key$":"load"},"remove":{"input":"data","name":"remove","points":[{"a":true,"co":{"id":"DELETE /organizations/{organization_name}/projects/{project_name}/queues/{queue_name}/jobs/{queue_job_id}","source":"openapi3","version":2},"g":{"params":[{"a":true,"k":"param","n":"organization_name","or":"organization_name","r":true,"t":"`$STRING`","index$":0},{"a":true,"k":"param","n":"project_id","or":"project_name","r":true,"t":"`$STRING`","index$":1},{"a":true,"k":"param","n":"queue_id","or":"queue_name","r":true,"t":"`$STRING`","index$":2},{"a":true,"k":"param","n":"queue_job_id","or":"queue_job_id","r":true,"t":"`$STRING`","index$":3}]},"k":"http","m":"DELETE","o":"/organizations/{organization_name}/projects/{project_name}/queues/{queue_name}/jobs/{queue_job_id}","q":{"exist":["organization_name","project_id","queue_id","queue_job_id"]},"r":{"param":{"project_name":"project_id","queue_name":"queue_id"}},"s":[{"lit":"organizations"},{"var":"organization_name"},{"lit":"projects"},{"var":"project_id"},{"lit":"queues"},{"var":"queue_id"},{"lit":"jobs"},{"var":"queue_job_id"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":0},{"a":true,"co":{"id":"DELETE /organizations/{organization_name}/projects/{project_name}/queues/{queue_name}","source":"openapi3","version":2},"g":{"params":[{"a":true,"k":"param","n":"id","or":"queue_name","r":true,"t":"`$STRING`","index$":0},{"a":true,"k":"param","n":"organization_name","or":"organization_name","r":true,"t":"`$STRING`","index$":1},{"a":true,"k":"param","n":"project_id","or":"project_name","r":true,"t":"`$STRING`","index$":2}]},"k":"http","m":"DELETE","o":"/organizations/{organization_name}/projects/{project_name}/queues/{queue_name}","q":{"exist":["id","organization_name","project_id"]},"r":{"param":{"project_name":"project_id","queue_name":"id"}},"s":[{"lit":"organizations"},{"var":"organization_name"},{"lit":"projects"},{"var":"project_id"},{"lit":"queues"},{"var":"id"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":1}],"key$":"remove"},"update":{"input":"data","name":"update","points":[{"a":true,"co":{"id":"PATCH /organizations/{organization_name}/projects/{project_name}/queues/{queue_name}","source":"openapi3","version":2},"g":{"params":[{"a":true,"k":"param","n":"id","or":"queue_name","r":true,"t":"`$STRING`","index$":0},{"a":true,"k":"param","n":"organization_name","or":"organization_name","r":true,"t":"`$STRING`","index$":1},{"a":true,"k":"param","n":"project_id","or":"project_name","r":true,"t":"`$STRING`","index$":2}]},"k":"http","m":"PATCH","o":"/organizations/{organization_name}/projects/{project_name}/queues/{queue_name}","q":{"exist":["id","organization_name","project_id"]},"r":{"param":{"project_name":"project_id","queue_name":"id"}},"s":[{"lit":"organizations"},{"var":"organization_name"},{"lit":"projects"},{"var":"project_id"},{"lit":"queues"},{"var":"id"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":0}],"key$":"update"}},"relations":{"ancestors":[]},"key$":"queue","name__orig":"queue","Name":"Queue","name_":"queue","name-":"queue","NAME":"QUEUE","index$":10}, {"active":true,"entity":"queue","key$":"BasicQueueFlow","kind":"basic","name":"BasicQueueFlow","param":{},"step":[{"a":true,"d":{},"i":{"ref":"queue_ref01"},"m":{"organization_name":"organization_name01","project_id":"project01","project_name":"project_name01","queue_id":"queue01","queue_name":"queue_name01"},"o":"create","s":[],"v":[],"index$":0},{"a":true,"d":{},"i":{},"m":{"organization_name":"organization_name01","project_name":"project_name01"},"o":"list","s":[],"v":[{"apply":"ItemExists","def":{"ref":"queue_ref01"}}],"index$":1},{"a":true,"d":{"organization_name":"organization_name01","project_id":"project01"},"i":{"ref":"queue_ref01","srcdatavar":"queue_ref01_data","suffix":"_up0","textfield":"create_time"},"m":{},"o":"update","s":[{"apply":"TextFieldMark","def":{"mark":"Mark01-queue_ref01"}}],"v":[],"index$":2},{"a":true,"d":{},"i":{"ref":"queue_ref01","srcdatavar":"queue_ref01_data","suffix":"_dt0"},"m":{"id":"queue01","organization_name":"organization_name01","project_id":"project01"},"o":"load","s":[],"v":[{"apply":"TextFieldMark","def":{"mark":"Mark01-queue_ref01"}}],"index$":3},{"a":true,"d":{},"i":{"ref":"queue_ref01","suffix":"_rm0"},"m":{"id":"queue01","organization_name":"organization_name01","project_id":"project01"},"o":"remove","s":[],"v":[],"index$":4},{"a":true,"d":{},"i":{"suffix":"_rt0"},"m":{"organization_name":"organization_name01","project_name":"project_name01"},"o":"list","s":[],"v":[{"apply":"ItemNotExists","def":{"ref":"queue_ref01"}}],"index$":5}]}, 'Queue', {"POST /organizations/{organization_name}/projects/{project_name}/queues/{queue_name}/jobs":{"protocol":"http","requestBody":{"required":true,"content":{"application/json":{"schema":{"description":"Represents a request to create a queue job","type":"object","properties":{"input":{"description":"The job input. May be any valid JSON.","x-ref":"#/components/schemas/QueueJobInput"},"metadata":{"description":"Additional metadata for the job","type":"object","maxProperties":20,"x-ref":"#/components/schemas/QueueJobMetadata"},"webhook":{"description":"The webhook to call when the job completes","type":"string","format":"url","maxLength":2048,"minLength":1,"pattern":"^.*$"}},"required":["input"],"x-ref":"#/components/schemas/QueueJobPrototype"}}},"x-ref":"#/components/requestBodies/CreateQueueJob"},"parameters":[{"name":"organization_name","in":"path","description":"Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.","required":true,"schema":{"description":"The organization name.","type":"string","examples":["acme-corp"],"maxLength":63,"minLength":2,"pattern":"^[a-z][a-z0-9-]{0,61}[a-z0-9]$","title":"Organization Name","x-ref":"#/components/schemas/OrganizationName"},"x-ref":"#/components/parameters/organization_name","index$":0},{"name":"project_name","in":"path","description":"Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.","required":true,"schema":{"description":"The project name.","type":"string","examples":["dev-env"],"maxLength":63,"minLength":2,"pattern":"^[a-z][a-z0-9-]{0,61}[a-z0-9]$","x-ref":"#/components/schemas/ProjectName"},"x-ref":"#/components/parameters/project_name","index$":1},{"in":"path","name":"queue_name","required":true,"schema":{"type":"string","examples":["fifo-queue"],"maxLength":63,"minLength":2,"pattern":"^[a-z][a-z0-9-]{0,61}[a-z0-9]$"},"description":"The queue name.","x-ref":"#/components/parameters/queue_name","index$":2}]},"POST /organizations/{organization_name}/projects/{project_name}/queues":{"protocol":"http","requestBody":{"required":true,"content":{"application/json":{"schema":{"description":"Represents a request to create a new queue.","type":"object","properties":{"description":{"description":"The description. This may be used as a space for notes or other information about the queue.","type":"string","maxLength":500,"minLength":0,"pattern":"^.*$","key$":"description"},"display_name":{"description":"The display name. This may be used as a more human-readable name.","type":"string","maxLength":63,"minLength":2,"pattern":"^[ ,-.0-9A-Za-z]+$","key$":"display_name"},"name":{"description":"The queue name. This must be unique within the project.","type":"string","maxLength":63,"minLength":2,"pattern":"^[a-z][a-z0-9-]{0,61}[a-z0-9]$","key$":"name"}},"required":["name"],"x-ref":"#/components/schemas/QueuePrototype","index$":1}}},"x-ref":"#/components/requestBodies/CreateQueue"},"parameters":[{"name":"organization_name","in":"path","description":"Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.","required":true,"schema":{"description":"The organization name.","type":"string","examples":["acme-corp"],"maxLength":63,"minLength":2,"pattern":"^[a-z][a-z0-9-]{0,61}[a-z0-9]$","title":"Organization Name","x-ref":"#/components/schemas/OrganizationName"},"x-ref":"#/components/parameters/organization_name","index$":0},{"name":"project_name","in":"path","description":"Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.","required":true,"schema":{"description":"The project name.","type":"string","examples":["dev-env"],"maxLength":63,"minLength":2,"pattern":"^[a-z][a-z0-9-]{0,61}[a-z0-9]$","x-ref":"#/components/schemas/ProjectName"},"x-ref":"#/components/parameters/project_name","index$":1}]},"GET /organizations/{organization_name}/projects/{project_name}/queues/{queue_name}/jobs":{"protocol":"http","parameters":[{"name":"organization_name","in":"path","description":"Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.","required":true,"schema":{"description":"The organization name.","type":"string","examples":["acme-corp"],"maxLength":63,"minLength":2,"pattern":"^[a-z][a-z0-9-]{0,61}[a-z0-9]$","title":"Organization Name","x-ref":"#/components/schemas/OrganizationName"},"x-ref":"#/components/parameters/organization_name","index$":0},{"name":"project_name","in":"path","description":"Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.","required":true,"schema":{"description":"The project name.","type":"string","examples":["dev-env"],"maxLength":63,"minLength":2,"pattern":"^[a-z][a-z0-9-]{0,61}[a-z0-9]$","x-ref":"#/components/schemas/ProjectName"},"x-ref":"#/components/parameters/project_name","index$":1},{"in":"path","name":"queue_name","required":true,"schema":{"type":"string","examples":["fifo-queue"],"maxLength":63,"minLength":2,"pattern":"^[a-z][a-z0-9-]{0,61}[a-z0-9]$"},"description":"The queue name.","x-ref":"#/components/parameters/queue_name","index$":2},{"in":"query","name":"page","description":"The page number.","schema":{"description":"The page number.","type":"integer","format":"int32","examples":[1],"maximum":2147483647,"minimum":1,"x-ref":"#/components/schemas/Page"},"x-ref":"#/components/parameters/Page","index$":3},{"in":"query","name":"page_size","description":"The maximum number of items per page.","schema":{"description":"The maximum number of items per page.","type":"integer","format":"int32","examples":[1],"maximum":100,"minimum":1,"x-ref":"#/components/schemas/PageSize"},"x-ref":"#/components/parameters/PageSize","index$":4}]},"GET /organizations/{organization_name}/projects/{project_name}/queues":{"protocol":"http","parameters":[{"name":"organization_name","in":"path","description":"Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.","required":true,"schema":{"description":"The organization name.","type":"string","examples":["acme-corp"],"maxLength":63,"minLength":2,"pattern":"^[a-z][a-z0-9-]{0,61}[a-z0-9]$","title":"Organization Name","x-ref":"#/components/schemas/OrganizationName"},"x-ref":"#/components/parameters/organization_name","index$":0},{"name":"project_name","in":"path","description":"Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.","required":true,"schema":{"description":"The project name.","type":"string","examples":["dev-env"],"maxLength":63,"minLength":2,"pattern":"^[a-z][a-z0-9-]{0,61}[a-z0-9]$","x-ref":"#/components/schemas/ProjectName"},"x-ref":"#/components/parameters/project_name","index$":1}]},"GET /organizations/{organization_name}/projects/{project_name}/queues/{queue_name}/jobs/{queue_job_id}":{"protocol":"http","parameters":[{"name":"organization_name","in":"path","description":"Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.","required":true,"schema":{"description":"The organization name.","type":"string","examples":["acme-corp"],"maxLength":63,"minLength":2,"pattern":"^[a-z][a-z0-9-]{0,61}[a-z0-9]$","title":"Organization Name","x-ref":"#/components/schemas/OrganizationName"},"x-ref":"#/components/parameters/organization_name","index$":0},{"name":"project_name","in":"path","description":"Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.","required":true,"schema":{"description":"The project name.","type":"string","examples":["dev-env"],"maxLength":63,"minLength":2,"pattern":"^[a-z][a-z0-9-]{0,61}[a-z0-9]$","x-ref":"#/components/schemas/ProjectName"},"x-ref":"#/components/parameters/project_name","index$":1},{"in":"path","name":"queue_name","required":true,"schema":{"type":"string","examples":["fifo-queue"],"maxLength":63,"minLength":2,"pattern":"^[a-z][a-z0-9-]{0,61}[a-z0-9]$"},"description":"The queue name.","x-ref":"#/components/parameters/queue_name","index$":2},{"in":"path","name":"queue_job_id","required":true,"schema":{"type":"string","format":"uuid","examples":["7dcd6922-50e9-4d56-89b5-91cde26f0211"]},"description":"The job identifier. This is automatically generated and assigned when the job is created.","x-ref":"#/components/parameters/queue_job_id","index$":3}]},"GET /organizations/{organization_name}/projects/{project_name}/queues/{queue_name}":{"protocol":"http","parameters":[{"name":"organization_name","in":"path","description":"Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.","required":true,"schema":{"description":"The organization name.","type":"string","examples":["acme-corp"],"maxLength":63,"minLength":2,"pattern":"^[a-z][a-z0-9-]{0,61}[a-z0-9]$","title":"Organization Name","x-ref":"#/components/schemas/OrganizationName"},"x-ref":"#/components/parameters/organization_name","index$":0},{"name":"project_name","in":"path","description":"Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.","required":true,"schema":{"description":"The project name.","type":"string","examples":["dev-env"],"maxLength":63,"minLength":2,"pattern":"^[a-z][a-z0-9-]{0,61}[a-z0-9]$","x-ref":"#/components/schemas/ProjectName"},"x-ref":"#/components/parameters/project_name","index$":1},{"in":"path","name":"queue_name","required":true,"schema":{"type":"string","examples":["fifo-queue"],"maxLength":63,"minLength":2,"pattern":"^[a-z][a-z0-9-]{0,61}[a-z0-9]$"},"description":"The queue name.","x-ref":"#/components/parameters/queue_name","index$":2}]},"DELETE /organizations/{organization_name}/projects/{project_name}/queues/{queue_name}/jobs/{queue_job_id}":{"protocol":"http","parameters":[{"name":"organization_name","in":"path","description":"Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.","required":true,"schema":{"description":"The organization name.","type":"string","examples":["acme-corp"],"maxLength":63,"minLength":2,"pattern":"^[a-z][a-z0-9-]{0,61}[a-z0-9]$","title":"Organization Name","x-ref":"#/components/schemas/OrganizationName"},"x-ref":"#/components/parameters/organization_name","index$":0},{"name":"project_name","in":"path","description":"Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.","required":true,"schema":{"description":"The project name.","type":"string","examples":["dev-env"],"maxLength":63,"minLength":2,"pattern":"^[a-z][a-z0-9-]{0,61}[a-z0-9]$","x-ref":"#/components/schemas/ProjectName"},"x-ref":"#/components/parameters/project_name","index$":1},{"in":"path","name":"queue_name","required":true,"schema":{"type":"string","examples":["fifo-queue"],"maxLength":63,"minLength":2,"pattern":"^[a-z][a-z0-9-]{0,61}[a-z0-9]$"},"description":"The queue name.","x-ref":"#/components/parameters/queue_name","index$":2},{"in":"path","name":"queue_job_id","required":true,"schema":{"type":"string","format":"uuid","examples":["7dcd6922-50e9-4d56-89b5-91cde26f0211"]},"description":"The job identifier. This is automatically generated and assigned when the job is created.","x-ref":"#/components/parameters/queue_job_id","index$":3}]},"DELETE /organizations/{organization_name}/projects/{project_name}/queues/{queue_name}":{"protocol":"http","parameters":[{"name":"organization_name","in":"path","description":"Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.","required":true,"schema":{"description":"The organization name.","type":"string","examples":["acme-corp"],"maxLength":63,"minLength":2,"pattern":"^[a-z][a-z0-9-]{0,61}[a-z0-9]$","title":"Organization Name","x-ref":"#/components/schemas/OrganizationName"},"x-ref":"#/components/parameters/organization_name","index$":0},{"name":"project_name","in":"path","description":"Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.","required":true,"schema":{"description":"The project name.","type":"string","examples":["dev-env"],"maxLength":63,"minLength":2,"pattern":"^[a-z][a-z0-9-]{0,61}[a-z0-9]$","x-ref":"#/components/schemas/ProjectName"},"x-ref":"#/components/parameters/project_name","index$":1},{"in":"path","name":"queue_name","required":true,"schema":{"type":"string","examples":["fifo-queue"],"maxLength":63,"minLength":2,"pattern":"^[a-z][a-z0-9-]{0,61}[a-z0-9]$"},"description":"The queue name.","x-ref":"#/components/parameters/queue_name","index$":2}]},"PATCH /organizations/{organization_name}/projects/{project_name}/queues/{queue_name}":{"protocol":"http","requestBody":{"required":true,"content":{"application/merge-patch+json":{"schema":{"description":"Represents a request to update an existing queue.","type":"object","properties":{"description":{"description":"The description. This may be used as a space for notes or other information about the queue.","type":["string","null"],"maxLength":500,"minLength":0,"pattern":"^.*$"},"display_name":{"description":"The display name. This may be used as a more human-readable name.","type":["string","null"],"maxLength":63,"minLength":2,"pattern":"^[ ,-.0-9A-Za-z]+$"}},"x-ref":"#/components/schemas/QueuePatch"}}},"x-ref":"#/components/requestBodies/UpdateQueue"},"parameters":[{"name":"organization_name","in":"path","description":"Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization.","required":true,"schema":{"description":"The organization name.","type":"string","examples":["acme-corp"],"maxLength":63,"minLength":2,"pattern":"^[a-z][a-z0-9-]{0,61}[a-z0-9]$","title":"Organization Name","x-ref":"#/components/schemas/OrganizationName"},"x-ref":"#/components/parameters/organization_name","index$":0},{"name":"project_name","in":"path","description":"Your project name. This represents a collection of related SaladCloud resources. The project must be created before using the API.","required":true,"schema":{"description":"The project name.","type":"string","examples":["dev-env"],"maxLength":63,"minLength":2,"pattern":"^[a-z][a-z0-9-]{0,61}[a-z0-9]$","x-ref":"#/components/schemas/ProjectName"},"x-ref":"#/components/parameters/project_name","index$":1},{"in":"path","name":"queue_name","required":true,"schema":{"type":"string","examples":["fifo-queue"],"maxLength":63,"minLength":2,"pattern":"^[a-z][a-z0-9-]{0,61}[a-z0-9]$"},"description":"The queue name.","x-ref":"#/components/parameters/queue_name","index$":2}]}})
+    }
+    const client = setup.client
+    const struct = setup.struct
+
+    const isempty = struct.isempty
+    const select = struct.select
+
+
+    // CREATE
+    const queue_ref01_ent = client.Queue()
+    let queue_ref01_data = setup.data.new.queue['queue_ref01']
+    queue_ref01_data['organization_name'] = setup.idmap['organization_name01']
+    queue_ref01_data['project_id'] = setup.idmap['project01']
+    queue_ref01_data['project_name'] = setup.idmap['project_name01']
+    queue_ref01_data['queue_id'] = setup.idmap['queue01']
+    queue_ref01_data['queue_name'] = setup.idmap['queue_name01']
+
+    queue_ref01_data = (await queue_ref01_ent.create(queue_ref01_data)).data()
+    assert(null != queue_ref01_data.id)
+
+
+    // LIST
+    const queue_ref01_match: any = {}
+    queue_ref01_match['organization_name'] = setup.idmap['organization_name01']
+    queue_ref01_match['project_name'] = setup.idmap['project_name01']
+
+    const queue_ref01_list = (await queue_ref01_ent.list(queue_ref01_match)).map((e: any) => e.data())
+
+    assert(!isempty(select(queue_ref01_list, { id: queue_ref01_data.id })))
+
+
+    // UPDATE
+    const queue_ref01_data_up0: any = {}
+    queue_ref01_data_up0.id = queue_ref01_data.id
+    queue_ref01_data_up0 ['organization_name'] = setup.idmap['organization_name']
+    queue_ref01_data_up0 ['project_id'] = setup.idmap['project_id']
+
+    const queue_ref01_markdef_up0 = { name: 'create_time', value: 'Mark01-queue_ref01_' + setup.now }
+    ;(queue_ref01_data_up0 as any)[queue_ref01_markdef_up0.name] = queue_ref01_markdef_up0.value
+
+    const queue_ref01_resdata_up0 = (await queue_ref01_ent.update(queue_ref01_data_up0)).data()
+    assert(queue_ref01_resdata_up0.id === queue_ref01_data_up0.id)
+
+    assert((queue_ref01_resdata_up0 as any)[queue_ref01_markdef_up0.name] === queue_ref01_markdef_up0.value)
+
+
+    // LOAD
+    const queue_ref01_match_dt0: any = {}
+    queue_ref01_match_dt0.id = queue_ref01_data.id
+    const queue_ref01_data_dt0 = (await queue_ref01_ent.load(queue_ref01_match_dt0)).data()
+    assert(queue_ref01_data_dt0.id === queue_ref01_data.id)
+
+
+    // REMOVE
+    const queue_ref01_match_rm0: any = { id: queue_ref01_data.id }
+    await queue_ref01_ent.remove(queue_ref01_match_rm0)
+  
+
+    // LIST
+    const queue_ref01_match_rt0: any = {}
+    queue_ref01_match_rt0['organization_name'] = setup.idmap['organization_name01']
+    queue_ref01_match_rt0['project_name'] = setup.idmap['project_name01']
+
+    const queue_ref01_list_rt0 = (await queue_ref01_ent.list(queue_ref01_match_rt0)).map((e: any) => e.data())
+
+    assert(isempty(select(queue_ref01_list_rt0, { id: queue_ref01_data.id })))
+
+
+  })
+})
+
+
+
+function basicSetup(extra?: any) {
+  // TODO: fix test def options
+  const options: any = {} // null
+
+  // TODO: needs test utility to resolve path
+  const entityDataFile =
+    Path.resolve(__dirname, 
+      '../../../../.sdk/test/entity/queue/QueueTestData.json')
+
+  // TODO: file ready util needed?
+  const entityDataSource = Fs.readFileSync(entityDataFile).toString('utf8')
+
+  // TODO: need a xlang JSON parse utility in voxgig/struct with better error msgs
+  const entityData = JSON.parse(entityDataSource)
+
+  options.entity = entityData.existing
+
+  let client = SaladcloudSDK.test(options, extra)
+  const struct = client.utility().struct
+  const merge = struct.merge
+  const transform = struct.transform
+
+  let idmap = transform(
+    ['queue01','queue02','queue03','organization_name01','project01','project_name01','queue_name01'],
+    {
+      '`$PACK`': ['', {
+        '`$KEY`': '`$COPY`',
+        '`$VAL`': ['`$FORMAT`', 'upper', '`$COPY`']
+      }]
+    })
+
+  const env = envOverride({
+    'SALADCLOUD_TEST_QUEUE_ENTID': idmap,
+    'SALADCLOUD_TEST_LIVE': 'FALSE',
+    'SALADCLOUD_TEST_EXPLAIN': 'FALSE',
+    'SALADCLOUD_APIKEY': '',
+  })
+
+  idmap = env['SALADCLOUD_TEST_QUEUE_ENTID']
+
+  const live = 'TRUE' === env.SALADCLOUD_TEST_LIVE
+
+  const transport = createLiveTransport()
+  if (live) {
+    const rawIds = process.env['SALADCLOUD_TEST_QUEUE_ENTID']
+    idmap = rawIds && rawIds.trim() ? JSON.parse(rawIds) : {}
+    if (!idmap || Array.isArray(idmap) || typeof idmap !== 'object') {
+      throw new Error('Live ENTID must be a JSON object')
+    }
+    client = new SaladcloudSDK(merge([
+      // FIRST, so the generated fields below win: sdk-test-control.json's
+      // test.client.options adds to the live client, it does not redirect it.
+      liveClientOptions(),
+      {
+        apikey: env.SALADCLOUD_APIKEY,
+      },
+      // 'extra || {}', not a bare 'extra': struct.merge returns UNDEFINED when the
+      // last entry is undefined, and basicSetup is normally called with no
+      // argument at all - so a bare 'extra' silently discarded the apikey
+      // and server values above and handed the SDK undefined. Harmless
+      // while there was nothing in that object; not harmless now.
+      extra || {},
+      { system: { fetch: transport.fetch } }
+    ]))
+  }
+
+  const setup = {
+    idmap,
+    env,
+    options,
+    client,
+    struct,
+    data: entityData,
+    explain: 'TRUE' === env.SALADCLOUD_TEST_EXPLAIN,
+    live,
+    transport,
+    now: Date.now(),
+  }
+
+  return setup
+}
+  

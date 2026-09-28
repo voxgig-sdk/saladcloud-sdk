@@ -1,0 +1,109 @@
+{
+  "existing": {
+    "container_group_instance": {
+      "CONTAINER_GROUP_INSTANCE00": {
+        "cpu_percent": 170,
+        "cpu_usage": 171,
+        "cpu_usage_total": 172,
+        "deletion_cost": 173,
+        "id": "CONTAINER_GROUP_INSTANCE00",
+        "machine_id": "MACHINE01",
+        "memory_usage_mb": 176,
+        "memory_usage_percent": 177,
+        "pulling_progress": 178,
+        "ready": false,
+        "ssh_host_key_fingerprint": "sb4",
+        "ssh_ip": "sb5",
+        "ssh_port": 182,
+        "started": false,
+        "state": "sb8",
+        "update_time": "sb9",
+        "version": 186,
+        "container_group_name": "CONTAINER_GROUP_NAME01",
+        "organization_name": "ORGANIZATION_NAME01",
+        "project_id": "PROJECT01",
+        "container_id": "CONTAINER01"
+      },
+      "CONTAINER_GROUP_INSTANCE01": {
+        "cpu_percent": 340,
+        "cpu_usage": 341,
+        "cpu_usage_total": 342,
+        "deletion_cost": 343,
+        "id": "CONTAINER_GROUP_INSTANCE01",
+        "machine_id": "MACHINE01",
+        "memory_usage_mb": 346,
+        "memory_usage_percent": 347,
+        "pulling_progress": 348,
+        "ready": false,
+        "ssh_host_key_fingerprint": "s15e",
+        "ssh_ip": "s15f",
+        "ssh_port": 352,
+        "started": false,
+        "state": "s162",
+        "update_time": "s163",
+        "version": 356,
+        "container_group_name": "CONTAINER_GROUP_NAME01",
+        "organization_name": "ORGANIZATION_NAME01",
+        "project_id": "PROJECT01",
+        "container_id": "CONTAINER01"
+      },
+      "CONTAINER_GROUP_INSTANCE02": {
+        "cpu_percent": 510,
+        "cpu_usage": 511,
+        "cpu_usage_total": 512,
+        "deletion_cost": 513,
+        "id": "CONTAINER_GROUP_INSTANCE02",
+        "machine_id": "MACHINE01",
+        "memory_usage_mb": 516,
+        "memory_usage_percent": 517,
+        "pulling_progress": 518,
+        "ready": false,
+        "ssh_host_key_fingerprint": "s208",
+        "ssh_ip": "s209",
+        "ssh_port": 522,
+        "started": false,
+        "state": "s20c",
+        "update_time": "s20d",
+        "version": 526,
+        "container_group_name": "CONTAINER_GROUP_NAME01",
+        "organization_name": "ORGANIZATION_NAME01",
+        "project_id": "PROJECT01",
+        "container_id": "CONTAINER01"
+      }
+    }
+  },
+  "new": {
+    "container_group_instance": {
+      "container_group_instance_ref01": {
+        "cpu_percent": 680,
+        "cpu_usage": 681,
+        "cpu_usage_total": 682,
+        "deletion_cost": 683,
+        "machine_id": "MACHINE01",
+        "memory_usage_mb": 686,
+        "memory_usage_percent": 687,
+        "pulling_progress": 688,
+        "ready": false,
+        "ssh_host_key_fingerprint": "s2b2",
+        "ssh_ip": "s2b3",
+        "ssh_port": 692,
+        "started": false,
+        "state": "s2b6",
+        "update_time": "s2b7",
+        "version": 696
+      }
+    }
+  },
+  "requests": {
+    "GET /organizations/{organization_name}/projects/{project_name}/containers/{container_group_name}/instances": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "PATCH /organizations/{organization_name}/projects/{project_name}/containers/{container_group_name}/instances/{container_group_instance_id}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

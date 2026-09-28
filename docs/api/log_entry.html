@@ -1,0 +1,582 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>LogEntry | SaladCloud API</title><link rel="stylesheet" href="../assets/style.css"></head>
+<body><a class="skip" href="#content">Skip to content</a>
+<header class="site-header"><a class="site-title" href="../index.html">SaladCloud API<span>SDK documentation</span></a><div class="site-links"><a class="repo-link" href="https://github.com/voxgig-sdk/saladcloud-sdk">voxgig-sdk/saladcloud-sdk</a></div></header>
+<div class="site-notice" role="note"></div>
+<div class="shell"><nav class="site-nav" aria-label="Documentation"><div class="search"><label for="search">Search documentation</label><input id="search" type="search" data-base="../" placeholder="Find a guide or reference"><div id="results" aria-live="polite"></div></div><details><summary>Overview</summary><a href="../index.html">SaladCloud API</a></details>
+<details open><summary>API</summary><a href="../api/index.html">API overview</a>
+<a href="../api/container.html">Container</a>
+<a href="../api/container_group.html">ContainerGroup</a>
+<a href="../api/container_group_instance.html">ContainerGroupInstance</a>
+<a href="../api/cpu_availability.html">CpuAvailability</a>
+<a href="../api/gpu_availability.html">GpuAvailability</a>
+<a href="../api/gpu_class.html">GpuClass</a>
+<a href="../api/inference_endpoint.html">InferenceEndpoint</a>
+<a href="../api/inference_endpoint_job.html">InferenceEndpointJob</a>
+<a href="../api/inference_endpoint_job_collection.html">InferenceEndpointJobCollection</a>
+<a aria-current="page" href="../api/log_entry.html">LogEntry</a><div class="nav-sections"><a class="nav-section" href="#post-organizationsorganization_namelog-entries">POST /organizations/{organization_name}/log-entries</a></div>
+<a href="../api/queue.html">Queue</a>
+<a href="../api/quota.html">Quota</a>
+<a href="../api/system_log.html">SystemLog</a>
+<a href="../api/webhook_secret_key.html">WebhookSecretKey</a></details>
+<details><summary>Guides</summary><a href="../guides/authentication.html">Authentication</a>
+<a href="../guides/first-call.html">Make your first API call</a>
+<a href="../guides/errors.html">Handle errors</a>
+<a href="../guides/concepts.html">Entities, SDKs, and tools</a></details>
+<details><summary>SDKs</summary><a href="../sdks/go.html">Golang</a>
+<a href="../sdks/lua.html">Lua</a>
+<a href="../sdks/php.html">PHP</a>
+<a href="../sdks/py.html">Python</a>
+<a href="../sdks/rb.html">Ruby</a>
+<a href="../sdks/ts.html">TypeScript</a></details>
+<details><summary>Tools</summary><a href="../tools/go-cli.html">Go CLI</a>
+<a href="../tools/go-mcp.html">Go MCP server</a></details>
+<details><summary>Features</summary><a href="../features/debug.html">Debug capture</a>
+<a href="../features/idempotency.html">Idempotency</a>
+<a href="../features/metrics.html">Metrics</a>
+<a href="../features/paging.html">Paging</a>
+<a href="../features/ratelimit.html">Rate limiting</a>
+<a href="../features/retry.html">Retry</a>
+<a href="../features/test.html">Test transport</a>
+<a href="../features/timeout.html">Timeout</a></details></nav><main id="content"><div class="page-context"><span class="section-dot" aria-hidden="true"></span>API</div><h1 id="logentry">LogEntry</h1>
+<h2 id="operations">Operations</h2>
+<p>Every route this entity exposes. Each route links to its own reference on this page.</p>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Route</th>
+<th>SDK operation</th>
+<th>Returns</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>POST</code></td>
+<td><a href="#post-organizationsorganization_namelog-entries"><code>/organizations/{organization_name}/log-entries</code></a></td>
+<td><code>create</code></td>
+<td>OK</td>
+</tr>
+</tbody>
+</table>
+<h2 id="examples">Examples</h2>
+<p>One example per SDK, generated from the API model. The argument names are the parameters and fields of this entity, and the values are placeholders. The examples are not compiled or executed.</p>
+<h3 id="golang">Golang</h3>
+<p>Construct <code>client</code> as shown in the <a href="../sdks/go.html#set-up-the-client">Golang setup</a>, then call the operations:</p>
+<pre><code class="language-go">created, err := client.LogEntry(nil).Create(map[string]any{&quot;organization_name&quot;: &quot;example&quot;, &quot;end_time&quot;: &quot;example&quot;, &quot;items&quot;: []any{}, &quot;page_max_time&quot;: &quot;example&quot;, &quot;page_min_time&quot;: &quot;example&quot;, &quot;query&quot;: &quot;example&quot;, &quot;start_time&quot;: &quot;example&quot;}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(created)
+</code></pre>
+<h3 id="lua">Lua</h3>
+<p>Construct <code>client</code> as shown in the <a href="../sdks/lua.html#set-up-the-client">Lua setup</a>, then call the operations:</p>
+<pre><code class="language-lua">local created, err = client:LogEntry():create({ organization_name = &quot;example&quot;, end_time = &quot;example&quot;, items = {}, page_max_time = &quot;example&quot;, page_min_time = &quot;example&quot;, query = &quot;example&quot;, start_time = &quot;example&quot; })
+</code></pre>
+<h3 id="php">PHP</h3>
+<p>Construct <code>client</code> as shown in the <a href="../sdks/php.html#set-up-the-client">PHP setup</a>, then call the operations:</p>
+<pre><code class="language-php">$created = $client-&gt;LogEntry()-&gt;create([&quot;organization_name&quot; =&gt; &quot;example&quot;, &quot;end_time&quot; =&gt; &quot;example&quot;, &quot;items&quot; =&gt; [], &quot;page_max_time&quot; =&gt; &quot;example&quot;, &quot;page_min_time&quot; =&gt; &quot;example&quot;, &quot;query&quot; =&gt; &quot;example&quot;, &quot;start_time&quot; =&gt; &quot;example&quot;]);
+</code></pre>
+<h3 id="python">Python</h3>
+<p>Construct <code>client</code> as shown in the <a href="../sdks/py.html#set-up-the-client">Python setup</a>, then call the operations:</p>
+<pre><code class="language-py">created = client.LogEntry().create({ &quot;organization_name&quot;: &quot;example&quot;, &quot;end_time&quot;: &quot;example&quot;, &quot;items&quot;: [], &quot;page_max_time&quot;: &quot;example&quot;, &quot;page_min_time&quot;: &quot;example&quot;, &quot;query&quot;: &quot;example&quot;, &quot;start_time&quot;: &quot;example&quot; })
+</code></pre>
+<h3 id="ruby">Ruby</h3>
+<p>Construct <code>client</code> as shown in the <a href="../sdks/rb.html#set-up-the-client">Ruby setup</a>, then call the operations:</p>
+<pre><code class="language-rb">created = client.LogEntry.create({ &quot;organization_name&quot; =&gt; &quot;example&quot;, &quot;end_time&quot; =&gt; &quot;example&quot;, &quot;items&quot; =&gt; [], &quot;page_max_time&quot; =&gt; &quot;example&quot;, &quot;page_min_time&quot; =&gt; &quot;example&quot;, &quot;query&quot; =&gt; &quot;example&quot;, &quot;start_time&quot; =&gt; &quot;example&quot; })
+</code></pre>
+<h3 id="typescript">TypeScript</h3>
+<p>Construct <code>client</code> as shown in the <a href="../sdks/ts.html#set-up-the-client">TypeScript setup</a>, then call the operations:</p>
+<pre><code class="language-ts">const created = await client.LogEntry().create({ organization_name: &quot;example&quot;, end_time: &quot;example&quot;, items: [], page_max_time: &quot;example&quot;, page_min_time: &quot;example&quot;, query: &quot;example&quot;, start_time: &quot;example&quot; })
+</code></pre>
+<h2 id="fields">Fields</h2>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>end_time</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The end time of the time range</td>
+</tr>
+<tr>
+<td><code>items</code></td>
+<td><code>array</code></td>
+<td>Yes</td>
+<td>A collection of log entries</td>
+</tr>
+<tr>
+<td><code>organization_name</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The organization name.</td>
+</tr>
+<tr>
+<td><code>page_max_time</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The maximum time page boundary.</td>
+</tr>
+<tr>
+<td><code>page_min_time</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The minimum time page boundary.</td>
+</tr>
+<tr>
+<td><code>page_size</code></td>
+<td><code>integer</code></td>
+<td>No</td>
+<td>The maximum number of items per page.</td>
+</tr>
+<tr>
+<td><code>query</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The query string for filtering logs</td>
+</tr>
+<tr>
+<td><code>sort_order</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The sort order of the log entries.</td>
+</tr>
+<tr>
+<td><code>start_time</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The start time of the time range</td>
+</tr>
+</tbody>
+</table>
+<h2 id="create">create</h2>
+<h3 id="post-organizationsorganization_namelog-entries" class="operation" data-method="post"><code>POST</code> /organizations/{organization_name}/log-entries</h3>
+<p>Operation ID: <code>query_log_entries</code>.</p>
+<p>Authentication: API key in the header (<code>ApiKeyAuth</code>).</p>
+<h4 id="parameters">Parameters</h4>
+<p>| Parameter | In | Type | Required | Description |
+| --- | --- | --- | --- |
+| <code>organization_name</code> | <code>path</code> | <code>string</code> | Yes | Your organization name. This identifies the billing context for the API operation and represents a security boundary for SaladCloud resources. The organization must be created before using the API, and you must be a member of the organization. |</p>
+<h4 id="request-body">Request body</h4>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>end_time</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The end time of the time range</td>
+</tr>
+<tr>
+<td><code>page_size</code></td>
+<td><code>integer (int32)</code></td>
+<td>No</td>
+<td>The maximum number of items per page.</td>
+</tr>
+<tr>
+<td><code>query</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The query string for filtering logs</td>
+</tr>
+<tr>
+<td><code>sort_order</code></td>
+<td><code>enum: desc, asc</code></td>
+<td>No</td>
+<td>The sort order of the log entries. <code>asc</code> will sort the log entries in chronological order. <code>desc</code> will sort the log entries in reverse chronological order.</td>
+</tr>
+<tr>
+<td><code>start_time</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The start time of the time range</td>
+</tr>
+</tbody>
+</table>
+<h4 id="responses">Responses</h4>
+<h5 id="200-ok" class="status" data-status="2xx">200: OK</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>items</code></td>
+<td><code>array of object</code></td>
+<td>Yes</td>
+<td>A collection of log entries</td>
+</tr>
+<tr>
+<td><code>items[].json_log</code></td>
+<td><code>object</code></td>
+<td>No</td>
+<td>The log message in JSON format.</td>
+</tr>
+<tr>
+<td><code>items[].parent_span_id</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The parent span ID of the log entry</td>
+</tr>
+<tr>
+<td><code>items[].receive_time</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The time when the log entry was received</td>
+</tr>
+<tr>
+<td><code>items[].resource</code></td>
+<td><code>object</code></td>
+<td>Yes</td>
+<td>The resource associated with the log entry</td>
+</tr>
+<tr>
+<td><code>items[].resource.labels</code></td>
+<td><code>object</code></td>
+<td>Yes</td>
+<td>The labels associated with the resource</td>
+</tr>
+<tr>
+<td><code>items[].resource.type</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The type of the resource</td>
+</tr>
+<tr>
+<td><code>items[].severity</code></td>
+<td><code>enum: default, debug, info, notice, warning, error, ...</code></td>
+<td>Yes</td>
+<td>The severity level of the log entry</td>
+</tr>
+<tr>
+<td><code>items[].span_Id</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The span ID of the log entry</td>
+</tr>
+<tr>
+<td><code>items[].text_log</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The log message in text format.</td>
+</tr>
+<tr>
+<td><code>items[].time</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The timestamp of the log entry</td>
+</tr>
+<tr>
+<td><code>items[].trace_Id</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The trace ID of the log entry</td>
+</tr>
+<tr>
+<td><code>organization_name</code></td>
+<td><code>string</code></td>
+<td>Yes</td>
+<td>The organization name.</td>
+</tr>
+<tr>
+<td><code>page_max_time</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The maximum time page boundary. This may be used when getting paginated results.</td>
+</tr>
+<tr>
+<td><code>page_min_time</code></td>
+<td><code>string (date-time)</code></td>
+<td>Yes</td>
+<td>The minimum time page boundary. This may be used when getting paginated results.</td>
+</tr>
+</tbody>
+</table>
+<h5 id="400-bad-request" class="status" data-status="4xx">400: Bad Request</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>detail</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The human-readable explanation specific to this occurrence of the error.</td>
+</tr>
+<tr>
+<td><code>instance</code></td>
+<td><code>string (url)</code></td>
+<td>No</td>
+<td>The URI reference that identifies the specific occurrence of the error.</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td><code>integer (int32)</code></td>
+<td>No</td>
+<td>The HTTP status code generated by the origin server for this occurrence of the error.</td>
+</tr>
+<tr>
+<td><code>title</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The short, human-readable summary of the error type.</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td><code>string (url)</code></td>
+<td>No</td>
+<td>The URI reference that identifies the error type.</td>
+</tr>
+</tbody>
+</table>
+<h5 id="401-unauthorized" class="status" data-status="4xx">401: Unauthorized</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>detail</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The human-readable explanation specific to this occurrence of the error.</td>
+</tr>
+<tr>
+<td><code>instance</code></td>
+<td><code>string (url)</code></td>
+<td>No</td>
+<td>The URI reference that identifies the specific occurrence of the error.</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td><code>integer (int32)</code></td>
+<td>No</td>
+<td>The HTTP status code generated by the origin server for this occurrence of the error.</td>
+</tr>
+<tr>
+<td><code>title</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The short, human-readable summary of the error type.</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td><code>string (url)</code></td>
+<td>No</td>
+<td>The URI reference that identifies the error type.</td>
+</tr>
+</tbody>
+</table>
+<h5 id="403-forbidden" class="status" data-status="4xx">403: Forbidden</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>detail</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The human-readable explanation specific to this occurrence of the error.</td>
+</tr>
+<tr>
+<td><code>instance</code></td>
+<td><code>string (url)</code></td>
+<td>No</td>
+<td>The URI reference that identifies the specific occurrence of the error.</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td><code>integer (int32)</code></td>
+<td>No</td>
+<td>The HTTP status code generated by the origin server for this occurrence of the error.</td>
+</tr>
+<tr>
+<td><code>title</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The short, human-readable summary of the error type.</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td><code>string (url)</code></td>
+<td>No</td>
+<td>The URI reference that identifies the error type.</td>
+</tr>
+</tbody>
+</table>
+<h5 id="404-not-found" class="status" data-status="4xx">404: Not Found</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>detail</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The human-readable explanation specific to this occurrence of the error.</td>
+</tr>
+<tr>
+<td><code>instance</code></td>
+<td><code>string (url)</code></td>
+<td>No</td>
+<td>The URI reference that identifies the specific occurrence of the error.</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td><code>integer (int32)</code></td>
+<td>No</td>
+<td>The HTTP status code generated by the origin server for this occurrence of the error.</td>
+</tr>
+<tr>
+<td><code>title</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The short, human-readable summary of the error type.</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td><code>string (url)</code></td>
+<td>No</td>
+<td>The URI reference that identifies the error type.</td>
+</tr>
+</tbody>
+</table>
+<h5 id="429-too-many-requests" class="status" data-status="4xx">429: Too Many Requests</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>detail</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The human-readable explanation specific to this occurrence of the error.</td>
+</tr>
+<tr>
+<td><code>instance</code></td>
+<td><code>string (url)</code></td>
+<td>No</td>
+<td>The URI reference that identifies the specific occurrence of the error.</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td><code>integer (int32)</code></td>
+<td>No</td>
+<td>The HTTP status code generated by the origin server for this occurrence of the error.</td>
+</tr>
+<tr>
+<td><code>title</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The short, human-readable summary of the error type.</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td><code>string (url)</code></td>
+<td>No</td>
+<td>The URI reference that identifies the error type.</td>
+</tr>
+</tbody>
+</table>
+<h5 id="default-unknown-error">default: Unknown Error</h5>
+<p><code>application/json</code></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>detail</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The human-readable explanation specific to this occurrence of the error.</td>
+</tr>
+<tr>
+<td><code>instance</code></td>
+<td><code>string (url)</code></td>
+<td>No</td>
+<td>The URI reference that identifies the specific occurrence of the error.</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td><code>integer (int32)</code></td>
+<td>No</td>
+<td>The HTTP status code generated by the origin server for this occurrence of the error.</td>
+</tr>
+<tr>
+<td><code>title</code></td>
+<td><code>string</code></td>
+<td>No</td>
+<td>The short, human-readable summary of the error type.</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td><code>string (url)</code></td>
+<td>No</td>
+<td>The URI reference that identifies the error type.</td>
+</tr>
+</tbody>
+</table>
+</main></div>
+<script src="../assets/search.js" defer></script></body></html>

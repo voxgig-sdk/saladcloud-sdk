@@ -1,0 +1,129 @@
+# Entity: log_entry
+
+main: kit: entity: log_entry: {
+
+  alias: field: {}
+
+  fields: {
+    end_time: {
+      fo: "date-time"
+      h: "End Time"
+      n: "end_time"
+      r: true
+      sh: "The end time of the time range"
+      t: "`$STRING`"
+    }
+    items: {
+      h: "Items"
+      n: "items"
+      r: true
+      sh: "A collection of log entries"
+      t: "`$ARRAY`"
+    }
+    organization_name: {
+      h: "Organization Name"
+      n: "organization_name"
+      r: true
+      sh: "The organization name."
+      t: "`$STRING`"
+    }
+    page_max_time: {
+      fo: "date-time"
+      h: "Page Max Time"
+      n: "page_max_time"
+      r: true
+      sh: "The maximum time page boundary."
+      t: "`$STRING`"
+    }
+    page_min_time: {
+      fo: "date-time"
+      h: "Page Min Time"
+      n: "page_min_time"
+      r: true
+      sh: "The minimum time page boundary."
+      t: "`$STRING`"
+    }
+    page_size: {
+      fo: "int32"
+      h: "Page Size"
+      n: "page_size"
+      r: false
+      sh: "The maximum number of items per page."
+      t: "`$INTEGER`"
+    }
+    query: {
+      h: "Query"
+      n: "query"
+      r: true
+      sh: "The query string for filtering logs"
+      t: "`$STRING`"
+    }
+    sort_order: {
+      h: "Sort Order"
+      n: "sort_order"
+      r: false
+      sh: "The sort order of the log entries."
+      t: "`$STRING`"
+    }
+    start_time: {
+      fo: "date-time"
+      h: "Start Time"
+      n: "start_time"
+      r: true
+      sh: "The start time of the time range"
+      t: "`$STRING`"
+    }
+  }
+
+  name: "log_entry"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          co: {
+            id: "POST /organizations/{organization_name}/log-entries"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "organization_name"
+                or: "organization_name"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/organizations/{organization_name}/log-entries"
+          q: {
+            exist: [
+              "organization_name"
+            ]
+          }
+          s: [
+            {
+              lit: "organizations"
+            }
+            {
+              var: "organization_name"
+            }
+            {
+              lit: "log-entries"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

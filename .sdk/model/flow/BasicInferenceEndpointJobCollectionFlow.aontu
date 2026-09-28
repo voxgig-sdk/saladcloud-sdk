@@ -1,0 +1,27 @@
+# BasicInferenceEndpointJobCollectionFlow
+
+main: kit: flow: BasicInferenceEndpointJobCollectionFlow:
+{
+  entity: "inference_endpoint_job_collection",
+  kind: "basic",
+  name: "BasicInferenceEndpointJobCollectionFlow",
+  step: [
+    {
+      m: {
+        inference_endpoint_name: "inference_endpoint_name01",
+        organization_name: "organization_name01"
+      }
+
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "inference_endpoint_job_collection_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicInferenceEndpointJobCollectionFlow"
+}

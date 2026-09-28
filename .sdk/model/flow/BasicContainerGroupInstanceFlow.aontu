@@ -1,0 +1,53 @@
+# BasicContainerGroupInstanceFlow
+
+main: kit: flow: BasicContainerGroupInstanceFlow:
+{
+  entity: "container_group_instance",
+  kind: "basic",
+  name: "BasicContainerGroupInstanceFlow",
+  step: [
+    {
+      m: {
+        container_group_name: "container_group_name01",
+        organization_name: "organization_name01",
+        project_id: "project01"
+      }
+
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "container_group_instance_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      d: {
+        container_id: "container01",
+        organization_name: "organization_name01",
+        project_id: "project01"
+      }
+
+      i: {
+        ref: "container_group_instance_ref01",
+        srcdatavar: "container_group_instance_ref01_data",
+        suffix: "_up0",
+        textfield: "machine_id"
+      }
+
+      o: "update",
+      s: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-container_group_instance_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicContainerGroupInstanceFlow"
+}

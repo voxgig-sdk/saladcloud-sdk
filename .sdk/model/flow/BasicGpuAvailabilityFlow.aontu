@@ -1,0 +1,22 @@
+# BasicGpuAvailabilityFlow
+
+main: kit: flow: BasicGpuAvailabilityFlow:
+{
+  entity: "gpu_availability",
+  kind: "basic",
+  name: "BasicGpuAvailabilityFlow",
+  step: [
+    {
+      i: {
+        ref: "gpu_availability_ref01"
+      }
+
+      m: {
+        organization_name: "organization_name01"
+      }
+
+      o: "create"
+    }
+  ],
+  "key$": "BasicGpuAvailabilityFlow"
+}

@@ -1,0 +1,249 @@
+# Entity: inference_endpoint_job
+
+main: kit: entity: inference_endpoint_job: {
+
+  alias: field: {}
+
+  fields: {
+    create_time: {
+      fo: "date-time"
+      h: "Create Time"
+      n: "create_time"
+      r: true
+      sh: "The time the job was created."
+      t: "`$STRING`"
+    }
+    events: {
+      h: "Events"
+      n: "events"
+      r: true
+      sh: "The list of events."
+      t: "`$ARRAY`"
+    }
+    id: {
+      fo: "uuid"
+      h: "Id"
+      n: "id"
+      r: true
+      sh: "The inference endpoint job identifier."
+      t: "`$STRING`"
+    }
+    inference_endpoint_name: {
+      h: "Inference Endpoint Name"
+      n: "inference_endpoint_name"
+      r: true
+      sh: "The inference endpoint name."
+      t: "`$STRING`"
+    }
+    input: {
+      h: "Input"
+      n: "input"
+      r: true
+      sh: "The job input."
+      t: "`$ANY`"
+    }
+    metadata: {
+      h: "Metadata"
+      n: "metadata"
+      r: false
+      sh: "The job metadata."
+      t: "`$OBJECT`"
+    }
+    organization_name: {
+      h: "Organization Name"
+      n: "organization_name"
+      r: true
+      sh: "The organization name."
+      t: "`$STRING`"
+    }
+    output: {
+      h: "Output"
+      n: "output"
+      r: false
+      sh: "The job output."
+      t: "`$ANY`"
+    }
+    status: {
+      h: "Status"
+      n: "status"
+      r: true
+      sh: "The current status."
+      t: "`$STRING`"
+    }
+    update_time: {
+      fo: "date-time"
+      h: "Update Time"
+      n: "update_time"
+      r: true
+      sh: "The time the job was last updated."
+      t: "`$STRING`"
+    }
+    webhook: {
+      de: true
+      fo: "url"
+      h: "Webhook"
+      n: "webhook"
+      r: false
+      sh: "The webhook URL called when the job completes."
+      t: "`$STRING`"
+    }
+    webhook_url: {
+      fo: "url"
+      h: "Webhook Url"
+      n: "webhook_url"
+      r: false
+      sh: "The webhook URL called when the job completes."
+      t: "`$STRING`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "inference_endpoint_job"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          co: {
+            id: "POST /organizations/{organization_name}/inference-endpoints/{inference_endpoint_name}/jobs"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "inference_endpoint_name"
+                or: "inference_endpoint_name"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "organization_name"
+                or: "organization_name"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "POST"
+          o: "/organizations/{organization_name}/inference-endpoints/{inference_endpoint_name}/jobs"
+          q: {
+            exist: [
+              "inference_endpoint_name"
+              "organization_name"
+            ]
+          }
+          s: [
+            {
+              lit: "organizations"
+            }
+            {
+              var: "organization_name"
+            }
+            {
+              lit: "inference-endpoints"
+            }
+            {
+              var: "inference_endpoint_name"
+            }
+            {
+              lit: "jobs"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /organizations/{organization_name}/inference-endpoints/{inference_endpoint_name}/jobs/{inference_endpoint_job_id}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "inference_endpoint_job_id"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "inference_endpoint_id"
+                or: "inference_endpoint_name"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "param"
+                n: "organization_name"
+                or: "organization_name"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/organizations/{organization_name}/inference-endpoints/{inference_endpoint_name}/jobs/{inference_endpoint_job_id}"
+          q: {
+            exist: [
+              "id"
+              "inference_endpoint_id"
+              "organization_name"
+            ]
+          }
+          r: {
+            param: {
+              inference_endpoint_job_id: "id"
+              inference_endpoint_name: "inference_endpoint_id"
+            }
+          }
+          s: [
+            {
+              lit: "organizations"
+            }
+            {
+              var: "organization_name"
+            }
+            {
+              lit: "inference-endpoints"
+            }
+            {
+              var: "inference_endpoint_id"
+            }
+            {
+              lit: "jobs"
+            }
+            {
+              var: "id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+  relations: ancestors: [
+    [path("$.main.kit.entity.inference_endpoint")]
+  ]
+
+}

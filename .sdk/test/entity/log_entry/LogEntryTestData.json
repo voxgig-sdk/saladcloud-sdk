@@ -1,0 +1,64 @@
+{
+  "existing": {
+    "log_entry": {
+      "LOG_ENTRY00": {
+        "end_time": "s5a",
+        "items": [],
+        "organization_name": "s5c",
+        "page_max_time": "s5d",
+        "page_min_time": "s5e",
+        "page_size": 95,
+        "query": "s60",
+        "sort_order": "s61",
+        "start_time": "s62",
+        "id": "LOG_ENTRY00"
+      },
+      "LOG_ENTRY01": {
+        "end_time": "sb4",
+        "items": [],
+        "organization_name": "sb6",
+        "page_max_time": "sb7",
+        "page_min_time": "sb8",
+        "page_size": 185,
+        "query": "sba",
+        "sort_order": "sbb",
+        "start_time": "sbc",
+        "id": "LOG_ENTRY01"
+      },
+      "LOG_ENTRY02": {
+        "end_time": "s10e",
+        "items": [],
+        "organization_name": "s110",
+        "page_max_time": "s111",
+        "page_min_time": "s112",
+        "page_size": 275,
+        "query": "s114",
+        "sort_order": "s115",
+        "start_time": "s116",
+        "id": "LOG_ENTRY02"
+      }
+    }
+  },
+  "new": {
+    "log_entry": {
+      "log_entry_ref01": {
+        "end_time": "s168",
+        "items": [],
+        "organization_name": "s16a",
+        "page_max_time": "s16b",
+        "page_min_time": "s16c",
+        "page_size": 365,
+        "query": "s16e",
+        "sort_order": "s16f",
+        "start_time": "s170"
+      }
+    }
+  },
+  "requests": {
+    "POST /organizations/{organization_name}/log-entries": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

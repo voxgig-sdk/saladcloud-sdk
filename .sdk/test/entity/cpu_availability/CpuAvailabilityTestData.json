@@ -1,0 +1,55 @@
+{
+  "existing": {
+    "cpu_availability": {
+      "CPU_AVAILABILITY00": {
+        "available_cpu_batch": 60,
+        "country_codes": [],
+        "cpu": 62,
+        "memory": 63,
+        "on_call_cpu": 64,
+        "storage_amount": 65,
+        "organization_name": "ORGANIZATION_NAME01",
+        "id": "CPU_AVAILABILITY00"
+      },
+      "CPU_AVAILABILITY01": {
+        "available_cpu_batch": 120,
+        "country_codes": [],
+        "cpu": 122,
+        "memory": 123,
+        "on_call_cpu": 124,
+        "storage_amount": 125,
+        "organization_name": "ORGANIZATION_NAME01",
+        "id": "CPU_AVAILABILITY01"
+      },
+      "CPU_AVAILABILITY02": {
+        "available_cpu_batch": 180,
+        "country_codes": [],
+        "cpu": 182,
+        "memory": 183,
+        "on_call_cpu": 184,
+        "storage_amount": 185,
+        "organization_name": "ORGANIZATION_NAME01",
+        "id": "CPU_AVAILABILITY02"
+      }
+    }
+  },
+  "new": {
+    "cpu_availability": {
+      "cpu_availability_ref01": {
+        "available_cpu_batch": 240,
+        "country_codes": [],
+        "cpu": 242,
+        "memory": 243,
+        "on_call_cpu": 244,
+        "storage_amount": 245
+      }
+    }
+  },
+  "requests": {
+    "POST /organizations/{organization_name}/availability/sce-cpu-availability": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

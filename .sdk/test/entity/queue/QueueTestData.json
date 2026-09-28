@@ -1,0 +1,138 @@
+{
+  "existing": {
+    "queue": {
+      "QUEUE00": {
+        "container_groups": [],
+        "create_time": "s8d",
+        "current_queue_length": 142,
+        "description": "s8f",
+        "display_name": "s90",
+        "events": [],
+        "id": "QUEUE00",
+        "input": "s93",
+        "metadata": {},
+        "name": "s95",
+        "output": "s96",
+        "status": "s97",
+        "update_time": "s98",
+        "webhook": "s99",
+        "organization_name": "ORGANIZATION_NAME01",
+        "project_id": "PROJECT01",
+        "queue_name": "QUEUE_NAME01",
+        "project_name": "PROJECT_NAME01",
+        "queue_id": "QUEUE01",
+        "queue_job_id": "QUEUE_JOB01"
+      },
+      "QUEUE01": {
+        "container_groups": [],
+        "create_time": "s119",
+        "current_queue_length": 282,
+        "description": "s11b",
+        "display_name": "s11c",
+        "events": [],
+        "id": "QUEUE01",
+        "input": "s11f",
+        "metadata": {},
+        "name": "s121",
+        "output": "s122",
+        "status": "s123",
+        "update_time": "s124",
+        "webhook": "s125",
+        "organization_name": "ORGANIZATION_NAME01",
+        "project_id": "PROJECT01",
+        "queue_name": "QUEUE_NAME01",
+        "project_name": "PROJECT_NAME01",
+        "queue_id": "QUEUE01",
+        "queue_job_id": "QUEUE_JOB01"
+      },
+      "QUEUE02": {
+        "container_groups": [],
+        "create_time": "s1a5",
+        "current_queue_length": 422,
+        "description": "s1a7",
+        "display_name": "s1a8",
+        "events": [],
+        "id": "QUEUE02",
+        "input": "s1ab",
+        "metadata": {},
+        "name": "s1ad",
+        "output": "s1ae",
+        "status": "s1af",
+        "update_time": "s1b0",
+        "webhook": "s1b1",
+        "organization_name": "ORGANIZATION_NAME01",
+        "project_id": "PROJECT01",
+        "queue_name": "QUEUE_NAME01",
+        "project_name": "PROJECT_NAME01",
+        "queue_id": "QUEUE01",
+        "queue_job_id": "QUEUE_JOB01"
+      }
+    }
+  },
+  "new": {
+    "queue": {
+      "queue_ref01": {
+        "container_groups": [],
+        "create_time": "s231",
+        "current_queue_length": 562,
+        "description": "s233",
+        "display_name": "s234",
+        "events": [],
+        "input": "s237",
+        "metadata": {},
+        "name": "s239",
+        "output": "s23a",
+        "status": "s23b",
+        "update_time": "s23c",
+        "webhook": "s23d"
+      }
+    }
+  },
+  "requests": {
+    "POST /organizations/{organization_name}/projects/{project_name}/queues/{queue_name}/jobs": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "POST /organizations/{organization_name}/projects/{project_name}/queues": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /organizations/{organization_name}/projects/{project_name}/queues/{queue_name}/jobs": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /organizations/{organization_name}/projects/{project_name}/queues": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /organizations/{organization_name}/projects/{project_name}/queues/{queue_name}/jobs/{queue_job_id}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "GET /organizations/{organization_name}/projects/{project_name}/queues/{queue_name}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "DELETE /organizations/{organization_name}/projects/{project_name}/queues/{queue_name}/jobs/{queue_job_id}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "DELETE /organizations/{organization_name}/projects/{project_name}/queues/{queue_name}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    },
+    "PATCH /organizations/{organization_name}/projects/{project_name}/queues/{queue_name}": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

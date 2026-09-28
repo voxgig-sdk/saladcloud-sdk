@@ -1,0 +1,190 @@
+# Generated from the API definition and overwritten on every build: do not
+# edit this file. Put customizations in the guide entry file, which includes
+# this one and overrides its defaults:
+#   guide.aontu
+
+guide: {
+  metrics: count: entity: 14
+  metrics: count: path: 24
+  metrics: count: method: 36
+
+  entity: container: {
+    path: "/organizations/{organization_name}/projects/{project_name}/containers": {
+      op: create: method: *POST
+      op: create: transform: res: *("`body.container`")|top
+      op: create: transform: req: "container": *("`reqdata`")|top
+      op: list: method: *GET
+      op: list: transform: res: *("`body.items`")|top
+    }
+    path: "/organizations/{organization_name}/projects/{project_name}/containers/{container_group_name}": {
+      rename: param: "container_group_name": *"id"
+      rename: param: "project_name": *"project_id"
+      op: load: method: *GET
+      op: load: transform: res: *("`body.container`")|top
+      op: patch: method: *PATCH
+      op: remove: method: *DELETE
+    }
+    path: "/organizations/{organization_name}/projects/{project_name}/containers/{container_group_name}/start": {
+      action: "start": {}
+      rename: param: "project_name": *"project_id"
+      op: create: method: *POST
+    }
+    path: "/organizations/{organization_name}/projects/{project_name}/containers/{container_group_name}/stop": {
+      action: "stop": {}
+      rename: param: "project_name": *"project_id"
+      op: create: method: *POST
+    }
+  }
+
+  entity: container_group: {
+    path: "/organizations/{organization_name}/projects/{project_name}/containers/{container_group_name}/instances/{container_group_instance_id}": {
+      rename: param: "container_group_name": *"container_id"
+      rename: param: "project_name": *"project_id"
+      op: load: method: *GET
+    }
+    path: "/organizations/{organization_name}/projects/{project_name}/containers/{container_group_name}/instances/{container_group_instance_id}/reallocate": {
+      action: "reallocate": {}
+      rename: param: "container_group_instance_id": *"instance_id"
+      rename: param: "container_group_name": *"container_id"
+      rename: param: "project_name": *"project_id"
+      op: create: method: *POST
+    }
+    path: "/organizations/{organization_name}/projects/{project_name}/containers/{container_group_name}/instances/{container_group_instance_id}/recreate": {
+      action: "recreate": {}
+      rename: param: "container_group_instance_id": *"instance_id"
+      rename: param: "container_group_name": *"container_id"
+      rename: param: "project_name": *"project_id"
+      op: create: method: *POST
+    }
+    path: "/organizations/{organization_name}/projects/{project_name}/containers/{container_group_name}/instances/{container_group_instance_id}/restart": {
+      action: "restart": {}
+      rename: param: "container_group_instance_id": *"instance_id"
+      rename: param: "container_group_name": *"container_id"
+      rename: param: "project_name": *"project_id"
+      op: create: method: *POST
+    }
+  }
+
+  entity: container_group_instance: {
+    path: "/organizations/{organization_name}/projects/{project_name}/containers/{container_group_name}/instances": {
+      rename: param: "project_name": *"project_id"
+      op: list: method: *GET
+      op: list: transform: res: *("`body.instances`")|top
+    }
+    path: "/organizations/{organization_name}/projects/{project_name}/containers/{container_group_name}/instances/{container_group_instance_id}": {
+      rename: param: "container_group_instance_id": *"id"
+      rename: param: "container_group_name": *"container_id"
+      rename: param: "project_name": *"project_id"
+      op: patch: method: *PATCH
+    }
+  }
+
+  entity: cpu_availability: {
+    path: "/organizations/{organization_name}/availability/sce-cpu-availability": {
+      op: create: method: *POST
+    }
+  }
+
+  entity: gpu_availability: {
+    path: "/organizations/{organization_name}/availability/sce-gpu-availability": {
+      op: create: method: *POST
+    }
+  }
+
+  entity: gpu_class: {
+    path: "/organizations/{organization_name}/gpu-classes": {
+      op: list: method: *GET
+      op: list: transform: res: *("`body.items`")|top
+    }
+  }
+
+  entity: inference_endpoint: {
+    path: "/organizations/{organization_name}/inference-endpoints": {
+      op: list: method: *GET
+      op: list: transform: res: *("`body.items`")|top
+    }
+    path: "/organizations/{organization_name}/inference-endpoints/{inference_endpoint_name}": {
+      rename: param: "inference_endpoint_name": *"id"
+      op: load: method: *GET
+    }
+    path: "/organizations/{organization_name}/inference-endpoints/{inference_endpoint_name}/jobs/{inference_endpoint_job_id}": {
+      rename: param: "inference_endpoint_name": *"inference_endpoint_id"
+      op: remove: method: *DELETE
+    }
+  }
+
+  entity: inference_endpoint_job: {
+    path: "/organizations/{organization_name}/inference-endpoints/{inference_endpoint_name}/jobs": {
+      op: create: method: *POST
+    }
+    path: "/organizations/{organization_name}/inference-endpoints/{inference_endpoint_name}/jobs/{inference_endpoint_job_id}": {
+      rename: param: "inference_endpoint_job_id": *"id"
+      rename: param: "inference_endpoint_name": *"inference_endpoint_id"
+      op: load: method: *GET
+    }
+  }
+
+  entity: inference_endpoint_job_collection: {
+    path: "/organizations/{organization_name}/inference-endpoints/{inference_endpoint_name}/jobs": {
+      op: list: method: *GET
+      op: list: transform: res: *("`body.items`")|top
+    }
+  }
+
+  entity: log_entry: {
+    path: "/organizations/{organization_name}/log-entries": {
+      op: create: method: *POST
+    }
+  }
+
+  entity: queue: {
+    path: "/organizations/{organization_name}/projects/{project_name}/queues": {
+      op: create: method: *POST
+      op: list: method: *GET
+      op: list: transform: res: *("`body.items`")|top
+    }
+    path: "/organizations/{organization_name}/projects/{project_name}/queues/{queue_name}": {
+      rename: param: "project_name": *"project_id"
+      rename: param: "queue_name": *"id"
+      op: load: method: *GET
+      op: patch: method: *PATCH
+      op: remove: method: *DELETE
+    }
+    path: "/organizations/{organization_name}/projects/{project_name}/queues/{queue_name}/jobs": {
+      action: "job": {}
+      rename: param: "project_name": *"project_id"
+      op: create: method: *POST
+      op: list: method: *GET
+      op: list: transform: res: *("`body.items`")|top
+    }
+    path: "/organizations/{organization_name}/projects/{project_name}/queues/{queue_name}/jobs/{queue_job_id}": {
+      rename: param: "project_name": *"project_id"
+      rename: param: "queue_name": *"queue_id"
+      op: load: method: *GET
+      op: remove: method: *DELETE
+    }
+  }
+
+  entity: quota: {
+    path: "/organizations/{organization_name}/quotas": {
+      op: load: method: *GET
+      op: load: transform: res: *("`body.container_groups_quotas`")|top
+    }
+  }
+
+  entity: system_log: {
+    path: "/organizations/{organization_name}/projects/{project_name}/containers/{container_group_name}/system-logs": {
+      rename: param: "project_name": *"project_id"
+      op: list: method: *GET
+      op: list: transform: res: *("`body.items`")|top
+    }
+  }
+
+  entity: webhook_secret_key: {
+    path: "/organizations/{organization_name}/webhook-secret-key": {
+      op: create: method: *POST
+      op: load: method: *GET
+    }
+  }
+
+}

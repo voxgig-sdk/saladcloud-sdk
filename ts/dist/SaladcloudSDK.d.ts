@@ -1,0 +1,83 @@
+import { ContainerEntity } from './entity/ContainerEntity';
+import { ContainerGroupEntity } from './entity/ContainerGroupEntity';
+import { ContainerGroupInstanceEntity } from './entity/ContainerGroupInstanceEntity';
+import { CpuAvailabilityEntity } from './entity/CpuAvailabilityEntity';
+import { GpuAvailabilityEntity } from './entity/GpuAvailabilityEntity';
+import { GpuClassEntity } from './entity/GpuClassEntity';
+import { InferenceEndpointEntity } from './entity/InferenceEndpointEntity';
+import { InferenceEndpointJobEntity } from './entity/InferenceEndpointJobEntity';
+import { InferenceEndpointJobCollectionEntity } from './entity/InferenceEndpointJobCollectionEntity';
+import { LogEntryEntity } from './entity/LogEntryEntity';
+import { QueueEntity } from './entity/QueueEntity';
+import { QuotaEntity } from './entity/QuotaEntity';
+import { SystemLogEntity } from './entity/SystemLogEntity';
+import { WebhookSecretKeyEntity } from './entity/WebhookSecretKeyEntity';
+export type * from './SaladcloudTypes';
+import { inspect } from 'node:util';
+import type { Context, Feature } from './types';
+import { config } from './Config';
+import { SaladcloudEntityBase } from './SaladcloudEntityBase';
+import { Utility } from './utility/Utility';
+import { BaseFeature } from './feature/base/BaseFeature';
+declare const stdutil: Utility;
+declare class SaladcloudSDK {
+    _mode: string;
+    _options: any;
+    _utility: Utility;
+    _features: Feature[];
+    _rootctx: Context;
+    constructor(options?: any);
+    options(): any;
+    utility(): any;
+    prepare(fetchargs?: any): Promise<any>;
+    direct(fetchargs?: any): Promise<Error | {
+        ok: boolean;
+        status: number;
+        headers: any;
+        data: any;
+        err?: undefined;
+    } | {
+        ok: boolean;
+        err: any;
+        status?: undefined;
+        headers?: undefined;
+        data?: undefined;
+    }>;
+    _rawRequest(fetchargs?: any): Promise<Error | {
+        ok: boolean;
+        status: number;
+        headers: any;
+        data: any;
+        err?: undefined;
+    } | {
+        ok: boolean;
+        err: any;
+        status?: undefined;
+        headers?: undefined;
+        data?: undefined;
+    }>;
+    graphql(query: string, variables?: any, ctrl?: any): Promise<any>;
+    Container(entopts?: Record<string, any>): ContainerEntity;
+    ContainerGroup(entopts?: Record<string, any>): ContainerGroupEntity;
+    ContainerGroupInstance(entopts?: Record<string, any>): ContainerGroupInstanceEntity;
+    CpuAvailability(entopts?: Record<string, any>): CpuAvailabilityEntity;
+    GpuAvailability(entopts?: Record<string, any>): GpuAvailabilityEntity;
+    GpuClass(entopts?: Record<string, any>): GpuClassEntity;
+    InferenceEndpoint(entopts?: Record<string, any>): InferenceEndpointEntity;
+    InferenceEndpointJob(entopts?: Record<string, any>): InferenceEndpointJobEntity;
+    InferenceEndpointJobCollection(entopts?: Record<string, any>): InferenceEndpointJobCollectionEntity;
+    LogEntry(entopts?: Record<string, any>): LogEntryEntity;
+    Queue(entopts?: Record<string, any>): QueueEntity;
+    Quota(entopts?: Record<string, any>): QuotaEntity;
+    SystemLog(entopts?: Record<string, any>): SystemLogEntity;
+    WebhookSecretKey(entopts?: Record<string, any>): WebhookSecretKeyEntity;
+    static test(testoptsarg?: any, sdkoptsarg?: any): SaladcloudSDK;
+    tester(testopts?: any, sdkopts?: any): SaladcloudSDK;
+    toJSON(): {
+        name: string;
+    };
+    toString(): string;
+    [inspect.custom](): string;
+}
+declare const SDK: typeof SaladcloudSDK;
+export { stdutil, config, BaseFeature, SaladcloudEntityBase, SaladcloudSDK, SDK, };

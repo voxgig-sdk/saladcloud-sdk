@@ -1,0 +1,37 @@
+# API Information
+
+
+main: {
+  kit: {
+    info: {
+      contact: {
+        email: "cloud@salad.com"
+        name: "SaladCloud Support"
+        url: "https://salad.com"
+      }
+      description: "The SaladCloud REST API. Please refer to the [SaladCloud API Documentation](https://docs.salad.com/api-reference) for more details."
+      license: {
+        identifier: "MIT"
+        name: "MIT License"
+      }
+      security: {
+        in: "header"
+        name: "Salad-Api-Key"
+        prefix: ""
+        scheme: "ApiKeyAuth"
+        type: "apiKey"
+      }
+      servers: [
+        {
+          url: "https://api.salad.com/api/public"
+        }
+      ]
+      summary: "The SaladCloud REST API."
+      termsOfService: "https://salad.com/terms"
+      title: "SaladCloud API"
+      version: "0.9.0-alpha.17"
+      website: "https://salad.com"
+    }
+  }
+}
+

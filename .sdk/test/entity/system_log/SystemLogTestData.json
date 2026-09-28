@@ -1,0 +1,70 @@
+{
+  "existing": {
+    "system_log": {
+      "SYSTEM_LOG00": {
+        "event_name": "s5a",
+        "event_time": "s5b",
+        "instance_id": "INSTANCE01",
+        "machine_id": "MACHINE01",
+        "resource_cpu": "s5e",
+        "resource_gpu_class": "s5f",
+        "resource_memory": "s60",
+        "resource_storage_amount": "s61",
+        "version": "s62",
+        "container_group_name": "CONTAINER_GROUP_NAME01",
+        "organization_name": "ORGANIZATION_NAME01",
+        "project_id": "PROJECT01"
+      },
+      "SYSTEM_LOG01": {
+        "event_name": "sb4",
+        "event_time": "sb5",
+        "instance_id": "INSTANCE01",
+        "machine_id": "MACHINE01",
+        "resource_cpu": "sb8",
+        "resource_gpu_class": "sb9",
+        "resource_memory": "sba",
+        "resource_storage_amount": "sbb",
+        "version": "sbc",
+        "container_group_name": "CONTAINER_GROUP_NAME01",
+        "organization_name": "ORGANIZATION_NAME01",
+        "project_id": "PROJECT01"
+      },
+      "SYSTEM_LOG02": {
+        "event_name": "s10e",
+        "event_time": "s10f",
+        "instance_id": "INSTANCE01",
+        "machine_id": "MACHINE01",
+        "resource_cpu": "s112",
+        "resource_gpu_class": "s113",
+        "resource_memory": "s114",
+        "resource_storage_amount": "s115",
+        "version": "s116",
+        "container_group_name": "CONTAINER_GROUP_NAME01",
+        "organization_name": "ORGANIZATION_NAME01",
+        "project_id": "PROJECT01"
+      }
+    }
+  },
+  "new": {
+    "system_log": {
+      "system_log_ref01": {
+        "event_name": "s168",
+        "event_time": "s169",
+        "instance_id": "INSTANCE01",
+        "machine_id": "MACHINE01",
+        "resource_cpu": "s16c",
+        "resource_gpu_class": "s16d",
+        "resource_memory": "s16e",
+        "resource_storage_amount": "s16f",
+        "version": "s170"
+      }
+    }
+  },
+  "requests": {
+    "GET /organizations/{organization_name}/projects/{project_name}/containers/{container_group_name}/system-logs": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

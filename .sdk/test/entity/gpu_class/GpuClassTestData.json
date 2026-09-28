@@ -1,0 +1,75 @@
+{
+  "existing": {
+    "gpu_class": {
+      "GPU_CLASS00": {
+        "gpu_class_type": "s78",
+        "gpu_count": 121,
+        "id": "GPU_CLASS00",
+        "is_high_demand": false,
+        "max_ram": 124,
+        "max_storage": 125,
+        "max_vcpu": 126,
+        "min_ram": 127,
+        "min_storage": 128,
+        "min_vcpu": 129,
+        "name": "s82",
+        "prices": [],
+        "organization_name": "ORGANIZATION_NAME01"
+      },
+      "GPU_CLASS01": {
+        "gpu_class_type": "sf0",
+        "gpu_count": 241,
+        "id": "GPU_CLASS01",
+        "is_high_demand": false,
+        "max_ram": 244,
+        "max_storage": 245,
+        "max_vcpu": 246,
+        "min_ram": 247,
+        "min_storage": 248,
+        "min_vcpu": 249,
+        "name": "sfa",
+        "prices": [],
+        "organization_name": "ORGANIZATION_NAME01"
+      },
+      "GPU_CLASS02": {
+        "gpu_class_type": "s168",
+        "gpu_count": 361,
+        "id": "GPU_CLASS02",
+        "is_high_demand": false,
+        "max_ram": 364,
+        "max_storage": 365,
+        "max_vcpu": 366,
+        "min_ram": 367,
+        "min_storage": 368,
+        "min_vcpu": 369,
+        "name": "s172",
+        "prices": [],
+        "organization_name": "ORGANIZATION_NAME01"
+      }
+    }
+  },
+  "new": {
+    "gpu_class": {
+      "gpu_class_ref01": {
+        "gpu_class_type": "s1e0",
+        "gpu_count": 481,
+        "is_high_demand": false,
+        "max_ram": 484,
+        "max_storage": 485,
+        "max_vcpu": 486,
+        "min_ram": 487,
+        "min_storage": 488,
+        "min_vcpu": 489,
+        "name": "s1ea",
+        "prices": []
+      }
+    }
+  },
+  "requests": {
+    "GET /organizations/{organization_name}/gpu-classes": {
+      "provenance": "operation-contract",
+      "version": 2,
+      "source": "openapi3"
+    }
+  }
+}

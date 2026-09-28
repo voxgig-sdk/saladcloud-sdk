@@ -1,0 +1,50 @@
+# BasicContainerGroupFlow
+
+main: kit: flow: BasicContainerGroupFlow:
+{
+  entity: "container_group",
+  kind: "basic",
+  name: "BasicContainerGroupFlow",
+  step: [
+    {
+      i: {
+        ref: "container_group_ref01"
+      }
+
+      m: {
+        container_id: "container01",
+        instance_id: "instance01",
+        organization_name: "organization_name01",
+        project_id: "project01"
+      }
+
+      o: "create"
+    }
+
+    {
+      i: {
+        ref: "container_group_ref01",
+        srcdatavar: "container_group_ref01_data",
+        suffix: "_dt0"
+      }
+
+      m: {
+        container_id: "container01",
+        id: "container_group01",
+        organization_name: "organization_name01",
+        project_id: "project01"
+      }
+
+      o: "load",
+      v: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-container_group_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicContainerGroupFlow"
+}

@@ -1,0 +1,127 @@
+# BasicQueueFlow
+
+main: kit: flow: BasicQueueFlow:
+{
+  entity: "queue",
+  kind: "basic",
+  name: "BasicQueueFlow",
+  step: [
+    {
+      i: {
+        ref: "queue_ref01"
+      }
+
+      m: {
+        organization_name: "organization_name01",
+        project_id: "project01",
+        project_name: "project_name01",
+        queue_id: "queue01",
+        queue_name: "queue_name01"
+      }
+
+      o: "create"
+    }
+
+    {
+      m: {
+        organization_name: "organization_name01",
+        project_name: "project_name01"
+      }
+
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "queue_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      d: {
+        organization_name: "organization_name01",
+        project_id: "project01"
+      }
+
+      i: {
+        ref: "queue_ref01",
+        srcdatavar: "queue_ref01_data",
+        suffix: "_up0",
+        textfield: "create_time"
+      }
+
+      o: "update",
+      s: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-queue_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      i: {
+        ref: "queue_ref01",
+        srcdatavar: "queue_ref01_data",
+        suffix: "_dt0"
+      }
+
+      m: {
+        id: "queue01",
+        organization_name: "organization_name01",
+        project_id: "project01"
+      }
+
+      o: "load",
+      v: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-queue_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      i: {
+        ref: "queue_ref01",
+        suffix: "_rm0"
+      }
+
+      m: {
+        id: "queue01",
+        organization_name: "organization_name01",
+        project_id: "project01"
+      }
+
+      o: "remove"
+    }
+
+    {
+      i: {
+        suffix: "_rt0"
+      }
+
+      m: {
+        organization_name: "organization_name01",
+        project_name: "project_name01"
+      }
+
+      o: "list",
+      v: [
+        {
+          apply: "ItemNotExists",
+          def: {
+            ref: "queue_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicQueueFlow"
+}

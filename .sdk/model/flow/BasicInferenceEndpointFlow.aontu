@@ -1,0 +1,49 @@
+# BasicInferenceEndpointFlow
+
+main: kit: flow: BasicInferenceEndpointFlow:
+{
+  entity: "inference_endpoint",
+  kind: "basic",
+  name: "BasicInferenceEndpointFlow",
+  step: [
+    {
+      m: {
+        organization_name: "organization_name01"
+      }
+
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "inference_endpoint_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      i: {
+        ref: "inference_endpoint_ref01",
+        srcdatavar: "inference_endpoint_ref01_data",
+        suffix: "_dt0"
+      }
+
+      m: {
+        id: "inference_endpoint01",
+        organization_name: "organization_name01"
+      }
+
+      o: "load",
+      v: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-inference_endpoint_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicInferenceEndpointFlow"
+}
