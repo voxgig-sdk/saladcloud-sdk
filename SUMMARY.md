@@ -12,7 +12,7 @@ An entity groups related API operations. An operation can have several routes wi
 
 ## What the API provides
 
-### [Container](docs/api/container.html)
+### Container
 
 Results: Accepted; Created; OK.
 
@@ -26,13 +26,13 @@ Key fields to recognise:
 - `create_time`: ISO 8601 timestamp when this container group was initially created
 - `current_state`: Represents the operational state of a container group during its lifecycle, including timing information, status, and instance distribution metrics. This state captures the current execution status, start and finish times, and provides visibility into the operational health across instances.
 
-### [ContainerGroup](docs/api/container_group.html)
+### ContainerGroup
 
 Results: Accepted; OK.
 
 SDK operations: `create`, `load`.
 
-### [ContainerGroupInstance](docs/api/container_group_instance.html)
+### ContainerGroupInstance
 
 Results: OK.
 
@@ -46,7 +46,7 @@ Key fields to recognise:
 - `deletion_cost`: The cost of deleting the container group instance
 - `id`: The container group instance identifier.
 
-### [CpuAvailability](docs/api/cpu_availability.html)
+### CpuAvailability
 
 Results: Successfully retrieved CPU availability.
 
@@ -60,7 +60,7 @@ Key fields to recognise:
 - `memory`: The amount of available memory in MB
 - `on_call_cpu`: The amount of on-call CPU
 
-### [GpuAvailability](docs/api/gpu_availability.html)
+### GpuAvailability
 
 Results: Successfully retrieved GPU availability.
 
@@ -74,7 +74,7 @@ Key fields to recognise:
 - `available_gpu_medium`: The number of available medium-end GPUs
 - `country_codes`: A list of country codes where the resources are available
 
-### [GpuClass](docs/api/gpu_class.html)
+### GpuClass
 
 Results: OK.
 
@@ -88,7 +88,7 @@ Key fields to recognise:
 - `is_high_demand`: Whether the GPU class is in high demand
 - `max_ram`: The maximum RAM amount in MB
 
-### [InferenceEndpoint](docs/api/inference_endpoint.html)
+### InferenceEndpoint
 
 Results: OK; Accepted.
 
@@ -102,7 +102,7 @@ Key fields to recognise:
 - `id`: The inference endpoint identifier.
 - `input_schema`: The input schema
 
-### [InferenceEndpointJob](docs/api/inference_endpoint_job.html)
+### InferenceEndpointJob
 
 Results: Created; OK.
 
@@ -116,7 +116,7 @@ Key fields to recognise:
 - `inference_endpoint_name`: The inference endpoint name.
 - `input`: The job input. May be any valid JSON.
 
-### [InferenceEndpointJobCollection](docs/api/inference_endpoint_job_collection.html)
+### InferenceEndpointJobCollection
 
 Results: OK.
 
@@ -130,7 +130,7 @@ Key fields to recognise:
 - `inference_endpoint_name`: The inference endpoint name.
 - `input`: The job input. May be any valid JSON.
 
-### [LogEntry](docs/api/log_entry.html)
+### LogEntry
 
 Results: OK.
 
@@ -144,7 +144,7 @@ Key fields to recognise:
 - `page_max_time`: The maximum time page boundary. This may be used when getting paginated results.
 - `page_min_time`: The minimum time page boundary. This may be used when getting paginated results.
 
-### [Queue](docs/api/queue.html)
+### Queue
 
 Results: Created; OK; Accepted.
 
@@ -158,7 +158,7 @@ Key fields to recognise:
 - `description`: The description. This may be used as a space for notes or other information about the queue.
 - `display_name`: The display name. This may be used as a more human-readable name.
 
-### [Quota](docs/api/quota.html)
+### Quota
 
 Results: OK.
 
@@ -172,7 +172,7 @@ Key fields to recognise:
 - `max_container_group_recreates_per_minute`: The maximum number of container group recreates per minute
 - `max_container_group_restarts_per_minute`: The maximum number of container group restarts per minute
 
-### [SystemLog](docs/api/system_log.html)
+### SystemLog
 
 Results: OK.
 
@@ -186,7 +186,7 @@ Key fields to recognise:
 - `machine_id`: The container group machine identifier.
 - `resource_cpu`: The number of CPUs
 
-### [WebhookSecretKey](docs/api/webhook_secret_key.html)
+### WebhookSecretKey
 
 Results: OK.
 
@@ -202,42 +202,42 @@ Use this map to locate a capability. Consult the entity reference before supplyi
 
 | Entity | SDK operation | HTTP route | Authentication |
 | --- | --- | --- | --- |
-| [Container](docs/api/container.html) | `create` | `POST /organizations/{organization_name}/projects/{project_name}/containers/{container_group_name}/start` | Required |
-| [Container](docs/api/container.html) | `create` | `POST /organizations/{organization_name}/projects/{project_name}/containers/{container_group_name}/stop` | Required |
-| [Container](docs/api/container.html) | `create` | `POST /organizations/{organization_name}/projects/{project_name}/containers` | Required |
-| [Container](docs/api/container.html) | `list` | `GET /organizations/{organization_name}/projects/{project_name}/containers` | Required |
-| [Container](docs/api/container.html) | `load` | `GET /organizations/{organization_name}/projects/{project_name}/containers/{container_group_name}` | Required |
-| [Container](docs/api/container.html) | `remove` | `DELETE /organizations/{organization_name}/projects/{project_name}/containers/{container_group_name}` | Required |
-| [Container](docs/api/container.html) | `update` | `PATCH /organizations/{organization_name}/projects/{project_name}/containers/{container_group_name}` | Required |
-| [ContainerGroup](docs/api/container_group.html) | `create` | `POST /organizations/{organization_name}/projects/{project_name}/containers/{container_group_name}/instances/{container_group_instance_id}/reallocate` | Required |
-| [ContainerGroup](docs/api/container_group.html) | `create` | `POST /organizations/{organization_name}/projects/{project_name}/containers/{container_group_name}/instances/{container_group_instance_id}/recreate` | Required |
-| [ContainerGroup](docs/api/container_group.html) | `create` | `POST /organizations/{organization_name}/projects/{project_name}/containers/{container_group_name}/instances/{container_group_instance_id}/restart` | Required |
-| [ContainerGroup](docs/api/container_group.html) | `load` | `GET /organizations/{organization_name}/projects/{project_name}/containers/{container_group_name}/instances/{container_group_instance_id}` | Required |
-| [ContainerGroupInstance](docs/api/container_group_instance.html) | `list` | `GET /organizations/{organization_name}/projects/{project_name}/containers/{container_group_name}/instances` | Required |
-| [ContainerGroupInstance](docs/api/container_group_instance.html) | `update` | `PATCH /organizations/{organization_name}/projects/{project_name}/containers/{container_group_name}/instances/{container_group_instance_id}` | Required |
-| [CpuAvailability](docs/api/cpu_availability.html) | `create` | `POST /organizations/{organization_name}/availability/sce-cpu-availability` | Required |
-| [GpuAvailability](docs/api/gpu_availability.html) | `create` | `POST /organizations/{organization_name}/availability/sce-gpu-availability` | Required |
-| [GpuClass](docs/api/gpu_class.html) | `list` | `GET /organizations/{organization_name}/gpu-classes` | Required |
-| [InferenceEndpoint](docs/api/inference_endpoint.html) | `list` | `GET /organizations/{organization_name}/inference-endpoints` | Required |
-| [InferenceEndpoint](docs/api/inference_endpoint.html) | `load` | `GET /organizations/{organization_name}/inference-endpoints/{inference_endpoint_name}` | Required |
-| [InferenceEndpoint](docs/api/inference_endpoint.html) | `remove` | `DELETE /organizations/{organization_name}/inference-endpoints/{inference_endpoint_name}/jobs/{inference_endpoint_job_id}` | Required |
-| [InferenceEndpointJob](docs/api/inference_endpoint_job.html) | `create` | `POST /organizations/{organization_name}/inference-endpoints/{inference_endpoint_name}/jobs` | Required |
-| [InferenceEndpointJob](docs/api/inference_endpoint_job.html) | `load` | `GET /organizations/{organization_name}/inference-endpoints/{inference_endpoint_name}/jobs/{inference_endpoint_job_id}` | Required |
-| [InferenceEndpointJobCollection](docs/api/inference_endpoint_job_collection.html) | `list` | `GET /organizations/{organization_name}/inference-endpoints/{inference_endpoint_name}/jobs` | Required |
-| [LogEntry](docs/api/log_entry.html) | `create` | `POST /organizations/{organization_name}/log-entries` | Required |
-| [Queue](docs/api/queue.html) | `create` | `POST /organizations/{organization_name}/projects/{project_name}/queues/{queue_name}/jobs` | Required |
-| [Queue](docs/api/queue.html) | `create` | `POST /organizations/{organization_name}/projects/{project_name}/queues` | Required |
-| [Queue](docs/api/queue.html) | `list` | `GET /organizations/{organization_name}/projects/{project_name}/queues/{queue_name}/jobs` | Required |
-| [Queue](docs/api/queue.html) | `list` | `GET /organizations/{organization_name}/projects/{project_name}/queues` | Required |
-| [Queue](docs/api/queue.html) | `load` | `GET /organizations/{organization_name}/projects/{project_name}/queues/{queue_name}/jobs/{queue_job_id}` | Required |
-| [Queue](docs/api/queue.html) | `load` | `GET /organizations/{organization_name}/projects/{project_name}/queues/{queue_name}` | Required |
-| [Queue](docs/api/queue.html) | `remove` | `DELETE /organizations/{organization_name}/projects/{project_name}/queues/{queue_name}/jobs/{queue_job_id}` | Required |
-| [Queue](docs/api/queue.html) | `remove` | `DELETE /organizations/{organization_name}/projects/{project_name}/queues/{queue_name}` | Required |
-| [Queue](docs/api/queue.html) | `update` | `PATCH /organizations/{organization_name}/projects/{project_name}/queues/{queue_name}` | Required |
-| [Quota](docs/api/quota.html) | `load` | `GET /organizations/{organization_name}/quotas` | Required |
-| [SystemLog](docs/api/system_log.html) | `list` | `GET /organizations/{organization_name}/projects/{project_name}/containers/{container_group_name}/system-logs` | Required |
-| [WebhookSecretKey](docs/api/webhook_secret_key.html) | `create` | `POST /organizations/{organization_name}/webhook-secret-key` | Required |
-| [WebhookSecretKey](docs/api/webhook_secret_key.html) | `load` | `GET /organizations/{organization_name}/webhook-secret-key` | Required |
+| Container | `create` | `POST /organizations/{organization_name}/projects/{project_name}/containers/{container_group_name}/start` | Required |
+| Container | `create` | `POST /organizations/{organization_name}/projects/{project_name}/containers/{container_group_name}/stop` | Required |
+| Container | `create` | `POST /organizations/{organization_name}/projects/{project_name}/containers` | Required |
+| Container | `list` | `GET /organizations/{organization_name}/projects/{project_name}/containers` | Required |
+| Container | `load` | `GET /organizations/{organization_name}/projects/{project_name}/containers/{container_group_name}` | Required |
+| Container | `remove` | `DELETE /organizations/{organization_name}/projects/{project_name}/containers/{container_group_name}` | Required |
+| Container | `update` | `PATCH /organizations/{organization_name}/projects/{project_name}/containers/{container_group_name}` | Required |
+| ContainerGroup | `create` | `POST /organizations/{organization_name}/projects/{project_name}/containers/{container_group_name}/instances/{container_group_instance_id}/reallocate` | Required |
+| ContainerGroup | `create` | `POST /organizations/{organization_name}/projects/{project_name}/containers/{container_group_name}/instances/{container_group_instance_id}/recreate` | Required |
+| ContainerGroup | `create` | `POST /organizations/{organization_name}/projects/{project_name}/containers/{container_group_name}/instances/{container_group_instance_id}/restart` | Required |
+| ContainerGroup | `load` | `GET /organizations/{organization_name}/projects/{project_name}/containers/{container_group_name}/instances/{container_group_instance_id}` | Required |
+| ContainerGroupInstance | `list` | `GET /organizations/{organization_name}/projects/{project_name}/containers/{container_group_name}/instances` | Required |
+| ContainerGroupInstance | `update` | `PATCH /organizations/{organization_name}/projects/{project_name}/containers/{container_group_name}/instances/{container_group_instance_id}` | Required |
+| CpuAvailability | `create` | `POST /organizations/{organization_name}/availability/sce-cpu-availability` | Required |
+| GpuAvailability | `create` | `POST /organizations/{organization_name}/availability/sce-gpu-availability` | Required |
+| GpuClass | `list` | `GET /organizations/{organization_name}/gpu-classes` | Required |
+| InferenceEndpoint | `list` | `GET /organizations/{organization_name}/inference-endpoints` | Required |
+| InferenceEndpoint | `load` | `GET /organizations/{organization_name}/inference-endpoints/{inference_endpoint_name}` | Required |
+| InferenceEndpoint | `remove` | `DELETE /organizations/{organization_name}/inference-endpoints/{inference_endpoint_name}/jobs/{inference_endpoint_job_id}` | Required |
+| InferenceEndpointJob | `create` | `POST /organizations/{organization_name}/inference-endpoints/{inference_endpoint_name}/jobs` | Required |
+| InferenceEndpointJob | `load` | `GET /organizations/{organization_name}/inference-endpoints/{inference_endpoint_name}/jobs/{inference_endpoint_job_id}` | Required |
+| InferenceEndpointJobCollection | `list` | `GET /organizations/{organization_name}/inference-endpoints/{inference_endpoint_name}/jobs` | Required |
+| LogEntry | `create` | `POST /organizations/{organization_name}/log-entries` | Required |
+| Queue | `create` | `POST /organizations/{organization_name}/projects/{project_name}/queues/{queue_name}/jobs` | Required |
+| Queue | `create` | `POST /organizations/{organization_name}/projects/{project_name}/queues` | Required |
+| Queue | `list` | `GET /organizations/{organization_name}/projects/{project_name}/queues/{queue_name}/jobs` | Required |
+| Queue | `list` | `GET /organizations/{organization_name}/projects/{project_name}/queues` | Required |
+| Queue | `load` | `GET /organizations/{organization_name}/projects/{project_name}/queues/{queue_name}/jobs/{queue_job_id}` | Required |
+| Queue | `load` | `GET /organizations/{organization_name}/projects/{project_name}/queues/{queue_name}` | Required |
+| Queue | `remove` | `DELETE /organizations/{organization_name}/projects/{project_name}/queues/{queue_name}/jobs/{queue_job_id}` | Required |
+| Queue | `remove` | `DELETE /organizations/{organization_name}/projects/{project_name}/queues/{queue_name}` | Required |
+| Queue | `update` | `PATCH /organizations/{organization_name}/projects/{project_name}/queues/{queue_name}` | Required |
+| Quota | `load` | `GET /organizations/{organization_name}/quotas` | Required |
+| SystemLog | `list` | `GET /organizations/{organization_name}/projects/{project_name}/containers/{container_group_name}/system-logs` | Required |
+| WebhookSecretKey | `create` | `POST /organizations/{organization_name}/webhook-secret-key` | Required |
+| WebhookSecretKey | `load` | `GET /organizations/{organization_name}/webhook-secret-key` | Required |
 
 ## Connect to the API
 
@@ -261,12 +261,12 @@ Choose the language already used by your application or service. The clients rep
 
 | Client | Repository directory | Distribution |
 | --- | --- | --- |
-| [Golang](docs/sdks/go.html) | `go/` | Build from source |
-| [Lua](docs/sdks/lua.html) | `lua/` | Build from source |
-| [PHP](docs/sdks/php.html) | `php/` | Build from source |
-| [Python](docs/sdks/py.html) | `py/` | Build from source |
-| [Ruby](docs/sdks/rb.html) | `rb/` | Build from source |
-| [TypeScript](docs/sdks/ts.html) | `ts/` | Build from source |
+| Golang | `go/` | Build from source |
+| Lua | `lua/` | Build from source |
+| PHP | `php/` | Build from source |
+| Python | `py/` | Build from source |
+| Ruby | `rb/` | Build from source |
+| TypeScript | `ts/` | Build from source |
 
 Build-from-source entries are not marked as published in the project model. Follow the build instructions in that target’s README, then consume the resulting package using your language’s local dependency mechanism. Published entries give the installation command recorded for that client.
 
@@ -274,14 +274,14 @@ Build-from-source entries are not marked as published in the project model. Foll
 
 These targets provide another way to use the API. Their available commands or tools can cover a smaller set of operations than the client libraries.
 
-### [Go CLI](docs/tools/go-cli.html)
+### Go CLI
 
 Use the command-line interface for shell-based tasks and scripts.
 
 Repository directory: `go-cli/`. Not published. Build from the go-cli directory.
 
 
-### [Go MCP server](docs/tools/go-mcp.html)
+### Go MCP server
 
 Use the MCP server to expose supported API operations to an MCP client.
 
@@ -294,21 +294,21 @@ Repository directory: `go-mcp/`. Not published. Build from the go-mcp directory.
 
 Features supply behaviour around API calls, such as request handling, diagnostics, or local testing. Inclusion in this project does not mean a feature is enabled at runtime. Check the selected SDK’s supported features and configuration defaults, then enable the behaviour your application needs.
 
-- [`debug`](docs/features/debug.html): Request/response capture ring buffer for debugging
-- [`idempotency`](docs/features/idempotency.html): Idempotency keys for safe retries of mutating operations
-- [`metrics`](docs/features/metrics.html): Statistics capture: per-operation counters and latency
-- [`paging`](docs/features/paging.html): Pagination signals for list operations
-- [`ratelimit`](docs/features/ratelimit.html): Client-side rate limiting via a token bucket
-- [`retry`](docs/features/retry.html): Automatic retry of transient failures with exponential backoff
-- [`test`](docs/features/test.html): In-memory mock transport for testing without a live server
-- [`timeout`](docs/features/timeout.html): Per-request timeout with transport abort
+- `debug`: Request/response capture ring buffer for debugging
+- `idempotency`: Idempotency keys for safe retries of mutating operations
+- `metrics`: Statistics capture: per-operation counters and latency
+- `paging`: Pagination signals for list operations
+- `ratelimit`: Client-side rate limiting via a token bucket
+- `retry`: Automatic retry of transient failures with exponential backoff
+- `test`: In-memory mock transport for testing without a live server
+- `timeout`: Per-request timeout with transport abort
 
 Start with the default client configuration. Add request limits and diagnostics as needed, test error paths, and review retry behaviour before using operations that change data. A retry can repeat an operation unless the API provides a suitable guarantee.
 
 ## Continue with the documentation
 
-- Follow the [first-call guide](docs/guides/first-call.html) for the setup sequence.
-- Read the [authentication guide](docs/guides/authentication.html) before using protected routes.
-- Use the [API reference](docs/api/index.html) for request schemas, response formats, and status codes.
+- Follow the first-call guide for the setup sequence.
+- Read the authentication guide before using protected routes.
+- Use the API reference for request schemas, response formats, and status codes.
 - Check the chosen SDK or companion tool reference for its configuration and supported operations.
 
