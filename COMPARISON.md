@@ -1,6 +1,6 @@
 # SaladCloud: the Voxgig SDK and the liblab SDK compared
 
-Vergleich: liblab. Compared with SaladTechnologies/salad-cloud-sdk-javascript 0.9.0-alpha.17 (liblab 2.25.53). Spec: salad-cloud-docs api-specs/salad-cloud.yaml at 795066d, the same version, OAS 3.1.0, 24 paths / 36 ops, MIT. Added 2026-09-28.
+Vergleich: liblab. Compared with SaladTechnologies/salad-cloud-sdk-javascript 0.9.0-alpha.17 (liblab 2.25.53). Spec: salad-cloud-docs api-specs/salad-cloud.yaml at 795066d, the same version, OAS 3.1.0, 24 paths / 36 ops, MIT. Added 2026-09-28. Rebuilt 2026-09-29 on sdkgen 4.32.1 and apidef 8.22.0.
 
 This repository is on the admin **vergleich** list. It is built only to be compared, and it is not published.
 
@@ -8,15 +8,15 @@ This repository is on the admin **vergleich** list. It is built only to be compa
 
 | | Voxgig | liblab |
 |---|---|---|
-| SDK | this repository, commit `c87796e`: eight targets (go, go-cli, go-mcp, ts, py, rb, lua, php) | `@saladtechnologies-oss/salad-cloud-sdk@0.9.0-alpha.17` (TypeScript) |
+| SDK | this repository, commit `a81166f`: eight targets (go, go-cli, go-mcp, ts, py, rb, lua, php) | `@saladtechnologies-oss/salad-cloud-sdk@0.9.0-alpha.17` (TypeScript) |
 | Input | `saladcloud-openapi.yaml`: OAS 3.1.0, `info.version` 0.9.0-alpha.17, 24 paths, 36 operations | the vendor's own generation; the note above names the definition version it came from |
 | Operations callable | 36 of 36 | 36 operation methods |
 | Entities | 14 | not applicable |
-| ts package | 1.44 MB, 300 files | 1.20 MB, 6 files |
+| ts package | 1.47 MB, 300 files | 1.20 MB, 6 files |
 | Runtime dependencies | 0 | 1 |
-| Generated tests | ts 268 pass / 0 fail; py 268 pass; rb 292 runs / 0 fail; lua 266 pass / 0 fail; php 292 tests, 0 fail; go, go-cli, go-mcp build, vet and test | not run: a published package |
+| Generated tests | ts 309 pass / 0 fail / 8 skipped; py 268 pass / 57 skipped; rb 292 runs / 0 fail; lua 266 pass / 0 fail; php 292 tests / 0 fail; go, go-cli, go-mcp build, vet and test | not run: a published package |
 | Determinism | a second generation on the same toolchain is byte-identical | not measured |
-| Scenario against a mock | 1 of 4 steps right, 1 returned wrong data, 1 request violations (static) | 1 of 4 steps right, 2 request violations (dynamic) |
+| Scenario against a mock | 4 of 4 steps right, 0 returned wrong data, 0 request violations (static) | 1 of 4 steps right, 2 request violations (dynamic) |
 
 ## Features
 
@@ -69,16 +69,16 @@ Voxgig's features are opt-in; these builds enable the standard set. The liblab c
 
 Each SDK lists one resource, loads and removes the first item it listed, and creates one from the definition's own example or required fields, against a mock built from the same vendor definition. The mock is Prism: static mode answers with the definition's examples, and dynamic mode generates schema-valid data. Each SDK is credited with its better mode. Request violations are Prism's verdicts on what the SDK sent.
 
-- **Voxgig, static:** 1 of 4 steps right, 1 request violations.
+- **Voxgig, static:** 4 of 4 steps right, 0 request violations.
   - ✓ `list`
-  - ⚠ `load`: returned the group's inner container spec (command, image, ...), not the group
-  - ✗ `create`: SaladcloudSDK: create: request: 400: Bad Request
-  - ✗ `remove`: SaladcloudSDK: remove: Unexpected end of JSON input
-- **Voxgig, dynamic:** 1 of 4 steps right, 1 request violations.
+  - ✓ `load`
+  - ✓ `create`
+  - ✓ `remove`
+- **Voxgig, dynamic:** 4 of 4 steps right, 0 request violations.
   - ✓ `list`
-  - ⚠ `load`: returned the group's inner container spec (command, image, ...), not the group
-  - ✗ `create`: SaladcloudSDK: create: request: 400: Bad Request
-  - ✗ `remove`: SaladcloudSDK: remove: Unexpected end of JSON input
+  - ✓ `load`
+  - ✓ `create`
+  - ✓ `remove`
 - **liblab, static:** 0 of 4 steps right, 2 request violations.
   - ✗ `list`: [
   - ✗ `load`: Unexpected response body for error status.
@@ -92,11 +92,11 @@ Each SDK lists one resource, loads and removes the first item it listed, and cre
 
 ## Voxgig toolchain findings
 
-- **Y1-Y3** (@tabnas/yaml 0.5.11 (used by apidef)). Three YAML parser defects. A quote inside a block scalar, comment or plain scalar inverts the flow scanner's quote parity (Lob fails at line 14557). A digit-first plain scalar is cut at its first colon (Novu's `09:00 AM`). Scalars resolve by YAML 1.1 rules, so SaladCloud's country code NO becomes false. Patch written and verified: all eight specs parse identically to js-yaml, 0 regressions over 259 local YAML files. Not applied: attaching tabnas/yaml with push access was refused. The three SDKs were built on the patched parser.
-- **UNWRAP** (@voxgig/apidef 8.17.2). The response transform that says where an operation's data sits is inferred wrongly for several resources, in both directions. A schema whose one object-valued property is ordinary data is taken for an envelope (Apicurio's `labels`, SaladCloud's `container`), and a real envelope is missed when it is composed with allOf (Lob) or sits beside another property (Neon's `projects` beside `pagination`). The SDKs' own tests cannot see it, because they mock from the same model; a mock built from the vendor definition does. Here: saladcloud container load: `body.container`, the group's inner container spec, not the group. Create wraps the request in `{ container: ... }` too, with the path parameters in the body. Reported, not changed: heuristic design in apidef.
-- **EMPTY-202** (@voxgig/sdkgen 4.30.3 (ResultBody)). The result body is JSON-parsed whenever response.body is non-null. An empty 202 (SaladCloud's asynchronous delete) has a non-null empty stream, so the call throws `Unexpected end of JSON input` although the server accepted it. Reported, not changed: the same logic exists per target.
-- **QUERY-ECHO** (@voxgig/sdkgen 4.30.3 (PrepareQuery: ts, js and rb read the field; other targets not checked)). Every match field, path parameters included, is also sent as a query parameter: GET /video/v1/assets/a1?id=a1 (Mux), GET /assistant/asst_1?id=asst_1 (Vapi), DELETE .../containers/web?id=web&organization_name=acme&project_id=demo (SaladCloud). prepareQuery excludes names in point.params, but the generated config carries path parameters in point.args.params (which prepareParams reads), so nothing is excluded. Harmless to a lenient server, rejected by a strict one. Prism logs paths without query strings, so its runs did not show it. Reported, not changed: the same exclusion exists per target.
-- **ERGONOMICS** (@voxgig/apidef 8.17.2). Mux's assets are listed through a separate ListAsset entity (named after the list response) but loaded, created and removed through Asset. SaladCloud's container operations call the same path parameter project_name in list and create but project_id in load, update and remove. Reported.
+- **Y1-Y4** (@tabnas/yaml, used by apidef). Four YAML parser defects: a quote inside a block scalar, comment or plain scalar inverted the flow scanner's quote parity (Lob failed at line 14557); a digit-first plain scalar was cut at its first colon (Novu's `09:00 AM`); scalars resolve by YAML 1.1 rules, so SaladCloud's country code `no` becomes `false`; and a `#` straight after a leading number ended the scalar, so Lob's buckslip weight `80#` read as the number 80 and was typed as an integer. Y1 and Y2 are fixed in the published parser (apidef 8.18.0 requires @tabnas/yaml 0.5.12, and 0.5.13 parses Lob and Novu), and Y4 in 0.5.14 (tabnas/yaml#95), so this rebuild uses no overlay. Y3 is the parser's documented YAML 1.1 leniency, and SaladCloud's SDK comes out the same with and without a patched parser.
+- **UNWRAP** (@voxgig/apidef). The response transform that says where an operation's data sits was inferred wrongly for several resources in the first build. Here: the container group's load read `body.container`, the group's inner container spec, and create wrapped the request in `{ container }`. Fixed in apidef 8.19.0 (voxgig/apidef#102): load and create read the group.
+- **EMPTY-202** (@voxgig/sdkgen, Response). An empty 202, SaladCloud's asynchronous delete, has a non-null empty body stream, so the TypeScript SDK threw `Unexpected end of JSON input` although the server had accepted the call. Fixed in voxgig/sdkgen#228 (issue #219), released in 4.32.1: the rebuild's remove succeeds.
+- **QUERY-ECHO** (@voxgig/sdkgen, PrepareQuery). Every match field, path parameters included, was also sent as a query parameter, such as `?id=` on a load. Fixed in voxgig/sdkgen#222, released in 4.31.0: query parameters go out under the definition's names, and the rebuild's scenario requests carry no echoed parameter.
+- **ERGONOMICS** (@voxgig/apidef). The container operations call the same path parameter `project_name` in list and create but `project_id` in load, update and remove (open: voxgig/apidef#98). The container group instance splits across two entities, ContainerGroup and ContainerGroupInstance, because its read answers only a 202 and is named from its tag (open: voxgig/apidef#111).
 
 ## liblab SDK notes
 
@@ -108,4 +108,6 @@ Each SDK lists one resource, loads and removes the first item it listed, and cre
 - Package size and file count: `npm pack --dry-run` for the Voxgig ts target, and the registry's `dist.unpackedSize` and `dist.fileCount` for the compared package.
 - Tests: `admin/scripts/cedar-test-all.sh` runs each target's generated suite.
 - Features: read from the code of the published package, crediting a feature only for a mechanism, not a word in the API's own models.
-
+- Rebuild: 2026-09-29, on create-sdkgen 0.30.4, sdkgen 4.32.1, apidef 8.22.0, model 12.0.0 and @tabnas/yaml 0.5.14, all as published, with no overlay.
+- Tests on the rebuild: all eight targets, the lua suite under Lua 5.4 with busted 2.2.0.
+- Scenario on the rebuild: the Voxgig side was re-run on 2026-09-29; the compared SDK's run is from 2026-09-28, and its package is unchanged. The generated create input honours the definition's minimums, which the first run did not.
