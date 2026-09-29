@@ -43,11 +43,16 @@ class ContainerGroupEntityTest < Minitest::Test
     container_group_ref01_data_result = container_group_ref01_ent.create(container_group_ref01_data, nil)
     container_group_ref01_data = Helpers.to_map(container_group_ref01_data_result.respond_to?(:data_get) ? container_group_ref01_data_result.data_get : container_group_ref01_data_result)
     assert !container_group_ref01_data.nil?
+    assert !container_group_ref01_data["id"].nil?
 
     # LOAD
-    container_group_ref01_match_dt0 = {}
+    container_group_ref01_match_dt0 = {
+      "id" => container_group_ref01_data["id"],
+    }
     container_group_ref01_data_dt0_loaded = container_group_ref01_ent.load(container_group_ref01_match_dt0, nil)
-    assert !container_group_ref01_data_dt0_loaded.nil?
+    container_group_ref01_data_dt0_load_result = Helpers.to_map(container_group_ref01_data_dt0_loaded.respond_to?(:data_get) ? container_group_ref01_data_dt0_loaded.data_get : container_group_ref01_data_dt0_loaded)
+    assert !container_group_ref01_data_dt0_load_result.nil?
+    assert_equal container_group_ref01_data_dt0_load_result["id"], container_group_ref01_data["id"]
 
   end
 end

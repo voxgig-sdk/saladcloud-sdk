@@ -305,6 +305,28 @@ Return the entity name.
 container_group = client.ContainerGroup()
 ```
 
+### Fields
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `cpu_percent` | `float` | No | The percentage of CPU used by this container group instance. |
+| `cpu_usage` | `int` | No | The total CPU usage in seconds for this container group instance. |
+| `cpu_usage_total` | `int` | No | The total CPU usage in seconds for this container group instance since it was started. |
+| `deletion_cost` | `int` | No | The cost of deleting the container group instance |
+| `id` | `str` | Yes | The container group instance identifier. |
+| `machine_id` | `str` | Yes | The container group machine identifier. |
+| `memory_usage_mb` | `float` | No | The memory usage in MB for this container group instance. |
+| `memory_usage_percent` | `float` | No | The percentage of memory used by this container group instance. |
+| `pulling_progress` | `float` | No | The progress percentage of pulling the container image. |
+| `ready` | `bool` | No | Indicates whether the container group instance is currently passing its readiness checks and is able to receive traffic or perform its intended function. |
+| `ssh_host_key_fingerprint` | `str` | No | The SSH host key fingerprint of the container group instance |
+| `ssh_ip` | `str` | No | The SSH IP address of the container group instance |
+| `ssh_port` | `int` | No | The SSH port of the container group instance |
+| `started` | `bool` | No | Indicates whether the container group instance has successfully completed its startup sequence and passed any configured startup probes. |
+| `state` | `str` | Yes | The state of the container group instance |
+| `update_time` | `str` | Yes | The UTC timestamp when the container group instance last changed its state. |
+| `version` | `int` | Yes | The version of the container group definition currently running on this instance. |
+
 ### Operations
 
 #### `create(reqdata, ctrl=None) -> dict`
@@ -317,6 +339,11 @@ result = client.ContainerGroup().create({
     "instance_id": "example_instance_id",  # str
     "organization_name": "example_organization_name",  # str
     "project_id": "example_project_id",  # str
+    "id": "example_id",  # str
+    "machine_id": "example_machine_id",  # str
+    "state": "example_state",  # str
+    "update_time": "example_update_time",  # str
+    "version": 1,  # int
 })
 ```
 
@@ -1057,11 +1084,9 @@ quota = client.Quota()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `container_replicas_quota` | `int` | Yes | The maximum number of replicas that can be created for a container group |
-| `container_replicas_used` | `int` | Yes | The number of replicas that are currently in use |
-| `max_container_group_reallocations_per_minute` | `int` | No | The maximum number of container group reallocations per minute |
-| `max_container_group_recreates_per_minute` | `int` | No | The maximum number of container group recreates per minute |
-| `max_container_group_restarts_per_minute` | `int` | No | The maximum number of container group restarts per minute |
+| `container_groups_quotas` | `dict` | Yes | Represents the organization quotas for container groups |
+| `create_time` | `str` | No | The time the resource was created |
+| `update_time` | `str` | No | The time the resource was last updated |
 
 ### Operations
 

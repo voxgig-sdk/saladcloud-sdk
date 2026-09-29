@@ -4,6 +4,145 @@ main: kit: entity: container_group: {
 
   alias: field: {}
 
+  fields: {
+    cpu_percent: {
+      fo: "float"
+      h: "Cpu Percent"
+      n: "cpu_percent"
+      r: false
+      sh: "The percentage of CPU used by this container group instance."
+      t: "`$NUMBER`"
+    }
+    cpu_usage: {
+      fo: "int64"
+      h: "Cpu Usage"
+      n: "cpu_usage"
+      r: false
+      sh: "The total CPU usage in seconds for this container group instance."
+      t: "`$INTEGER`"
+    }
+    cpu_usage_total: {
+      fo: "int64"
+      h: "Cpu Usage Total"
+      n: "cpu_usage_total"
+      r: false
+      sh: "The total CPU usage in seconds for this container group instance since it was started."
+      t: "`$INTEGER`"
+    }
+    deletion_cost: {
+      h: "Deletion Cost"
+      n: "deletion_cost"
+      r: false
+      sh: "The cost of deleting the container group instance"
+      t: "`$INTEGER`"
+    }
+    id: {
+      fo: "uuid"
+      h: "Id"
+      n: "id"
+      r: true
+      sh: "The container group instance identifier."
+      t: "`$STRING`"
+    }
+    machine_id: {
+      fo: "uuid"
+      h: "Machine Id"
+      n: "machine_id"
+      r: true
+      sh: "The container group machine identifier."
+      t: "`$STRING`"
+    }
+    memory_usage_mb: {
+      fo: "float"
+      h: "Memory Usage Mb"
+      n: "memory_usage_mb"
+      r: false
+      sh: "The memory usage in MB for this container group instance."
+      t: "`$NUMBER`"
+    }
+    memory_usage_percent: {
+      fo: "float"
+      h: "Memory Usage Percent"
+      n: "memory_usage_percent"
+      r: false
+      sh: "The percentage of memory used by this container group instance."
+      t: "`$NUMBER`"
+    }
+    pulling_progress: {
+      fo: "float"
+      h: "Pulling Progress"
+      n: "pulling_progress"
+      r: false
+      sh: "The progress percentage of pulling the container image."
+      t: "`$NUMBER`"
+    }
+    ready: {
+      h: "Ready"
+      n: "ready"
+      r: false
+      sh: "Indicates whether the container group instance is currently passing its readiness checks and is able to receive traffic or perform its intended function."
+      t: "`$BOOLEAN`"
+    }
+    ssh_host_key_fingerprint: {
+      h: "Ssh Host Key Fingerprint"
+      n: "ssh_host_key_fingerprint"
+      r: false
+      sh: "The SSH host key fingerprint of the container group instance"
+      t: "`$STRING`"
+    }
+    ssh_ip: {
+      fo: "ipv4"
+      h: "Ssh Ip"
+      n: "ssh_ip"
+      r: false
+      sh: "The SSH IP address of the container group instance"
+      t: "`$STRING`"
+    }
+    ssh_port: {
+      fo: "int32"
+      h: "Ssh Port"
+      n: "ssh_port"
+      r: false
+      sh: "The SSH port of the container group instance"
+      t: "`$INTEGER`"
+    }
+    started: {
+      h: "Started"
+      n: "started"
+      r: false
+      sh: "Indicates whether the container group instance has successfully completed its startup sequence and passed any configured startup probes."
+      t: "`$BOOLEAN`"
+    }
+    state: {
+      h: "State"
+      n: "state"
+      r: true
+      sh: "The state of the container group instance"
+      t: "`$STRING`"
+    }
+    update_time: {
+      fo: "date-time"
+      h: "Update Time"
+      n: "update_time"
+      r: true
+      sh: "The UTC timestamp when the container group instance last changed its state."
+      t: "`$STRING`"
+    }
+    version: {
+      fo: "int32"
+      h: "Version"
+      n: "version"
+      r: true
+      sh: "The version of the container group definition currently running on this instance."
+      t: "`$INTEGER`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
   name: "container_group"
   op: {
     create: {
@@ -371,9 +510,6 @@ main: kit: entity: container_group: {
         }
       ]
     }
-  }
-
-  fields: {
   }
 
 

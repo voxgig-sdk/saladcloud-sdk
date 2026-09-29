@@ -113,6 +113,23 @@ type ContainerGroupCreateData struct {
 	InstanceId string `json:"instance_id"`
 	OrganizationName string `json:"organization_name"`
 	ProjectId string `json:"project_id"`
+	CpuPercent *float64 `json:"cpu_percent,omitempty"`
+	CpuUsage *int `json:"cpu_usage,omitempty"`
+	CpuUsageTotal *int `json:"cpu_usage_total,omitempty"`
+	DeletionCost *int `json:"deletion_cost,omitempty"`
+	Id string `json:"id"`
+	MachineId string `json:"machine_id"`
+	MemoryUsageMb *float64 `json:"memory_usage_mb,omitempty"`
+	MemoryUsagePercent *float64 `json:"memory_usage_percent,omitempty"`
+	PullingProgress *float64 `json:"pulling_progress,omitempty"`
+	Ready *bool `json:"ready,omitempty"`
+	SshHostKeyFingerprint *string `json:"ssh_host_key_fingerprint,omitempty"`
+	SshIp *string `json:"ssh_ip,omitempty"`
+	SshPort *int `json:"ssh_port,omitempty"`
+	Started *bool `json:"started,omitempty"`
+	State string `json:"state"`
+	UpdateTime string `json:"update_time"`
+	Version int `json:"version"`
 }
 
 // ContainerGroupInstance is the typed data model for the container_group_instance entity.

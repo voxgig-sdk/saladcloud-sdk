@@ -345,6 +345,23 @@ API path: `/organizations/{organization_name}/projects/{project_name}/containers
 
 | Field | Description |
 | --- | --- |
+| `"cpu_percent"` | The percentage of CPU used by this container group instance. |
+| `"cpu_usage"` | The total CPU usage in seconds for this container group instance. |
+| `"cpu_usage_total"` | The total CPU usage in seconds for this container group instance since it was started. |
+| `"deletion_cost"` | The cost of deleting the container group instance |
+| `"id"` | The container group instance identifier. |
+| `"machine_id"` | The container group machine identifier. |
+| `"memory_usage_mb"` | The memory usage in MB for this container group instance. |
+| `"memory_usage_percent"` | The percentage of memory used by this container group instance. |
+| `"pulling_progress"` | The progress percentage of pulling the container image. |
+| `"ready"` | Indicates whether the container group instance is currently passing its readiness checks and is able to receive traffic or perform its intended function. |
+| `"ssh_host_key_fingerprint"` | The SSH host key fingerprint of the container group instance |
+| `"ssh_ip"` | The SSH IP address of the container group instance |
+| `"ssh_port"` | The SSH port of the container group instance |
+| `"started"` | Indicates whether the container group instance has successfully completed its startup sequence and passed any configured startup probes. |
+| `"state"` | The state of the container group instance |
+| `"update_time"` | The UTC timestamp when the container group instance last changed its state. |
+| `"version"` | The version of the container group definition currently running on this instance. |
 
 Operations: Create, Load.
 
@@ -537,11 +554,9 @@ API path: `/organizations/{organization_name}/projects/{project_name}/queues/{qu
 
 | Field | Description |
 | --- | --- |
-| `"container_replicas_quota"` | The maximum number of replicas that can be created for a container group |
-| `"container_replicas_used"` | The number of replicas that are currently in use |
-| `"max_container_group_reallocations_per_minute"` | The maximum number of container group reallocations per minute |
-| `"max_container_group_recreates_per_minute"` | The maximum number of container group recreates per minute |
-| `"max_container_group_restarts_per_minute"` | The maximum number of container group restarts per minute |
+| `"container_groups_quotas"` | Represents the organization quotas for container groups |
+| `"create_time"` | The time the resource was created |
+| `"update_time"` | The time the resource was last updated |
 
 Operations: Load.
 
@@ -691,6 +706,28 @@ Create an instance: `containerGroup := client.ContainerGroup(nil)`
 | `Load(match, ctrl)` | Load a single entity by match criteria. |
 | `Create(data, ctrl)` | Create a new entity with the given data. |
 
+#### Fields
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `cpu_percent` | `float64` | The percentage of CPU used by this container group instance. |
+| `cpu_usage` | `int` | The total CPU usage in seconds for this container group instance. |
+| `cpu_usage_total` | `int` | The total CPU usage in seconds for this container group instance since it was started. |
+| `deletion_cost` | `int` | The cost of deleting the container group instance |
+| `id` | `string` | The container group instance identifier. |
+| `machine_id` | `string` | The container group machine identifier. |
+| `memory_usage_mb` | `float64` | The memory usage in MB for this container group instance. |
+| `memory_usage_percent` | `float64` | The percentage of memory used by this container group instance. |
+| `pulling_progress` | `float64` | The progress percentage of pulling the container image. |
+| `ready` | `bool` | Indicates whether the container group instance is currently passing its readiness checks and is able to receive traffic or perform its intended function. |
+| `ssh_host_key_fingerprint` | `string` | The SSH host key fingerprint of the container group instance |
+| `ssh_ip` | `string` | The SSH IP address of the container group instance |
+| `ssh_port` | `int` | The SSH port of the container group instance |
+| `started` | `bool` | Indicates whether the container group instance has successfully completed its startup sequence and passed any configured startup probes. |
+| `state` | `string` | The state of the container group instance |
+| `update_time` | `string` | The UTC timestamp when the container group instance last changed its state. |
+| `version` | `int` | The version of the container group definition currently running on this instance. |
+
 #### Example: Load
 
 ```go
@@ -709,6 +746,11 @@ result, err := client.ContainerGroup(nil).Create(map[string]any{
     "instance_id": "example_instance_id",
     "organization_name": "example_organization_name",
     "project_id": "example_project_id",
+    "id": "example_id",
+    "machine_id": "example_machine_id",
+    "state": "example_state",
+    "update_time": "example_update_time",
+    "version": 1,
 }, nil)
 if err != nil {
     panic(err)
@@ -1149,11 +1191,9 @@ Create an instance: `quota := client.Quota(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `container_replicas_quota` | `int` | The maximum number of replicas that can be created for a container group |
-| `container_replicas_used` | `int` | The number of replicas that are currently in use |
-| `max_container_group_reallocations_per_minute` | `int` | The maximum number of container group reallocations per minute |
-| `max_container_group_recreates_per_minute` | `int` | The maximum number of container group recreates per minute |
-| `max_container_group_restarts_per_minute` | `int` | The maximum number of container group restarts per minute |
+| `container_groups_quotas` | `map[string]any` | Represents the organization quotas for container groups |
+| `create_time` | `string` | The time the resource was created |
+| `update_time` | `string` | The time the resource was last updated |
 
 #### Example: Load
 

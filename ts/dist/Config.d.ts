@@ -248,9 +248,7 @@ declare class Config {
                             param?: undefined;
                         };
                         transform: {
-                            req: {
-                                container: string;
-                            };
+                            req: string;
                             res: string;
                         };
                         args: {
@@ -425,7 +423,39 @@ declare class Config {
             };
         };
         container_group: {
-            fields: never[];
+            fields: ({
+                name: string;
+                title: string;
+                type: string;
+                short: string;
+                format: string;
+                req?: undefined;
+            } | {
+                name: string;
+                title: string;
+                type: string;
+                short: string;
+                format?: undefined;
+                req?: undefined;
+            } | {
+                name: string;
+                title: string;
+                type: string;
+                req: boolean;
+                short: string;
+                format: string;
+            } | {
+                name: string;
+                title: string;
+                type: string;
+                req: boolean;
+                short: string;
+                format?: undefined;
+            })[];
+            id: {
+                field: string;
+                name: string;
+            };
             name: string;
             op: {
                 create: {
@@ -1589,7 +1619,7 @@ declare class Config {
                 type: string;
                 req: boolean;
                 short: string;
-                format: string;
+                format?: undefined;
             } | {
                 name: string;
                 title: string;

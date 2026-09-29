@@ -97,6 +97,23 @@ export interface ContainerRemoveMatch {
     project_id: string;
 }
 export interface ContainerGroup {
+    cpu_percent?: number;
+    cpu_usage?: number;
+    cpu_usage_total?: number;
+    deletion_cost?: number;
+    id: string;
+    machine_id: string;
+    memory_usage_mb?: number;
+    memory_usage_percent?: number;
+    pulling_progress?: number;
+    ready?: boolean;
+    ssh_host_key_fingerprint?: string;
+    ssh_ip?: string;
+    ssh_port?: number;
+    started?: boolean;
+    state: string;
+    update_time: string;
+    version: number;
 }
 export interface ContainerGroupLoadMatch {
     container_group_instance_id: string;
@@ -109,6 +126,23 @@ export interface ContainerGroupCreateData {
     instance_id: string;
     organization_name: string;
     project_id: string;
+    cpu_percent?: number;
+    cpu_usage?: number;
+    cpu_usage_total?: number;
+    deletion_cost?: number;
+    id: string;
+    machine_id: string;
+    memory_usage_mb?: number;
+    memory_usage_percent?: number;
+    pulling_progress?: number;
+    ready?: boolean;
+    ssh_host_key_fingerprint?: string;
+    ssh_ip?: string;
+    ssh_port?: number;
+    started?: boolean;
+    state: string;
+    update_time: string;
+    version: number;
     $action?: string;
     [action: string]: any;
 }
@@ -393,11 +427,9 @@ export interface QueueRemoveMatch {
     id?: string;
 }
 export interface Quota {
-    container_replicas_quota: number;
-    container_replicas_used: number;
-    max_container_group_reallocations_per_minute?: number;
-    max_container_group_recreates_per_minute?: number;
-    max_container_group_restarts_per_minute?: number;
+    container_groups_quotas: Record<string, any>;
+    create_time?: string;
+    update_time?: string;
 }
 export interface QuotaLoadMatch {
     organization_name: string;

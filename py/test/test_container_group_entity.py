@@ -50,11 +50,16 @@ class TestContainerGroupEntity:
 
         container_group_ref01_data = helpers.to_map(runner.entity_data(container_group_ref01_ent.create(container_group_ref01_data, None)))
         assert container_group_ref01_data is not None
+        assert container_group_ref01_data["id"] is not None
 
         # LOAD
-        container_group_ref01_match_dt0 = {}
+        container_group_ref01_match_dt0 = {
+            "id": container_group_ref01_data["id"],
+        }
         container_group_ref01_data_dt0_loaded = container_group_ref01_ent.load(container_group_ref01_match_dt0, None)
-        assert container_group_ref01_data_dt0_loaded is not None
+        container_group_ref01_data_dt0_load_result = helpers.to_map(runner.entity_data(container_group_ref01_data_dt0_loaded))
+        assert container_group_ref01_data_dt0_load_result is not None
+        assert container_group_ref01_data_dt0_load_result["id"] == container_group_ref01_data["id"]
 
 
 

@@ -50,11 +50,16 @@ class ContainerGroupEntityTest extends TestCase
         $container_group_ref01_data_result = $container_group_ref01_ent->create($container_group_ref01_data, null);
         $container_group_ref01_data = Helpers::to_map(is_object($container_group_ref01_data_result) && method_exists($container_group_ref01_data_result, 'data_get') ? $container_group_ref01_data_result->data_get() : $container_group_ref01_data_result);
         $this->assertNotNull($container_group_ref01_data);
+        $this->assertNotNull($container_group_ref01_data["id"]);
 
         // LOAD
-        $container_group_ref01_match_dt0 = [];
+        $container_group_ref01_match_dt0 = [
+            "id" => $container_group_ref01_data["id"],
+        ];
         $container_group_ref01_data_dt0_loaded = $container_group_ref01_ent->load($container_group_ref01_match_dt0, null);
-        $this->assertNotNull($container_group_ref01_data_dt0_loaded);
+        $container_group_ref01_data_dt0_load_result = Helpers::to_map(is_object($container_group_ref01_data_dt0_loaded) && method_exists($container_group_ref01_data_dt0_loaded, 'data_get') ? $container_group_ref01_data_dt0_loaded->data_get() : $container_group_ref01_data_dt0_loaded);
+        $this->assertNotNull($container_group_ref01_data_dt0_load_result);
+        $this->assertEquals($container_group_ref01_data_dt0_load_result["id"], $container_group_ref01_data["id"]);
 
     }
 }

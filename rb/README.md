@@ -12,9 +12,18 @@ The SDK exposes the API as capitalised, semantic **Entities** — for example `c
 
 ## Install
 This package is not yet published to RubyGems. Install it from the
-GitHub release tag (`rb/vX.Y.Z`):
+GitHub release tag (`rb/vX.Y.Z`, see [Releases](https://github.com/voxgig-sdk/saladcloud-sdk/releases)), or
+from a clone:
 
-- Releases: [https://github.com/voxgig-sdk/saladcloud-sdk/releases](https://github.com/voxgig-sdk/saladcloud-sdk/releases)
+```bash
+git clone https://github.com/voxgig-sdk/saladcloud-sdk
+```
+
+Then add it to your `Gemfile` by path, and run `bundle install`:
+
+```ruby
+gem "voxgig-sdk-saladcloud-sdk", path: "./saladcloud-sdk/rb"
+```
 
 
 ## Tutorial: your first API call
@@ -322,6 +331,23 @@ API path: `/organizations/{organization_name}/projects/{project_name}/containers
 
 | Field | Description |
 | --- | --- |
+| `cpu_percent` | The percentage of CPU used by this container group instance. |
+| `cpu_usage` | The total CPU usage in seconds for this container group instance. |
+| `cpu_usage_total` | The total CPU usage in seconds for this container group instance since it was started. |
+| `deletion_cost` | The cost of deleting the container group instance |
+| `id` | The container group instance identifier. |
+| `machine_id` | The container group machine identifier. |
+| `memory_usage_mb` | The memory usage in MB for this container group instance. |
+| `memory_usage_percent` | The percentage of memory used by this container group instance. |
+| `pulling_progress` | The progress percentage of pulling the container image. |
+| `ready` | Indicates whether the container group instance is currently passing its readiness checks and is able to receive traffic or perform its intended function. |
+| `ssh_host_key_fingerprint` | The SSH host key fingerprint of the container group instance |
+| `ssh_ip` | The SSH IP address of the container group instance |
+| `ssh_port` | The SSH port of the container group instance |
+| `started` | Indicates whether the container group instance has successfully completed its startup sequence and passed any configured startup probes. |
+| `state` | The state of the container group instance |
+| `update_time` | The UTC timestamp when the container group instance last changed its state. |
+| `version` | The version of the container group definition currently running on this instance. |
 
 Operations: Create, Load.
 
@@ -514,11 +540,9 @@ API path: `/organizations/{organization_name}/projects/{project_name}/queues/{qu
 
 | Field | Description |
 | --- | --- |
-| `container_replicas_quota` | The maximum number of replicas that can be created for a container group |
-| `container_replicas_used` | The number of replicas that are currently in use |
-| `max_container_group_reallocations_per_minute` | The maximum number of container group reallocations per minute |
-| `max_container_group_recreates_per_minute` | The maximum number of container group recreates per minute |
-| `max_container_group_restarts_per_minute` | The maximum number of container group restarts per minute |
+| `container_groups_quotas` | Represents the organization quotas for container groups |
+| `create_time` | The time the resource was created |
+| `update_time` | The time the resource was last updated |
 
 Operations: Load.
 
@@ -658,6 +682,28 @@ Create an instance: `container_group = client.ContainerGroup`
 | `create(data)` | Create a new entity with the given data. |
 | `load(match)` | Load a single entity by match criteria. |
 
+#### Fields
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `cpu_percent` | `Float` | The percentage of CPU used by this container group instance. |
+| `cpu_usage` | `Integer` | The total CPU usage in seconds for this container group instance. |
+| `cpu_usage_total` | `Integer` | The total CPU usage in seconds for this container group instance since it was started. |
+| `deletion_cost` | `Integer` | The cost of deleting the container group instance |
+| `id` | `String` | The container group instance identifier. |
+| `machine_id` | `String` | The container group machine identifier. |
+| `memory_usage_mb` | `Float` | The memory usage in MB for this container group instance. |
+| `memory_usage_percent` | `Float` | The percentage of memory used by this container group instance. |
+| `pulling_progress` | `Float` | The progress percentage of pulling the container image. |
+| `ready` | `Boolean` | Indicates whether the container group instance is currently passing its readiness checks and is able to receive traffic or perform its intended function. |
+| `ssh_host_key_fingerprint` | `String` | The SSH host key fingerprint of the container group instance |
+| `ssh_ip` | `String` | The SSH IP address of the container group instance |
+| `ssh_port` | `Integer` | The SSH port of the container group instance |
+| `started` | `Boolean` | Indicates whether the container group instance has successfully completed its startup sequence and passed any configured startup probes. |
+| `state` | `String` | The state of the container group instance |
+| `update_time` | `String` | The UTC timestamp when the container group instance last changed its state. |
+| `version` | `Integer` | The version of the container group definition currently running on this instance. |
+
 #### Example: Load
 
 ```ruby
@@ -673,6 +719,11 @@ container_group = client.ContainerGroup.create({
   "instance_id" => "example_instance_id", # String
   "organization_name" => "example_organization_name", # String
   "project_id" => "example_project_id", # String
+  "id" => "example_id", # String
+  "machine_id" => "example_machine_id", # String
+  "state" => "example_state", # String
+  "update_time" => "example_update_time", # String
+  "version" => 1, # Integer
 })
 ```
 
@@ -1065,11 +1116,9 @@ Create an instance: `quota = client.Quota`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `container_replicas_quota` | `Integer` | The maximum number of replicas that can be created for a container group |
-| `container_replicas_used` | `Integer` | The number of replicas that are currently in use |
-| `max_container_group_reallocations_per_minute` | `Integer` | The maximum number of container group reallocations per minute |
-| `max_container_group_recreates_per_minute` | `Integer` | The maximum number of container group recreates per minute |
-| `max_container_group_restarts_per_minute` | `Integer` | The maximum number of container group restarts per minute |
+| `container_groups_quotas` | `Hash` | Represents the organization quotas for container groups |
+| `create_time` | `String` | The time the resource was created |
+| `update_time` | `String` | The time the resource was last updated |
 
 #### Example: Load
 

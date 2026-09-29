@@ -11,8 +11,6 @@ guide: {
   entity: container: {
     path: "/organizations/{organization_name}/projects/{project_name}/containers": {
       op: create: method: *POST
-      op: create: transform: res: *("`body.container`")|top
-      op: create: transform: req: "container": *("`reqdata`")|top
       op: list: method: *GET
       op: list: transform: res: *("`body.items`")|top
     }
@@ -20,7 +18,6 @@ guide: {
       rename: param: "container_group_name": *"id"
       rename: param: "project_name": *"project_id"
       op: load: method: *GET
-      op: load: transform: res: *("`body.container`")|top
       op: patch: method: *PATCH
       op: remove: method: *DELETE
     }
@@ -168,7 +165,6 @@ guide: {
   entity: quota: {
     path: "/organizations/{organization_name}/quotas": {
       op: load: method: *GET
-      op: load: transform: res: *("`body.container_groups_quotas`")|top
     }
   }
 

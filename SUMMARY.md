@@ -32,6 +32,14 @@ Results: Accepted; OK.
 
 SDK operations: `create`, `load`.
 
+Key fields to recognise:
+
+- `cpu_percent`: The percentage of CPU used by this container group instance. This is updated every minute.
+- `cpu_usage`: The total CPU usage in seconds for this container group instance. This is updated every minute.
+- `cpu_usage_total`: The total CPU usage in seconds for this container group instance since it was started. This is updated every minute.
+- `deletion_cost`: The cost of deleting the container group instance
+- `id`: The container group instance identifier.
+
 ### ContainerGroupInstance
 
 Results: OK.
@@ -166,11 +174,9 @@ SDK operations: `load`.
 
 Key fields to recognise:
 
-- `container_replicas_quota`: The maximum number of replicas that can be created for a container group
-- `container_replicas_used`: The number of replicas that are currently in use
-- `max_container_group_reallocations_per_minute`: The maximum number of container group reallocations per minute
-- `max_container_group_recreates_per_minute`: The maximum number of container group recreates per minute
-- `max_container_group_restarts_per_minute`: The maximum number of container group restarts per minute
+- `container_groups_quotas`: Represents the organization quotas for container groups
+- `create_time`: The time the resource was created
+- `update_time`: The time the resource was last updated
 
 ### SystemLog
 

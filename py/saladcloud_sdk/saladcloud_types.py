@@ -127,8 +127,27 @@ class ContainerRemoveMatch(TypedDict):
     project_id: str
 
 
-class ContainerGroup(TypedDict):
-    pass
+class ContainerGroupRequired(TypedDict):
+    id: str
+    machine_id: str
+    state: str
+    update_time: str
+    version: int
+
+
+class ContainerGroup(ContainerGroupRequired, total=False):
+    cpu_percent: float
+    cpu_usage: int
+    cpu_usage_total: int
+    deletion_cost: int
+    memory_usage_mb: float
+    memory_usage_percent: float
+    pulling_progress: float
+    ready: bool
+    ssh_host_key_fingerprint: str
+    ssh_ip: str
+    ssh_port: int
+    started: bool
 
 
 class ContainerGroupLoadMatch(TypedDict):
@@ -138,11 +157,31 @@ class ContainerGroupLoadMatch(TypedDict):
     project_id: str
 
 
-class ContainerGroupCreateData(TypedDict):
+class ContainerGroupCreateDataRequired(TypedDict):
     container_id: str
     instance_id: str
     organization_name: str
     project_id: str
+    id: str
+    machine_id: str
+    state: str
+    update_time: str
+    version: int
+
+
+class ContainerGroupCreateData(ContainerGroupCreateDataRequired, total=False):
+    cpu_percent: float
+    cpu_usage: int
+    cpu_usage_total: int
+    deletion_cost: int
+    memory_usage_mb: float
+    memory_usage_percent: float
+    pulling_progress: float
+    ready: bool
+    ssh_host_key_fingerprint: str
+    ssh_ip: str
+    ssh_port: int
+    started: bool
 
 
 class ContainerGroupInstanceRequired(TypedDict):
@@ -502,14 +541,12 @@ class QueueRemoveMatch(QueueRemoveMatchRequired, total=False):
 
 
 class QuotaRequired(TypedDict):
-    container_replicas_quota: int
-    container_replicas_used: int
+    container_groups_quotas: dict
 
 
 class Quota(QuotaRequired, total=False):
-    max_container_group_reallocations_per_minute: int
-    max_container_group_recreates_per_minute: int
-    max_container_group_restarts_per_minute: int
+    create_time: str
+    update_time: str
 
 
 class QuotaLoadMatch(TypedDict):

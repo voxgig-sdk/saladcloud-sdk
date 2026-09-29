@@ -103,6 +103,23 @@
 ---@field project_id string
 
 ---@class ContainerGroup
+---@field cpu_percent? number
+---@field cpu_usage? number
+---@field cpu_usage_total? number
+---@field deletion_cost? number
+---@field id string
+---@field machine_id string
+---@field memory_usage_mb? number
+---@field memory_usage_percent? number
+---@field pulling_progress? number
+---@field ready? boolean
+---@field ssh_host_key_fingerprint? string
+---@field ssh_ip? string
+---@field ssh_port? number
+---@field started? boolean
+---@field state string
+---@field update_time string
+---@field version number
 
 ---@class ContainerGroupLoadMatch
 ---@field container_group_instance_id string
@@ -115,6 +132,23 @@
 ---@field instance_id string
 ---@field organization_name string
 ---@field project_id string
+---@field cpu_percent? number
+---@field cpu_usage? number
+---@field cpu_usage_total? number
+---@field deletion_cost? number
+---@field id string
+---@field machine_id string
+---@field memory_usage_mb? number
+---@field memory_usage_percent? number
+---@field pulling_progress? number
+---@field ready? boolean
+---@field ssh_host_key_fingerprint? string
+---@field ssh_ip? string
+---@field ssh_port? number
+---@field started? boolean
+---@field state string
+---@field update_time string
+---@field version number
 
 ---@class ContainerGroupInstance
 ---@field cpu_percent? number
@@ -393,11 +427,9 @@
 ---@field id? string
 
 ---@class Quota
----@field container_replicas_quota number
----@field container_replicas_used number
----@field max_container_group_reallocations_per_minute? number
----@field max_container_group_recreates_per_minute? number
----@field max_container_group_restarts_per_minute? number
+---@field container_groups_quotas table
+---@field create_time? string
+---@field update_time? string
 
 ---@class QuotaLoadMatch
 ---@field organization_name string

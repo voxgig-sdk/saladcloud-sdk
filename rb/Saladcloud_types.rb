@@ -375,8 +375,77 @@ ContainerRemoveMatch = Struct.new(
 )
 
 # ContainerGroup entity data model.
-class ContainerGroup
-end
+#
+# @!attribute [rw] cpu_percent
+#   @return [Float, nil]
+#
+# @!attribute [rw] cpu_usage
+#   @return [Integer, nil]
+#
+# @!attribute [rw] cpu_usage_total
+#   @return [Integer, nil]
+#
+# @!attribute [rw] deletion_cost
+#   @return [Integer, nil]
+#
+# @!attribute [rw] id
+#   @return [String]
+#
+# @!attribute [rw] machine_id
+#   @return [String]
+#
+# @!attribute [rw] memory_usage_mb
+#   @return [Float, nil]
+#
+# @!attribute [rw] memory_usage_percent
+#   @return [Float, nil]
+#
+# @!attribute [rw] pulling_progress
+#   @return [Float, nil]
+#
+# @!attribute [rw] ready
+#   @return [Boolean, nil]
+#
+# @!attribute [rw] ssh_host_key_fingerprint
+#   @return [String, nil]
+#
+# @!attribute [rw] ssh_ip
+#   @return [String, nil]
+#
+# @!attribute [rw] ssh_port
+#   @return [Integer, nil]
+#
+# @!attribute [rw] started
+#   @return [Boolean, nil]
+#
+# @!attribute [rw] state
+#   @return [String]
+#
+# @!attribute [rw] update_time
+#   @return [String]
+#
+# @!attribute [rw] version
+#   @return [Integer]
+ContainerGroup = Struct.new(
+  :cpu_percent,
+  :cpu_usage,
+  :cpu_usage_total,
+  :deletion_cost,
+  :id,
+  :machine_id,
+  :memory_usage_mb,
+  :memory_usage_percent,
+  :pulling_progress,
+  :ready,
+  :ssh_host_key_fingerprint,
+  :ssh_ip,
+  :ssh_port,
+  :started,
+  :state,
+  :update_time,
+  :version,
+  keyword_init: true
+)
 
 # Request payload for ContainerGroup#load.
 #
@@ -412,11 +481,79 @@ ContainerGroupLoadMatch = Struct.new(
 #
 # @!attribute [rw] project_id
 #   @return [String]
+#
+# @!attribute [rw] cpu_percent
+#   @return [Float, nil]
+#
+# @!attribute [rw] cpu_usage
+#   @return [Integer, nil]
+#
+# @!attribute [rw] cpu_usage_total
+#   @return [Integer, nil]
+#
+# @!attribute [rw] deletion_cost
+#   @return [Integer, nil]
+#
+# @!attribute [rw] id
+#   @return [String]
+#
+# @!attribute [rw] machine_id
+#   @return [String]
+#
+# @!attribute [rw] memory_usage_mb
+#   @return [Float, nil]
+#
+# @!attribute [rw] memory_usage_percent
+#   @return [Float, nil]
+#
+# @!attribute [rw] pulling_progress
+#   @return [Float, nil]
+#
+# @!attribute [rw] ready
+#   @return [Boolean, nil]
+#
+# @!attribute [rw] ssh_host_key_fingerprint
+#   @return [String, nil]
+#
+# @!attribute [rw] ssh_ip
+#   @return [String, nil]
+#
+# @!attribute [rw] ssh_port
+#   @return [Integer, nil]
+#
+# @!attribute [rw] started
+#   @return [Boolean, nil]
+#
+# @!attribute [rw] state
+#   @return [String]
+#
+# @!attribute [rw] update_time
+#   @return [String]
+#
+# @!attribute [rw] version
+#   @return [Integer]
 ContainerGroupCreateData = Struct.new(
   :container_id,
   :instance_id,
   :organization_name,
   :project_id,
+  :cpu_percent,
+  :cpu_usage,
+  :cpu_usage_total,
+  :deletion_cost,
+  :id,
+  :machine_id,
+  :memory_usage_mb,
+  :memory_usage_percent,
+  :pulling_progress,
+  :ready,
+  :ssh_host_key_fingerprint,
+  :ssh_ip,
+  :ssh_port,
+  :started,
+  :state,
+  :update_time,
+  :version,
   keyword_init: true
 )
 
@@ -1448,26 +1585,18 @@ QueueRemoveMatch = Struct.new(
 
 # Quota entity data model.
 #
-# @!attribute [rw] container_replicas_quota
-#   @return [Integer]
+# @!attribute [rw] container_groups_quotas
+#   @return [Hash]
 #
-# @!attribute [rw] container_replicas_used
-#   @return [Integer]
+# @!attribute [rw] create_time
+#   @return [String, nil]
 #
-# @!attribute [rw] max_container_group_reallocations_per_minute
-#   @return [Integer, nil]
-#
-# @!attribute [rw] max_container_group_recreates_per_minute
-#   @return [Integer, nil]
-#
-# @!attribute [rw] max_container_group_restarts_per_minute
-#   @return [Integer, nil]
+# @!attribute [rw] update_time
+#   @return [String, nil]
 Quota = Struct.new(
-  :container_replicas_quota,
-  :container_replicas_used,
-  :max_container_group_reallocations_per_minute,
-  :max_container_group_recreates_per_minute,
-  :max_container_group_restarts_per_minute,
+  :container_groups_quotas,
+  :create_time,
+  :update_time,
   keyword_init: true
 )
 

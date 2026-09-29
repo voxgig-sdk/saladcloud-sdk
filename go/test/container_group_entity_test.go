@@ -66,15 +66,24 @@ func TestContainerGroupEntity(t *testing.T) {
 		if containerGroupRef01Data == nil {
 			t.Fatal("expected create result to be a map")
 		}
+		if containerGroupRef01Data["id"] == nil {
+			t.Fatal("expected created entity to have an id")
+		}
 
 		// LOAD
-		containerGroupRef01MatchDt0 := map[string]any{}
+		containerGroupRef01MatchDt0 := map[string]any{
+			"id": containerGroupRef01Data["id"],
+		}
 		containerGroupRef01DataDt0Loaded, err := containerGroupRef01Ent.Load(containerGroupRef01MatchDt0, nil)
 		if err != nil {
 			t.Fatalf("load failed: %v", err)
 		}
-		if containerGroupRef01DataDt0Loaded == nil {
-			t.Fatal("expected load result to be non-nil")
+		containerGroupRef01DataDt0LoadResult := core.ToMapAny(entityData(containerGroupRef01DataDt0Loaded))
+		if containerGroupRef01DataDt0LoadResult == nil {
+			t.Fatal("expected load result to be a map")
+		}
+		if containerGroupRef01DataDt0LoadResult["id"] != containerGroupRef01Data["id"] {
+			t.Fatal("expected load result id to match")
 		}
 
 	})

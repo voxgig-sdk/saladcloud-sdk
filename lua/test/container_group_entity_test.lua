@@ -47,12 +47,17 @@ describe("ContainerGroupEntity", function()
     assert.is_nil(err)
     container_group_ref01_data = helpers.to_map(type(container_group_ref01_data_result) == 'table' and container_group_ref01_data_result.data_get and container_group_ref01_data_result:data_get() or container_group_ref01_data_result)
     assert.is_not_nil(container_group_ref01_data)
+    assert.is_not_nil(container_group_ref01_data["id"])
 
     -- LOAD
-    local container_group_ref01_match_dt0 = {}
+    local container_group_ref01_match_dt0 = {
+      id = container_group_ref01_data["id"],
+    }
     local container_group_ref01_data_dt0_loaded, err = container_group_ref01_ent:load(container_group_ref01_match_dt0, nil)
     assert.is_nil(err)
-    assert.is_not_nil(container_group_ref01_data_dt0_loaded)
+    local container_group_ref01_data_dt0_load_result = helpers.to_map(type(container_group_ref01_data_dt0_loaded) == 'table' and container_group_ref01_data_dt0_loaded.data_get and container_group_ref01_data_dt0_loaded:data_get() or container_group_ref01_data_dt0_loaded)
+    assert.is_not_nil(container_group_ref01_data_dt0_load_result)
+    assert.are.equal(container_group_ref01_data_dt0_load_result["id"], container_group_ref01_data["id"])
 
   end)
 end)

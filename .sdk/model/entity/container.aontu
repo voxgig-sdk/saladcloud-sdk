@@ -442,10 +442,8 @@ main: kit: entity: container: {
             }
           ]
           t: {
-            req: {
-              container: "`reqdata`"
-            }
-            res: "`body.container`"
+            req: "`reqdata`"
+            res: "`body`"
           }
         }
       ]
@@ -580,7 +578,7 @@ main: kit: entity: container: {
           ]
           t: {
             req: "`reqdata`"
-            res: "`body.container`"
+            res: "`body`"
           }
         }
       ]

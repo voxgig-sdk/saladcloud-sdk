@@ -129,6 +129,23 @@ class ContainerRemoveMatch
 /** ContainerGroup entity data model. */
 class ContainerGroup
 {
+    public ?float $cpu_percent = null;
+    public ?int $cpu_usage = null;
+    public ?int $cpu_usage_total = null;
+    public ?int $deletion_cost = null;
+    public string $id;
+    public string $machine_id;
+    public ?float $memory_usage_mb = null;
+    public ?float $memory_usage_percent = null;
+    public ?float $pulling_progress = null;
+    public ?bool $ready = null;
+    public ?string $ssh_host_key_fingerprint = null;
+    public ?string $ssh_ip = null;
+    public ?int $ssh_port = null;
+    public ?bool $started = null;
+    public string $state;
+    public string $update_time;
+    public int $version;
 }
 
 /** Request payload for ContainerGroup#load. */
@@ -147,6 +164,23 @@ class ContainerGroupCreateData
     public string $instance_id;
     public string $organization_name;
     public string $project_id;
+    public ?float $cpu_percent = null;
+    public ?int $cpu_usage = null;
+    public ?int $cpu_usage_total = null;
+    public ?int $deletion_cost = null;
+    public string $id;
+    public string $machine_id;
+    public ?float $memory_usage_mb = null;
+    public ?float $memory_usage_percent = null;
+    public ?float $pulling_progress = null;
+    public ?bool $ready = null;
+    public ?string $ssh_host_key_fingerprint = null;
+    public ?string $ssh_ip = null;
+    public ?int $ssh_port = null;
+    public ?bool $started = null;
+    public string $state;
+    public string $update_time;
+    public int $version;
 }
 
 /** ContainerGroupInstance entity data model. */
@@ -506,11 +540,9 @@ class QueueRemoveMatch
 /** Quota entity data model. */
 class Quota
 {
-    public int $container_replicas_quota;
-    public int $container_replicas_used;
-    public ?int $max_container_group_reallocations_per_minute = null;
-    public ?int $max_container_group_recreates_per_minute = null;
-    public ?int $max_container_group_restarts_per_minute = null;
+    public array $container_groups_quotas;
+    public ?string $create_time = null;
+    public ?string $update_time = null;
 }
 
 /** Request payload for Quota#load. */

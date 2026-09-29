@@ -605,10 +605,8 @@
                     }
                   ],
                   "t": {
-                    "req": {
-                      "container": "`reqdata`"
-                    },
-                    "res": "`body.container`"
+                    "req": "`reqdata`",
+                    "res": "`body`"
                   }
                 }
               ]
@@ -755,7 +753,7 @@
                   ],
                   "t": {
                     "req": "`reqdata`",
-                    "res": "`body.container`"
+                    "res": "`body`"
                   }
                 }
               ]
@@ -934,7 +932,160 @@
           "alias": {
             "field": {}
           },
-          "fields": {},
+          "fields": {
+            "cpu_percent": {
+              "a": true,
+              "fo": "float",
+              "h": "Cpu Percent",
+              "n": "cpu_percent",
+              "r": false,
+              "sh": "The percentage of CPU used by this container group instance.",
+              "t": "`$NUMBER`"
+            },
+            "cpu_usage": {
+              "a": true,
+              "fo": "int64",
+              "h": "Cpu Usage",
+              "n": "cpu_usage",
+              "r": false,
+              "sh": "The total CPU usage in seconds for this container group instance.",
+              "t": "`$INTEGER`"
+            },
+            "cpu_usage_total": {
+              "a": true,
+              "fo": "int64",
+              "h": "Cpu Usage Total",
+              "n": "cpu_usage_total",
+              "r": false,
+              "sh": "The total CPU usage in seconds for this container group instance since it was started.",
+              "t": "`$INTEGER`"
+            },
+            "deletion_cost": {
+              "a": true,
+              "h": "Deletion Cost",
+              "n": "deletion_cost",
+              "r": false,
+              "sh": "The cost of deleting the container group instance",
+              "t": "`$INTEGER`"
+            },
+            "id": {
+              "a": true,
+              "fo": "uuid",
+              "h": "Id",
+              "n": "id",
+              "r": true,
+              "sh": "The container group instance identifier.",
+              "t": "`$STRING`"
+            },
+            "machine_id": {
+              "a": true,
+              "fo": "uuid",
+              "h": "Machine Id",
+              "n": "machine_id",
+              "r": true,
+              "sh": "The container group machine identifier.",
+              "t": "`$STRING`"
+            },
+            "memory_usage_mb": {
+              "a": true,
+              "fo": "float",
+              "h": "Memory Usage Mb",
+              "n": "memory_usage_mb",
+              "r": false,
+              "sh": "The memory usage in MB for this container group instance.",
+              "t": "`$NUMBER`"
+            },
+            "memory_usage_percent": {
+              "a": true,
+              "fo": "float",
+              "h": "Memory Usage Percent",
+              "n": "memory_usage_percent",
+              "r": false,
+              "sh": "The percentage of memory used by this container group instance.",
+              "t": "`$NUMBER`"
+            },
+            "pulling_progress": {
+              "a": true,
+              "fo": "float",
+              "h": "Pulling Progress",
+              "n": "pulling_progress",
+              "r": false,
+              "sh": "The progress percentage of pulling the container image.",
+              "t": "`$NUMBER`"
+            },
+            "ready": {
+              "a": true,
+              "h": "Ready",
+              "n": "ready",
+              "r": false,
+              "sh": "Indicates whether the container group instance is currently passing its readiness checks and is able to receive traffic or perform its intended function.",
+              "t": "`$BOOLEAN`"
+            },
+            "ssh_host_key_fingerprint": {
+              "a": true,
+              "h": "Ssh Host Key Fingerprint",
+              "n": "ssh_host_key_fingerprint",
+              "r": false,
+              "sh": "The SSH host key fingerprint of the container group instance",
+              "t": "`$STRING`"
+            },
+            "ssh_ip": {
+              "a": true,
+              "fo": "ipv4",
+              "h": "Ssh Ip",
+              "n": "ssh_ip",
+              "r": false,
+              "sh": "The SSH IP address of the container group instance",
+              "t": "`$STRING`"
+            },
+            "ssh_port": {
+              "a": true,
+              "fo": "int32",
+              "h": "Ssh Port",
+              "n": "ssh_port",
+              "r": false,
+              "sh": "The SSH port of the container group instance",
+              "t": "`$INTEGER`"
+            },
+            "started": {
+              "a": true,
+              "h": "Started",
+              "n": "started",
+              "r": false,
+              "sh": "Indicates whether the container group instance has successfully completed its startup sequence and passed any configured startup probes.",
+              "t": "`$BOOLEAN`"
+            },
+            "state": {
+              "a": true,
+              "h": "State",
+              "n": "state",
+              "r": true,
+              "sh": "The state of the container group instance",
+              "t": "`$STRING`"
+            },
+            "update_time": {
+              "a": true,
+              "fo": "date-time",
+              "h": "Update Time",
+              "n": "update_time",
+              "r": true,
+              "sh": "The UTC timestamp when the container group instance last changed its state.",
+              "t": "`$STRING`"
+            },
+            "version": {
+              "a": true,
+              "fo": "int32",
+              "h": "Version",
+              "n": "version",
+              "r": true,
+              "sh": "The version of the container group definition currently running on this instance.",
+              "t": "`$INTEGER`"
+            }
+          },
+          "id": {
+            "field": "id",
+            "name": "id"
+          },
           "name": "container_group",
           "op": {
             "create": {
@@ -3957,50 +4108,31 @@
             "field": {}
           },
           "fields": {
-            "container_replicas_quota": {
+            "container_groups_quotas": {
               "a": true,
-              "fo": "int32",
-              "h": "Container Replicas Quota",
-              "n": "container_replicas_quota",
+              "h": "Container Groups Quotas",
+              "n": "container_groups_quotas",
               "r": true,
-              "sh": "The maximum number of replicas that can be created for a container group",
-              "t": "`$INTEGER`"
+              "sh": "Represents the organization quotas for container groups",
+              "t": "`$OBJECT`"
             },
-            "container_replicas_used": {
+            "create_time": {
               "a": true,
-              "fo": "int32",
-              "h": "Container Replicas Used",
-              "n": "container_replicas_used",
-              "r": true,
-              "sh": "The number of replicas that are currently in use",
-              "t": "`$INTEGER`"
-            },
-            "max_container_group_reallocations_per_minute": {
-              "a": true,
-              "fo": "int32",
-              "h": "Max Container Group Reallocations Per Minute",
-              "n": "max_container_group_reallocations_per_minute",
+              "fo": "date-time",
+              "h": "Create Time",
+              "n": "create_time",
               "r": false,
-              "sh": "The maximum number of container group reallocations per minute",
-              "t": "`$INTEGER`"
+              "sh": "The time the resource was created",
+              "t": "`$STRING`"
             },
-            "max_container_group_recreates_per_minute": {
+            "update_time": {
               "a": true,
-              "fo": "int32",
-              "h": "Max Container Group Recreates Per Minute",
-              "n": "max_container_group_recreates_per_minute",
+              "fo": "date-time",
+              "h": "Update Time",
+              "n": "update_time",
               "r": false,
-              "sh": "The maximum number of container group recreates per minute",
-              "t": "`$INTEGER`"
-            },
-            "max_container_group_restarts_per_minute": {
-              "a": true,
-              "fo": "int32",
-              "h": "Max Container Group Restarts Per Minute",
-              "n": "max_container_group_restarts_per_minute",
-              "r": false,
-              "sh": "The maximum number of container group restarts per minute",
-              "t": "`$INTEGER`"
+              "sh": "The time the resource was last updated",
+              "t": "`$STRING`"
             }
           },
           "name": "quota",
@@ -4050,7 +4182,7 @@
                   ],
                   "t": {
                     "req": "`reqdata`",
-                    "res": "`body.container_groups_quotas`"
+                    "res": "`body`"
                   }
                 }
               ]

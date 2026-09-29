@@ -5,45 +5,28 @@ main: kit: entity: quota: {
   alias: field: {}
 
   fields: {
-    container_replicas_quota: {
-      fo: "int32"
-      h: "Container Replicas Quota"
-      n: "container_replicas_quota"
+    container_groups_quotas: {
+      h: "Container Groups Quotas"
+      n: "container_groups_quotas"
       r: true
-      sh: "The maximum number of replicas that can be created for a container group"
-      t: "`$INTEGER`"
+      sh: "Represents the organization quotas for container groups"
+      t: "`$OBJECT`"
     }
-    container_replicas_used: {
-      fo: "int32"
-      h: "Container Replicas Used"
-      n: "container_replicas_used"
-      r: true
-      sh: "The number of replicas that are currently in use"
-      t: "`$INTEGER`"
-    }
-    max_container_group_reallocations_per_minute: {
-      fo: "int32"
-      h: "Max Container Group Reallocations Per Minute"
-      n: "max_container_group_reallocations_per_minute"
+    create_time: {
+      fo: "date-time"
+      h: "Create Time"
+      n: "create_time"
       r: false
-      sh: "The maximum number of container group reallocations per minute"
-      t: "`$INTEGER`"
+      sh: "The time the resource was created"
+      t: "`$STRING`"
     }
-    max_container_group_recreates_per_minute: {
-      fo: "int32"
-      h: "Max Container Group Recreates Per Minute"
-      n: "max_container_group_recreates_per_minute"
+    update_time: {
+      fo: "date-time"
+      h: "Update Time"
+      n: "update_time"
       r: false
-      sh: "The maximum number of container group recreates per minute"
-      t: "`$INTEGER`"
-    }
-    max_container_group_restarts_per_minute: {
-      fo: "int32"
-      h: "Max Container Group Restarts Per Minute"
-      n: "max_container_group_restarts_per_minute"
-      r: false
-      sh: "The maximum number of container group restarts per minute"
-      t: "`$INTEGER`"
+      sh: "The time the resource was last updated"
+      t: "`$STRING`"
     }
   }
 
@@ -89,7 +72,7 @@ main: kit: entity: quota: {
           ]
           t: {
             req: "`reqdata`"
-            res: "`body.container_groups_quotas`"
+            res: "`body`"
           }
         }
       ]

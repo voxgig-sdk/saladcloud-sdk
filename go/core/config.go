@@ -597,10 +597,8 @@ func MakeConfig() map[string]any {
 								},
 								"rename": map[string]any{},
 								"transform": map[string]any{
-									"req": map[string]any{
-										"container": "`reqdata`",
-									},
-									"res": "`body.container`",
+									"req": "`reqdata`",
+									"res": "`body`",
 								},
 								"args": map[string]any{
 									"params": []any{
@@ -737,7 +735,7 @@ func MakeConfig() map[string]any {
 								},
 								"transform": map[string]any{
 									"req": "`reqdata`",
-									"res": "`body.container`",
+									"res": "`body`",
 								},
 								"args": map[string]any{
 									"params": []any{
@@ -942,7 +940,131 @@ func MakeConfig() map[string]any {
 				},
 			},
 			"container_group": map[string]any{
-				"fields": []any{},
+				"fields": []any{
+					map[string]any{
+						"name": "cpu_percent",
+						"title": "Cpu Percent",
+						"type": "`$NUMBER`",
+						"short": "The percentage of CPU used by this container group instance.",
+						"format": "float",
+					},
+					map[string]any{
+						"name": "cpu_usage",
+						"title": "Cpu Usage",
+						"type": "`$INTEGER`",
+						"short": "The total CPU usage in seconds for this container group instance.",
+						"format": "int64",
+					},
+					map[string]any{
+						"name": "cpu_usage_total",
+						"title": "Cpu Usage Total",
+						"type": "`$INTEGER`",
+						"short": "The total CPU usage in seconds for this container group instance since it was started.",
+						"format": "int64",
+					},
+					map[string]any{
+						"name": "deletion_cost",
+						"title": "Deletion Cost",
+						"type": "`$INTEGER`",
+						"short": "The cost of deleting the container group instance",
+					},
+					map[string]any{
+						"name": "id",
+						"title": "Id",
+						"type": "`$STRING`",
+						"req": true,
+						"short": "The container group instance identifier.",
+						"format": "uuid",
+					},
+					map[string]any{
+						"name": "machine_id",
+						"title": "Machine Id",
+						"type": "`$STRING`",
+						"req": true,
+						"short": "The container group machine identifier.",
+						"format": "uuid",
+					},
+					map[string]any{
+						"name": "memory_usage_mb",
+						"title": "Memory Usage Mb",
+						"type": "`$NUMBER`",
+						"short": "The memory usage in MB for this container group instance.",
+						"format": "float",
+					},
+					map[string]any{
+						"name": "memory_usage_percent",
+						"title": "Memory Usage Percent",
+						"type": "`$NUMBER`",
+						"short": "The percentage of memory used by this container group instance.",
+						"format": "float",
+					},
+					map[string]any{
+						"name": "pulling_progress",
+						"title": "Pulling Progress",
+						"type": "`$NUMBER`",
+						"short": "The progress percentage of pulling the container image.",
+						"format": "float",
+					},
+					map[string]any{
+						"name": "ready",
+						"title": "Ready",
+						"type": "`$BOOLEAN`",
+						"short": "Indicates whether the container group instance is currently passing its readiness checks and is able to receive traffic or perform its intended function.",
+					},
+					map[string]any{
+						"name": "ssh_host_key_fingerprint",
+						"title": "Ssh Host Key Fingerprint",
+						"type": "`$STRING`",
+						"short": "The SSH host key fingerprint of the container group instance",
+					},
+					map[string]any{
+						"name": "ssh_ip",
+						"title": "Ssh Ip",
+						"type": "`$STRING`",
+						"short": "The SSH IP address of the container group instance",
+						"format": "ipv4",
+					},
+					map[string]any{
+						"name": "ssh_port",
+						"title": "Ssh Port",
+						"type": "`$INTEGER`",
+						"short": "The SSH port of the container group instance",
+						"format": "int32",
+					},
+					map[string]any{
+						"name": "started",
+						"title": "Started",
+						"type": "`$BOOLEAN`",
+						"short": "Indicates whether the container group instance has successfully completed its startup sequence and passed any configured startup probes.",
+					},
+					map[string]any{
+						"name": "state",
+						"title": "State",
+						"type": "`$STRING`",
+						"req": true,
+						"short": "The state of the container group instance",
+					},
+					map[string]any{
+						"name": "update_time",
+						"title": "Update Time",
+						"type": "`$STRING`",
+						"req": true,
+						"short": "The UTC timestamp when the container group instance last changed its state.",
+						"format": "date-time",
+					},
+					map[string]any{
+						"name": "version",
+						"title": "Version",
+						"type": "`$INTEGER`",
+						"req": true,
+						"short": "The version of the container group definition currently running on this instance.",
+						"format": "int32",
+					},
+				},
+				"id": map[string]any{
+					"field": "id",
+					"name": "id",
+				},
 				"name": "container_group",
 				"op": map[string]any{
 					"create": map[string]any{
@@ -3744,41 +3866,25 @@ func MakeConfig() map[string]any {
 			"quota": map[string]any{
 				"fields": []any{
 					map[string]any{
-						"name": "container_replicas_quota",
-						"title": "Container Replicas Quota",
-						"type": "`$INTEGER`",
+						"name": "container_groups_quotas",
+						"title": "Container Groups Quotas",
+						"type": "`$OBJECT`",
 						"req": true,
-						"short": "The maximum number of replicas that can be created for a container group",
-						"format": "int32",
+						"short": "Represents the organization quotas for container groups",
 					},
 					map[string]any{
-						"name": "container_replicas_used",
-						"title": "Container Replicas Used",
-						"type": "`$INTEGER`",
-						"req": true,
-						"short": "The number of replicas that are currently in use",
-						"format": "int32",
+						"name": "create_time",
+						"title": "Create Time",
+						"type": "`$STRING`",
+						"short": "The time the resource was created",
+						"format": "date-time",
 					},
 					map[string]any{
-						"name": "max_container_group_reallocations_per_minute",
-						"title": "Max Container Group Reallocations Per Minute",
-						"type": "`$INTEGER`",
-						"short": "The maximum number of container group reallocations per minute",
-						"format": "int32",
-					},
-					map[string]any{
-						"name": "max_container_group_recreates_per_minute",
-						"title": "Max Container Group Recreates Per Minute",
-						"type": "`$INTEGER`",
-						"short": "The maximum number of container group recreates per minute",
-						"format": "int32",
-					},
-					map[string]any{
-						"name": "max_container_group_restarts_per_minute",
-						"title": "Max Container Group Restarts Per Minute",
-						"type": "`$INTEGER`",
-						"short": "The maximum number of container group restarts per minute",
-						"format": "int32",
+						"name": "update_time",
+						"title": "Update Time",
+						"type": "`$STRING`",
+						"short": "The time the resource was last updated",
+						"format": "date-time",
 					},
 				},
 				"name": "quota",
@@ -3810,7 +3916,7 @@ func MakeConfig() map[string]any {
 								"rename": map[string]any{},
 								"transform": map[string]any{
 									"req": "`reqdata`",
-									"res": "`body.container_groups_quotas`",
+									"res": "`body`",
 								},
 								"args": map[string]any{
 									"params": []any{
