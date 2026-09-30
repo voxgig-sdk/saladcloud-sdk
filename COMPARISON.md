@@ -109,5 +109,6 @@ Each SDK lists one resource, loads and removes the first item it listed, and cre
 - Tests: `admin/scripts/cedar-test-all.sh` runs each target's generated suite.
 - Features: read from the code of the published package, crediting a feature only for a mechanism, not a word in the API's own models.
 - Rebuild: 2026-09-29, on create-sdkgen 0.30.4, sdkgen 4.32.1, apidef 8.22.0, model 12.0.0 and @tabnas/yaml 0.5.14, all as published, with no overlay.
+- Toolchain refresh: 2026-09-30, to apidef 8.22.1 and @tabnas/yaml 0.5.15, as published. A regeneration on them writes the same SDK, so only `.sdk/package-lock.json` moved.
 - Tests on the rebuild: all eight targets, the lua suite under Lua 5.4 with busted 2.2.0.
 - Scenario on the rebuild: the Voxgig side was re-run on 2026-09-29; the compared SDK's run is from 2026-09-28, and its package is unchanged. The generated create input honours the definition's minimums, which the first run did not.
